@@ -1,0 +1,24 @@
+---
+// Social proof + métricas. Sem testemunhos fake — usar barra de números/ícones.
+---
+
+<section class="py-12 bg-white border-y border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <p class="text-center text-xs font-semibold uppercase tracking-widest text-gray-500 mb-8">
+      Construído com base nas regulações que importam pra você
+    </p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      {[
+        { v: 'CFP 11/2018', d: 'Atendimento online' },
+        { v: 'CFP 01/2009', d: 'Prontuário psicológico' },
+        { v: 'LGPD 13.709', d: 'Dados sensíveis' },
+        { v: 'NFS-e Nacional', d: 'Padrão Receita Federal' },
+      ].map((item) => (
+        <div class="text-center">
+          <div class="text-lg lg:text-xl font-bold text-gray-900">{item.v}</div>
+          <div class="text-xs text-gray-500 mt-1">{item.d}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

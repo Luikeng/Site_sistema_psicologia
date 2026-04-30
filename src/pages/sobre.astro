@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTA from '../components/CTA.astro';
+
+const title = 'Sobre o Sistema Psicologia';
+const description =
+  'Construído por quem entende da rotina clínica. Conheça nossa missão de desburocratizar a gestão para psicólogos e clínicas no Brasil.';
+---
+
+<BaseLayout title={title} description={description}>
+  <header class="pt-32 pb-12 bg-gradient-to-b from-white to-[#F8FAFC]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-5 text-balance">
+        Construído por quem <span class="text-blue-600">vive a clínica</span>
+      </h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        O Sistema Psicologia nasceu da frustração com planilhas duplicadas, agendas perdidas e papeladas que tiram o foco do que importa: o paciente.
+      </p>
+    </div>
+  </header>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-gray prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-2xl prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline">
+      <h2>Por que existimos</h2>
+      <p>
+        Psicólogos não estudaram pra virar contadores, secretários e administradores. Mas a realidade da clínica autônoma e da pequena clínica empurra todo psicólogo pra esse papel: agenda no Google + planilha no Excel + bloco de receita + WhatsApp + sistema de NFS-e do município + cálculo manual da Receita Saúde.
+      </p>
+      <p>
+        Cada uma dessas peças pede atenção. E quando você soma tudo, sobra menos tempo pra estudar, pra supervisão, pra você. O custo de oportunidade é enorme — e silencioso.
+      </p>
+
+      <h2>Como pensamos o produto</h2>
+      <p>
+        Cada módulo do sistema responde a uma dor concreta que ouvimos da prática clínica. Não construímos features pra gerar tela bonita — construímos pra eliminar uma fricção real do dia a dia. Quando uma feature não faz sentido pra rotina, não entra.
+      </p>
+      <p>
+        Os pilares são: <strong>nada de planilha pra contador</strong> (NFS-e e Receita Saúde nativos), <strong>nada de agenda manual</strong> (sincronização total com Google), <strong>nada de papelada solta</strong> (prontuário e documentos no mesmo lugar), e <strong>nada de quebra de sigilo</strong> (LGPD aplicada de verdade, não no marketing).
+      </p>
+
+      <h2>Quem somos</h2>
+      <p>
+        Equipe pequena, brasileira, com background em desenvolvimento de software médico-clínico e conformidade LGPD. Psicólogos parceiros validam cada decisão de produto antes de virar código. Suporte respondido por gente — não por robô.
+      </p>
+
+      <h2>Compromissos</h2>
+      <ul>
+        <li><strong>Seus dados são seus.</strong> Exportação completa em qualquer momento, em formato aberto.</li>
+        <li><strong>Sem refém.</strong> Cancelamento sem multa, sem fidelidade.</li>
+        <li><strong>Preço estável.</strong> Não fazemos aumento surpresa em cima de quem já é cliente.</li>
+        <li><strong>Resposta humana.</strong> Suporte real, em português, por quem entende.</li>
+      </ul>
+    </div>
+  </section>
+
+  <CTA
+    title="Quer conhecer o sistema na prática?"
+    subtitle="Crie a conta sem cartão e teste com seus próprios dados durante o período grátis."
+  />
+</BaseLayout>

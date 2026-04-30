@@ -1,0 +1,105 @@
+---
+// Mockup estático em SVG/HTML do dashboard. Pure-Astro, zero JS.
+const today = new Date();
+const monthName = today.toLocaleDateString('pt-BR', { month: 'long' });
+---
+
+<div class="w-full h-full flex bg-gray-50/40">
+  <!-- Sidebar -->
+  <aside class="hidden md:flex flex-col w-56 bg-white border-r border-gray-100 px-4 py-5">
+    <div class="flex items-center gap-2 mb-8">
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-sm">S</div>
+      <span class="font-bold text-gray-900 text-sm">Sistema Psicologia</span>
+    </div>
+    <nav class="space-y-1 flex-1">
+      {[
+        { l: 'Dashboard', a: true },
+        { l: 'Agenda' },
+        { l: 'Pacientes' },
+        { l: 'Prontuários' },
+        { l: 'Financeiro' },
+        { l: 'NFS-e' },
+        { l: 'Receita Saúde' },
+        { l: 'Documentos' },
+        { l: 'Configurações' },
+      ].map((item) => (
+        <div class:list={[
+          'px-3 py-2 rounded-lg text-xs font-medium',
+          item.a ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-50',
+        ]}>{item.l}</div>
+      ))}
+    </nav>
+    <div class="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl p-3 text-white text-xs">
+      <div class="font-bold mb-1">Plano Clínica</div>
+      <div class="opacity-80">3 profissionais ativos</div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="flex-1 flex flex-col">
+    <header class="h-12 border-b border-gray-100 px-4 sm:px-6 flex items-center justify-between bg-white">
+      <div class="text-xs text-gray-500 capitalize">{monthName} de {today.getFullYear()}</div>
+      <div class="flex items-center gap-3">
+        <div class="text-xs text-gray-600 hidden sm:block">Dra. Ana Beatriz</div>
+        <div class="w-7 h-7 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold">AB</div>
+      </div>
+    </header>
+
+    <div class="flex-1 p-4 sm:p-6 overflow-hidden">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+        {[
+          { l: 'Sessões hoje', v: '8', s: '+2 vs ontem', c: 'text-emerald-600' },
+          { l: 'Faturado no mês', v: 'R$ 12.480', s: '+18%', c: 'text-emerald-600' },
+          { l: 'NFS-e emitidas', v: '47', s: 'Out/2026', c: 'text-gray-500' },
+          { l: 'Inadimplência', v: 'R$ 320', s: '2 pacientes', c: 'text-amber-600' },
+        ].map((kpi) => (
+          <div class="bg-white border border-gray-100 rounded-xl p-3">
+            <div class="text-[10px] uppercase tracking-wider text-gray-500 font-semibold mb-1">{kpi.l}</div>
+            <div class="text-lg font-bold text-gray-900">{kpi.v}</div>
+            <div class={`text-[10px] font-medium ${kpi.c}`}>{kpi.s}</div>
+          </div>
+        ))}
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
+        <div class="lg:col-span-2 bg-white border border-gray-100 rounded-xl p-4">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-sm font-bold text-gray-900">Próximas sessões</h3>
+            <span class="text-[10px] text-gray-400">Sincronizado · Google Agenda</span>
+          </div>
+          <ul class="space-y-2">
+            {[
+              { h: '14:00', n: 'João Pedro', s: 'Sala 2', c: 'bg-emerald-500' },
+              { h: '15:00', n: 'Mariana C.', s: 'Sala 1', c: 'bg-blue-500' },
+              { h: '16:00', n: 'Lucas V.', s: 'Online', c: 'bg-indigo-500' },
+              { h: '17:00', n: 'Camila S.', s: 'Sala 2', c: 'bg-emerald-500' },
+            ].map((sess) => (
+              <li class="flex items-center gap-3 px-2 py-2 hover:bg-gray-50 rounded-lg">
+                <div class={`w-1 h-8 rounded-full ${sess.c}`}></div>
+                <div class="flex-1 min-w-0">
+                  <div class="text-xs font-bold text-gray-900">{sess.h} · {sess.n}</div>
+                  <div class="text-[11px] text-gray-500">{sess.s}</div>
+                </div>
+                <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">Confirmado</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="bg-white border border-gray-100 rounded-xl p-4">
+          <h3 class="text-sm font-bold text-gray-900 mb-3">Atalhos</h3>
+          <div class="grid grid-cols-2 gap-2">
+            {[
+              { l: 'Emitir NFS-e', c: 'bg-blue-50 text-blue-700' },
+              { l: 'Receita Saúde', c: 'bg-emerald-50 text-emerald-700' },
+              { l: 'Novo Recibo', c: 'bg-indigo-50 text-indigo-700' },
+              { l: 'Convidar pro Portal', c: 'bg-amber-50 text-amber-700' },
+            ].map((s) => (
+              <div class={`text-[10px] font-bold px-3 py-3 rounded-lg ${s.c} text-center`}>{s.l}</div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeatureLanding from '../../components/FeatureLanding.astro';
+import CTA from '../../components/CTA.astro';
+import { FEATURES } from '../../data/features.ts';
+
+const feature = FEATURES.find((f) => f.slug === 'agenda-google')!;
+
+const title = 'Agenda online para psicólogos · Google Calendar 2-way';
+const description =
+  'Agenda integrada bidirecional com o Google Calendar. Confirme sessões pelo celular, funcione offline pelo Google Agenda e sincronize tudo automaticamente.';
+
+const benefits = [
+  { icon: 'CalendarSync' as const, title: 'Sincronização 2-way real', description: 'Marcou no app, aparece no Google. Marcou no Google, aparece no app. Sem duplicata, sem precisar revisar manualmente.' },
+  { icon: 'Repeat' as const, title: 'Funciona offline pelo Google', description: 'No metrô, sem internet? Use o app do Google Agenda no celular normalmente. Quando conectar, o sistema sincroniza tudo.' },
+  { icon: 'CalendarClock' as const, title: 'Sessões recorrentes em 1 clique', description: 'Toda terça às 15h por 6 meses? Configure a recorrência uma vez e o sistema gerencia automaticamente, com bloqueio de feriado.' },
+  { icon: 'MessageCircle' as const, title: 'Notificações automáticas', description: 'Lembretes pelo Google Calendar — o paciente recebe no e-mail e celular sem você precisar disparar nada.' },
+  { icon: 'Building2' as const, title: 'Cruzamento com salas', description: 'Plano Clínica: a sala física entra no cálculo. O sistema valida se há sala livre antes de aceitar a marcação.' },
+  { icon: 'ShieldCheck' as const, title: 'Token criptografado', description: 'Token OAuth do Google guardado com criptografia AES-256. Você revoga o acesso quando quiser pelo painel da conta Google.' },
+];
+
+const steps = [
+  { title: 'Conecte sua conta Google', description: 'OAuth padrão Google — você autoriza, o sistema só pede permissão de calendário (não lê e-mail, não lê outras coisas).' },
+  { title: 'Escolha o calendário', description: 'Pode usar seu calendário pessoal ou criar um dedicado pra clínica. Você decide a granularidade.' },
+  { title: 'Marque sessões normalmente', description: 'A partir do app ou do Google Agenda. Tudo sincroniza nos dois sentidos a cada poucos minutos.' },
+  { title: 'Confirme presença pelo celular', description: 'Lembrete chega pro paciente. Resposta de confirmação atualiza o status no sistema automaticamente.' },
+];
+
+const faqs = [
+  { q: 'Preciso pagar API do Google?', a: 'Não. A integração usa o Google Calendar API gratuita dentro dos limites de uso normais.' },
+  { q: 'Posso integrar mais de uma agenda Google?', a: 'Hoje uma agenda principal por psicólogo. Suficiente pra 99% dos casos. Se você atende com várias contas Google, escolhe a principal.' },
+  { q: 'Funciona com o Outlook?', a: 'Hoje só Google Calendar. Integração com Outlook/Microsoft 365 está no roadmap.' },
+  { q: 'Se eu apagar um evento no Google, o sistema apaga a sessão também?', a: 'Sim. A sincronização é simétrica. Se você quer manter a sessão registrada mesmo cancelando o evento, marque como cancelada/desmarcada no sistema em vez de apagar.' },
+  { q: 'Como funciona com vários profissionais (Plano Clínica)?', a: 'Cada profissional conecta sua própria agenda Google. O sistema agrega tudo numa visão única e ainda valida sala/disponibilidade.' },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <FeatureLanding
+    feature={feature}
+    h1="Agenda Google <span class='text-blue-600'>de mão dupla</span>"
+    intro="Sua agenda continua sendo o Google. O sistema só amplifica: confirma presença, valida sala, aplica recorrência, e mantém tudo em sincronia perfeita — sem você gerenciar duas listas."
+    benefits={benefits}
+    steps={steps}
+    faqs={faqs}
+  />
+  <CTA />
+</BaseLayout>

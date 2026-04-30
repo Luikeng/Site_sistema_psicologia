@@ -1,0 +1,69 @@
+---
+import Icon from './Icon.astro';
+---
+
+<section id="fiscal" class="py-20 lg:py-24 bg-gradient-to-b from-white to-blue-50/40 relative overflow-hidden border-t border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 font-semibold text-[10px] uppercase tracking-widest mb-5">
+        <Icon name="FileBadge" class="w-3.5 h-3.5" /> Diferencial fiscal
+      </div>
+      <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-5 tracking-tight text-balance">
+        NFS-e e <span class="text-blue-600">Receita Saúde</span> sem sair do sistema
+      </h2>
+      <p class="text-lg text-gray-600 leading-relaxed">
+        Pare de pagar contador pra emitir nota uma a uma e de montar planilha pro Carnê-Leão. O sistema gera, assina e entrega — você só confirma.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+      <!-- NFS-e Card -->
+      <article class="bg-white rounded-3xl border border-gray-100 p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
+            <Icon name="FileBadge" class="w-6 h-6" />
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-gray-900">NFS-e Nacional</h3>
+            <p class="text-sm text-gray-500">Padrão Receita Federal</p>
+          </div>
+        </div>
+        <ul class="space-y-3 text-sm text-gray-700 mb-6">
+          <li class="flex items-start gap-2"><span class="text-emerald-500 font-bold">✓</span>Certificado digital A1 (PKCS#12) integrado</li>
+          <li class="flex items-start gap-2"><span class="text-emerald-500 font-bold">✓</span>Código de serviço 04.16 (psicologia) pré-configurado</li>
+          <li class="flex items-start gap-2"><span class="text-emerald-500 font-bold">✓</span>Geração de DPS, assinatura XML e transmissão automática</li>
+          <li class="flex items-start gap-2"><span class="text-emerald-500 font-bold">✓</span>Suporte a Simples Nacional e regime normal</li>
+          <li class="flex items-start gap-2"><span class="text-emerald-500 font-bold">✓</span>XML armazenado e PDF gerado pra enviar ao paciente</li>
+        </ul>
+        <a href="/recursos/nfs-e-psicologia" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700">
+          Ver detalhes da NFS-e
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </article>
+
+      <!-- Receita Saúde Card -->
+      <article class="bg-white rounded-3xl border border-gray-100 p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600">
+            <Icon name="Receipt" class="w-6 h-6" />
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-gray-900">Receita Saúde</h3>
+            <p class="text-sm text-gray-500">Carnê-Leão e-CAC</p>
+          </div>
+        </div>
+        <ul class="space-y-3 text-sm text-gray-700 mb-6">
+          <li class="flex items-start gap-2"><span class="text-emerald-500 font-bold">✓</span>CSV oficial conforme Manual v2.1 (16 campos, ;)</li>
+          <li class="flex items-start gap-2"><span class="text-emerald-500 font-bold">✓</span>Código de ocupação 255 (psicólogo) padronizado</li>
+          <li class="flex items-start gap-2"><span class="text-emerald-500 font-bold">✓</span>Lotes de até 1.000 linhas por arquivo, com paginação automática</li>
+          <li class="flex items-start gap-2"><span class="text-emerald-500 font-bold">✓</span>Workflow guiado: rascunho → gerado → enviado → confirmado</li>
+          <li class="flex items-start gap-2"><span class="text-emerald-500 font-bold">✓</span>Pronto pra importar direto no e-CAC, sem ajuste manual</li>
+        </ul>
+        <a href="/recursos/receita-saude" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700">
+          Ver detalhes da Receita Saúde
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Features from '../../components/Features.astro';
+import CTA from '../../components/CTA.astro';
+import { SITE } from '../../data/site.ts';
+
+const title = 'Recursos completos do Sistema Psicologia';
+const description =
+  'Conheça todos os módulos: agenda Google 2-way, prontuário LGPD, NFS-e, Receita Saúde, mensalidades, portal do paciente, multi-profissional e mais.';
+---
+
+<BaseLayout title={title} description={description}>
+  <header class="pt-32 pb-12 bg-gradient-to-b from-white to-[#F8FAFC]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-5 text-balance">
+        Todos os recursos do <span class="text-blue-600">Sistema Psicologia</span>
+      </h1>
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        Catálogo completo dos módulos disponíveis. Cada um foi pensado para resolver uma dor específica da rotina clínica.
+      </p>
+    </div>
+  </header>
+
+  <Features
+    id="lista-recursos"
+    show="all"
+    title="Catálogo de funcionalidades"
+    subtitle="Clique em qualquer recurso para ver a página dedicada com todos os detalhes técnicos e clínicos."
+  />
+
+  <CTA
+    title="Quer ver tudo isso funcionando?"
+    subtitle="Crie a conta sem cartão e use o sistema completo durante o teste grátis."
+  />
+</BaseLayout>

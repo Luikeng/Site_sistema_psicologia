@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import SocialProof from '../components/SocialProof.astro';
+import Features from '../components/Features.astro';
+import FiscalShowcase from '../components/FiscalShowcase.astro';
+import DocumentEditor from '../components/DocumentEditor.astro';
+import Security from '../components/Security.astro';
+import Pricing from '../components/Pricing.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import { SITE } from '../data/site.ts';
+import { FAQ as FAQ_ITEMS } from '../data/faq.ts';
+import { PLANS } from '../data/pricing.ts';
+
+const title = 'Sistema Psicologia · Agenda, Prontuário LGPD, NFS-e e Financeiro';
+const description =
+  'Plataforma all-in-one pra psicólogos e clínicas: agenda integrada ao Google, prontuário eletrônico LGPD, NFS-e, Receita Saúde, financeiro e portal do paciente. Teste grátis, sem cartão.';
+
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${SITE.url}#organization`,
+  name: SITE.name,
+  url: SITE.url,
+  logo: `${SITE.url}/favicon.svg`,
+  sameAs: [],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer support',
+    email: SITE.contactEmail,
+    areaServed: 'BR',
+    availableLanguage: ['pt-BR'],
+  },
+};
+
+const softwareLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: SITE.name,
+  applicationCategory: 'BusinessApplication',
+  applicationSubCategory: 'Healthcare Practice Management',
+  operatingSystem: 'Web',
+  description,
+  inLanguage: 'pt-BR',
+  url: SITE.url,
+  offers: PLANS.map((plan) => ({
+    '@type': 'Offer',
+    name: `Plano ${plan.name}`,
+    price: plan.monthly.toFixed(2),
+    priceCurrency: 'BRL',
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: plan.monthly.toFixed(2),
+      priceCurrency: 'BRL',
+      billingIncrement: 1,
+      unitText: 'MONTH',
+    },
+    url: SITE.appUrl,
+  })),
+  aggregateRating: undefined, // adicionar quando tiver reviews reais
+  featureList: [
+    'Agenda 2-way Google Calendar',
+    'Prontuário Eletrônico LGPD AES-256',
+    'NFS-e Nacional integrada',
+    'Receita Saúde (Carnê-Leão)',
+    'Financeiro com mensalidades',
+    'Portal do Paciente',
+    'Multi-profissional e multi-salas',
+    'Permissões granulares (RBAC)',
+  ],
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.slice(0, 6).map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  jsonLd={[orgLd, softwareLd, faqLd]}
+>
+  <Hero />
+  <SocialProof />
+  <Features
+    show={['agenda-google', 'prontuario-eletronico', 'nfs-e-psicologia', 'receita-saude', 'financeiro', 'portal-paciente', 'documentos', 'whatsapp-templates', 'multi-clinica']}
+    title="Tudo que sua clínica precisa, num só lugar"
+    subtitle="Mapeamos cada detalhe da rotina psicológica para entregar módulos prontos. Do agendamento até a NFS-e, sem precisar de planilha, papel ou outro app."
+  />
+  <FiscalShowcase />
+  <DocumentEditor />
+  <Security />
+  <Pricing variant="home" />
+  <FAQ limit={6} />
+  <CTA />
+</BaseLayout>

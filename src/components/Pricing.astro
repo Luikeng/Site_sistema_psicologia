@@ -1,0 +1,97 @@
+---
+import { PLANS } from '../data/pricing.ts';
+import { SITE } from '../data/site.ts';
+
+export interface Props {
+  variant?: 'home' | 'full';
+}
+const { variant = 'home' } = Astro.props;
+
+const formatBRL = (n: number) =>
+  n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+---
+
+<section id="planos" class="py-20 lg:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 tracking-tight">Planos sob medida pro seu momento</h2>
+      <p class="text-lg text-gray-600">
+        Comece com teste grátis, sem cartão. Suba pra Clínica quando precisar de equipe.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+      {PLANS.map((plan) => (
+        <article
+          class:list={[
+            'rounded-3xl p-8 flex flex-col relative',
+            plan.highlight
+              ? 'bg-blue-600 text-white border border-blue-600 shadow-[0_20px_40px_rgba(37,99,235,0.2)]'
+              : 'bg-white text-gray-900 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:border-gray-200 transition-colors',
+          ]}
+        >
+          {plan.badge && (
+            <div class="absolute top-0 right-6 -translate-y-1/2">
+              <span class="bg-blue-800 text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm border border-blue-900/50">
+                {plan.badge}
+              </span>
+            </div>
+          )}
+
+          <div class="mb-6">
+            <h3 class:list={['text-2xl font-bold mb-2 tracking-tight', plan.highlight ? 'text-white' : 'text-gray-900']}>{plan.name}</h3>
+            <p class:list={['text-sm', plan.highlight ? 'text-blue-100' : 'text-gray-500']}>{plan.tagline}</p>
+          </div>
+
+          <div class:list={['mb-6 pb-6 border-b', plan.highlight ? 'border-white/10' : 'border-gray-100']}>
+            <div>
+              <span class:list={['text-4xl font-bold', plan.highlight ? 'text-white' : 'text-gray-900']}>{formatBRL(plan.monthly)}</span>
+              <span class:list={['font-medium', plan.highlight ? 'text-blue-100' : 'text-gray-500']}>/mês</span>
+            </div>
+            {plan.perProfessional && (
+              <div class:list={['text-xs mt-1', plan.highlight ? 'text-blue-100' : 'text-gray-500']}>
+                + {formatBRL(plan.perProfessional)}/mês por profissional adicional
+              </div>
+            )}
+            <div class:list={['text-xs mt-2', plan.highlight ? 'text-blue-100' : 'text-gray-500']}>
+              ou {formatBRL(plan.annual)}/ano (~17% off)
+            </div>
+          </div>
+
+          <ul class="space-y-3 mb-8 flex-1">
+            {plan.features.map((feat) => (
+              <li class:list={['flex items-start gap-2.5 text-sm font-medium', plan.highlight ? 'text-white' : 'text-gray-900']}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class:list={['flex-shrink-0 mt-0.5', plan.highlight ? 'text-blue-300' : 'text-emerald-500']}><polyline points="20 6 9 17 4 12"/></svg>
+                <span>{feat}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href={SITE.appUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cta={`pricing-${plan.id}`}
+            class:list={[
+              'w-full py-3.5 rounded-xl font-bold text-center transition-colors block',
+              plan.highlight
+                ? 'bg-white text-blue-600 hover:bg-gray-50 shadow-[0_4px_14px_rgba(0,0,0,0.1)]'
+                : 'border border-gray-200 text-blue-600 hover:bg-gray-50 shadow-sm',
+            ]}
+          >
+            {plan.ctaLabel}
+          </a>
+        </article>
+      ))}
+    </div>
+
+    {variant === 'home' && (
+      <div class="mt-10 text-center">
+        <a href="/precos" class="text-sm font-semibold text-blue-600 hover:text-blue-700 inline-flex items-center gap-1">
+          Comparar planos em detalhe
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    )}
+  </div>
+</section>

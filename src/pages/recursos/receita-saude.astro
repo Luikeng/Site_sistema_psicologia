@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeatureLanding from '../../components/FeatureLanding.astro';
+import CTA from '../../components/CTA.astro';
+import { FEATURES } from '../../data/features.ts';
+
+const feature = FEATURES.find((f) => f.slug === 'receita-saude')!;
+
+const title = 'Receita Saúde para psicólogos · CSV oficial pronto';
+const description =
+  'Geração automática do CSV oficial da Receita Saúde (Carnê-Leão) conforme Manual v2.1. Código de ocupação 255, 16 campos, pronto pra importar no e-CAC.';
+
+const benefits = [
+  { icon: 'Receipt' as const, title: 'CSV oficial v2.1 sempre atualizado', description: 'Seguimos a especificação do Manual Receita Saúde 2.1: 16 campos na ordem certa, separador ponto-e-vírgula, encoding correto.' },
+  { icon: 'Briefcase' as const, title: 'Código 255 (psicólogo) padronizado', description: 'Código de ocupação preenchido automaticamente pra todos os recibos — sem risco de erro de digitação que rejeita o lote.' },
+  { icon: 'Repeat' as const, title: 'Lotes de até 1.000 linhas', description: 'O sistema respeita o limite oficial e quebra em vários arquivos automaticamente quando você tem muitos recibos no período.' },
+  { icon: 'BookText' as const, title: 'Workflow guiado', description: 'Estados claros: rascunho → gerado → enviado → confirmado. Você sempre sabe o status de cada batch e pode revisar antes de exportar.' },
+  { icon: 'WalletCards' as const, title: 'Direto do financeiro', description: 'O sistema usa as sessões pagas que você já registrou. Sem precisar refazer planilha — a fonte de verdade é uma só.' },
+  { icon: 'ShieldCheck' as const, title: 'Validação prévia', description: 'CPF, valor e data validados antes de gerar o CSV. Você descobre erros aqui, não na hora de subir no e-CAC.' },
+];
+
+const steps = [
+  { title: 'Selecione período e pacientes', description: 'Filtre por mês ou intervalo e marque quais pacientes/sessões vão pro lote (ou inclua tudo).' },
+  { title: 'Revise o batch', description: 'O sistema mostra os recibos consolidados, com totais por paciente, e flags os que têm dado faltando.' },
+  { title: 'Gere o CSV', description: '1 clique e o arquivo CSV é gerado, dividido em lotes de 1.000 se necessário, conforme manual oficial.' },
+  { title: 'Suba no e-CAC', description: 'Baixe o CSV e suba no Receita Saúde do e-CAC. O sistema marca o batch como "enviado" e depois "confirmado" pra você acompanhar.' },
+];
+
+const faqs = [
+  { q: 'Preciso entender a especificação técnica do CSV?', a: 'Não. O sistema implementa a especificação completa do Manual v2.1. Você só seleciona o período e baixa.' },
+  { q: 'E se eu cobrar valores diferentes pra cada paciente?', a: 'O sistema usa o valor que está na sessão (custom_fee do paciente ou valor cobrado naquela sessão específica). Cada linha do CSV reflete o que foi efetivamente cobrado.' },
+  { q: 'Posso refazer um batch já enviado?', a: 'Sim. Você pode marcar como rascunho de novo, ajustar e regenerar. O sistema mantém histórico de versões.' },
+  { q: 'Funciona pra terapeuta que não é psicólogo (255)?', a: 'A spec da Receita tem códigos de ocupação distintos. Hoje suportamos código 255 (psicólogo). Outras ocupações entram conforme demanda.' },
+  { q: 'A Receita Saúde substitui a NFS-e?', a: 'Não, são coisas diferentes. NFS-e é nota fiscal de serviço (município/Federal). Receita Saúde é declaração mensal pro Imposto de Renda do paciente abater como despesa médica. O sistema cuida das duas.' },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <FeatureLanding
+    feature={feature}
+    h1="Receita Saúde <span class='text-blue-600'>sem planilha</span>"
+    intro="Gerar o arquivo do Carnê-Leão no padrão exigido pela Receita Federal não precisa ser manual. O sistema compila os recibos do período e exporta o CSV oficial pronto pra importar no e-CAC."
+    benefits={benefits}
+    steps={steps}
+    faqs={faqs}
+  />
+  <CTA />
+</BaseLayout>

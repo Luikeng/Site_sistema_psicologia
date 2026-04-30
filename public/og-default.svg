@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e40af"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="200" cy="120" r="280" fill="url(#glow)"/>
+  <circle cx="1000" cy="500" r="320" fill="url(#glow)"/>
+
+  <g transform="translate(80, 90)">
+    <rect width="74" height="74" rx="16" fill="white"/>
+    <text x="37" y="52" font-size="42" font-family="Inter, Arial, sans-serif" font-weight="800" fill="#2563eb" text-anchor="middle">SP</text>
+  </g>
+
+  <text x="80" y="220" font-size="32" font-family="Inter, Arial, sans-serif" font-weight="600" fill="#bfdbfe">Sistema Psicologia</text>
+
+  <text x="80" y="320" font-size="68" font-family="Inter, Arial, sans-serif" font-weight="800" fill="#ffffff">A clínica do psicólogo</text>
+  <text x="80" y="400" font-size="68" font-family="Inter, Arial, sans-serif" font-weight="800" fill="#ffffff">tudo num lugar só.</text>
+
+  <text x="80" y="480" font-size="26" font-family="Inter, Arial, sans-serif" font-weight="500" fill="#dbeafe">Agenda · Prontuário LGPD · NFS-e · Receita Saúde · Financeiro</text>
+
+  <g transform="translate(80, 530)">
+    <rect width="220" height="56" rx="14" fill="#ffffff"/>
+    <text x="110" y="36" font-size="22" font-family="Inter, Arial, sans-serif" font-weight="700" fill="#2563eb" text-anchor="middle">Teste grátis →</text>
+  </g>
+</svg>

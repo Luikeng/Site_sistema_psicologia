@@ -1,0 +1,63 @@
+---
+import { SITE, RECURSOS_LINKS } from '../data/site.ts';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-white border-t border-gray-200 pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      <div class="col-span-1 md:col-span-1">
+        <a href="/" class="flex items-center gap-2 mb-4" aria-label={SITE.name}>
+          <div class="w-7 h-7 rounded bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-xs">S</div>
+          <span class="font-bold text-lg text-blue-600">Sistema Psicologia</span>
+        </a>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+          Plataforma de gestão para clínicas de psicologia: agenda, prontuário LGPD, NFS-e e financeiro num só lugar.
+        </p>
+        <p class="text-xs text-gray-400">CNPJ em breve · Brasil</p>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-gray-900 mb-4">Recursos</h4>
+        <ul class="space-y-3 text-sm text-gray-600">
+          {RECURSOS_LINKS.map((l) => (
+            <li><a href={l.href} class="hover:text-blue-600 transition-colors">{l.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-gray-900 mb-4">Empresa</h4>
+        <ul class="space-y-3 text-sm text-gray-600">
+          <li><a href="/sobre" class="hover:text-blue-600 transition-colors">Sobre</a></li>
+          <li><a href="/precos" class="hover:text-blue-600 transition-colors">Preços</a></li>
+          <li><a href="/contato" class="hover:text-blue-600 transition-colors">Contato</a></li>
+          <li>
+            <a href={SITE.appUrl} target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 transition-colors">Acessar sistema</a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-gray-900 mb-4">Legal &amp; Segurança</h4>
+        <ul class="space-y-3 text-sm text-gray-600">
+          <li><a href="/seguranca" class="hover:text-blue-600 transition-colors">Segurança &amp; LGPD</a></li>
+          <li><a href="/privacidade" class="hover:text-blue-600 transition-colors">Política de Privacidade</a></li>
+          <li><a href="/termos" class="hover:text-blue-600 transition-colors">Termos de Uso</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-sm text-gray-500">
+        © {year} {SITE.name}. Todos os direitos reservados.
+      </p>
+      <div class="flex items-center gap-4 text-sm text-gray-500">
+        <span>Brasil</span>
+        <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+        <span>Português (BR)</span>
+      </div>
+    </div>
+  </div>
+</footer>

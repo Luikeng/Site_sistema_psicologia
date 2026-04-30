@@ -1,0 +1,94 @@
+---
+import { SITE, NAV_LINKS } from '../data/site.ts';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-[72px]">
+      <a href="/" class="font-extrabold text-gray-900 text-xl tracking-tight" aria-label={SITE.name}>
+        SISTEMA <span class="text-blue-600">PSICOLOGIA</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8">
+        {NAV_LINKS.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              'text-sm font-medium transition-colors',
+              isActive(link.href) ? 'text-blue-600' : 'text-gray-600 hover:text-blue-600',
+            ]}
+            aria-current={isActive(link.href) ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+
+      <div class="hidden md:flex items-center gap-3">
+        <a
+          href={SITE.appUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm font-semibold text-gray-700 hover:text-blue-600 transition-colors"
+        >
+          Entrar
+        </a>
+        <a
+          href={SITE.appUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-blue-600 text-white text-sm px-4 py-2 rounded-xl font-semibold hover:bg-blue-700 transition-colors shadow-sm"
+        >
+          Teste grátis
+        </a>
+      </div>
+
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        <svg id="icon-close" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="md:hidden hidden bg-white border-b border-gray-100">
+    <div class="px-4 py-4 space-y-1 flex flex-col">
+      {NAV_LINKS.map((link) => (
+        <a href={link.href} class="block py-3 text-base font-medium text-gray-900 border-b border-gray-50">
+          {link.label}
+        </a>
+      ))}
+      <a
+        href={SITE.appUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-4 block w-full text-center bg-blue-600 text-white px-6 py-3.5 rounded-xl font-semibold shadow-sm"
+      >
+        Começar teste grátis
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const open = document.getElementById('icon-open');
+  const close = document.getElementById('icon-close');
+  btn?.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    menu?.classList.toggle('hidden');
+    open?.classList.toggle('hidden');
+    close?.classList.toggle('hidden');
+  });
+</script>

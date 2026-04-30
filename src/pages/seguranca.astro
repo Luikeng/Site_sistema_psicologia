@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Security from '../components/Security.astro';
+import CTA from '../components/CTA.astro';
+import Icon from '../components/Icon.astro';
+
+const title = 'Segurança, LGPD e Conformidade CFP';
+const description =
+  'Como o Sistema Psicologia protege os dados sensíveis dos seus pacientes: criptografia AES-256, conformidade LGPD, Resoluções CFP, backups diários e trilha de auditoria.';
+
+const sections = [
+  {
+    icon: 'ShieldCheck',
+    t: 'LGPD aplicada na prática',
+    d: 'A Lei Geral de Proteção de Dados classifica dados de saúde como sensíveis (Art. 11). Operamos como Operador (Art. 39); você, profissional, é o Controlador. Mantemos registro de operações, gerenciamos consentimentos e respondemos solicitações de titulares.',
+  },
+  {
+    icon: 'Lock',
+    t: 'Criptografia em camadas',
+    d: 'Dados sensíveis (prontuário, anamnese) criptografados em repouso com AES-256. Tráfego sempre em TLS 1.3. Tokens do Google Calendar criptografados com chave separada. Senhas com bcrypt.',
+  },
+  {
+    icon: 'BookText',
+    t: 'Resoluções do CFP atendidas',
+    d: 'Resolução CFP nº 01/2009 (prontuário psicológico): registro datado, identificado e fidedigno. Resolução CFP nº 11/2018 (atendimento online): plataforma adequada, segurança e confidencialidade.',
+  },
+  {
+    icon: 'KeyRound',
+    t: 'Permissões granulares (RBAC)',
+    d: 'Sistema de papéis e permissões: secretária só vê agenda; psicólogo parceiro só vê seus pacientes; admin vê tudo. Cada acesso a prontuário é registrado.',
+  },
+  {
+    icon: 'Repeat',
+    t: 'Backups diários e portabilidade',
+    d: 'Snapshot diário do banco em Cloud Storage com retenção. Você pode exportar todos os seus dados a qualquer momento — pacientes, prontuários, recibos, financeiro. Sem refém.',
+  },
+  {
+    icon: 'BookText',
+    t: 'Trilha de auditoria',
+    d: 'Toda ação sensível (acesso a prontuário, alteração financeira, emissão de documento) é registrada com usuário, timestamp e detalhes — útil pra LGPD e investigação interna.',
+  },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <header class="pt-32 pb-12 bg-gradient-to-b from-white to-emerald-50/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold text-[10px] uppercase tracking-widest mb-5">
+        <Icon name="ShieldCheck" class="w-3.5 h-3.5" /> Segurança em primeiro lugar
+      </div>
+      <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-5 text-balance">
+        Sigilo profissional <span class="text-blue-600">tratado a sério</span>
+      </h1>
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        Os dados dos seus pacientes têm o mesmo grau de proteção que arquivos médicos físicos trancados. Conheça as camadas de segurança que aplicamos.
+      </p>
+    </div>
+  </header>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {sections.map((s) => (
+          <article class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+            <div class="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-4">
+              <Icon name={s.icon as any} class="w-6 h-6" />
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">{s.t}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">{s.d}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Security />
+
+  <section class="py-16 bg-[#F8FAFC]">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 tracking-tight">Tem alguma dúvida específica de segurança?</h2>
+      <p class="text-gray-600 mb-6">Para questões de conformidade, due diligence ou acordos de processamento de dados (DPA), entre em contato com nosso DPO.</p>
+      <a href="/contato" class="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors">
+        Falar com o DPO
+      </a>
+    </div>
+  </section>
+
+  <CTA />
+</BaseLayout>

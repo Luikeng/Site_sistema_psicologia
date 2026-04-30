@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Pricing from '../components/Pricing.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import { PLANS } from '../data/pricing.ts';
+import { SITE } from '../data/site.ts';
+
+const title = 'Preços do Sistema Psicologia';
+const description =
+  'Plano Individual e Plano Clínica. Sem cartão pra começar, sem fidelidade, cancele quando quiser. Veja a comparação completa.';
+
+const productLd = PLANS.map((plan) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: `Sistema Psicologia · Plano ${plan.name}`,
+  description: plan.tagline,
+  brand: { '@type': 'Brand', name: SITE.name },
+  offers: {
+    '@type': 'Offer',
+    price: plan.monthly.toFixed(2),
+    priceCurrency: 'BRL',
+    url: SITE.appUrl,
+    availability: 'https://schema.org/InStock',
+  },
+}));
+
+const compareTable: Array<{ feature: string; individual: string | true; clinica: string | true }> = [
+  { feature: 'Agenda 2-way Google Calendar', individual: true, clinica: true },
+  { feature: 'Prontuário Eletrônico (AES-256, LGPD)', individual: true, clinica: true },
+  { feature: 'Central de Documentos (recibo, atestado, declaração)', individual: true, clinica: true },
+  { feature: 'NFS-e Nacional integrada', individual: true, clinica: true },
+  { feature: 'Receita Saúde (CSV oficial)', individual: true, clinica: true },
+  { feature: 'Financeiro com mensalidades automáticas', individual: true, clinica: true },
+  { feature: 'Portal do Paciente', individual: true, clinica: true },
+  { feature: 'Templates de mensagens (WhatsApp)', individual: true, clinica: true },
+  { feature: 'Login com Google', individual: true, clinica: true },
+  { feature: 'Multi-profissional no mesmo workspace', individual: '—', clinica: 'Ilimitado*' },
+  { feature: 'Usuário Secretária(o) com acesso restrito', individual: '—', clinica: true },
+  { feature: 'Multi-Salas com validação de conflito', individual: '—', clinica: true },
+  { feature: 'Repasses financeiros por profissional', individual: '—', clinica: true },
+  { feature: 'Permissões granulares (RBAC)', individual: '—', clinica: true },
+  { feature: 'Trilha de auditoria completa', individual: 'Básica', clinica: 'Completa' },
+  { feature: 'Suporte', individual: 'E-mail', clinica: 'Prioritário' },
+];
+---
+
+<BaseLayout title={title} description={description} jsonLd={productLd}>
+  <header class="pt-32 pb-12 bg-gradient-to-b from-white to-[#F8FAFC]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-5 text-balance">
+        Preços simples. <span class="text-blue-600">Sem letra miúda.</span>
+      </h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        Comece grátis sem cartão. Pague só quando decidir continuar. Cancele quando quiser, com seus dados sempre exportáveis.
+      </p>
+    </div>
+  </header>
+
+  <Pricing variant="full" />
+
+  <section class="py-16 bg-[#F8FAFC]">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-8 text-center tracking-tight">Comparação completa</h2>
+      <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-gray-50 border-b border-gray-100">
+                <th class="text-left p-4 font-semibold text-gray-700">Recurso</th>
+                <th class="text-center p-4 font-semibold text-gray-700 w-32">Individual</th>
+                <th class="text-center p-4 font-semibold text-blue-700 w-32 bg-blue-50/50">Clínica</th>
+              </tr>
+            </thead>
+            <tbody>
+              {compareTable.map((row, idx) => (
+                <tr class:list={[idx % 2 === 1 ? 'bg-gray-50/40' : '', 'border-b border-gray-50 last:border-0']}>
+                  <td class="p-4 text-gray-900">{row.feature}</td>
+                  <td class="p-4 text-center text-gray-600">{row.individual === true ? '✓' : row.individual}</td>
+                  <td class="p-4 text-center text-blue-700 bg-blue-50/30 font-medium">{row.clinica === true ? '✓' : row.clinica}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="text-xs text-gray-500 text-center mt-4">* Plano Clínica: profissional principal incluso. Profissional adicional: R$ 49/mês cada.</p>
+    </div>
+  </section>
+
+  <FAQ />
+  <CTA />
+</BaseLayout>

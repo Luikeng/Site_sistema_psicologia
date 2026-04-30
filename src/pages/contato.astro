@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site.ts';
+
+const title = 'Contato';
+const description =
+  'Fale com o time do Sistema Psicologia: dúvidas comerciais, suporte, parcerias e questões de privacidade (DPO).';
+---
+
+<BaseLayout title={title} description={description}>
+  <header class="pt-32 pb-12 bg-gradient-to-b from-white to-[#F8FAFC]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-5 text-balance">
+        Vamos <span class="text-blue-600">conversar</span>
+      </h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        Quer entender se o sistema serve pra sua clínica? Tem dúvida fiscal, de migração ou de LGPD? Estamos aqui.
+      </p>
+    </div>
+  </header>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <article class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <h3 class="text-base font-bold text-gray-900 mb-1">E-mail comercial</h3>
+          <p class="text-sm text-gray-600 mb-4">Dúvidas de plano, demos e parcerias.</p>
+          <a href={`mailto:${SITE.contactEmail}`} class="text-sm font-semibold text-blue-600 hover:text-blue-700">{SITE.contactEmail}</a>
+        </article>
+
+        <article class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+          </div>
+          <h3 class="text-base font-bold text-gray-900 mb-1">WhatsApp</h3>
+          <p class="text-sm text-gray-600 mb-4">Suporte rápido e conversas comerciais.</p>
+          <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-emerald-600 hover:text-emerald-700">Abrir conversa</a>
+        </article>
+
+        <article class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+          </div>
+          <h3 class="text-base font-bold text-gray-900 mb-1">Privacidade / DPO</h3>
+          <p class="text-sm text-gray-600 mb-4">Direitos do titular (LGPD), DPA e segurança.</p>
+          <a href={`mailto:${SITE.contactEmail}`} class="text-sm font-semibold text-indigo-600 hover:text-indigo-700">{SITE.contactEmail}</a>
+        </article>
+      </div>
+
+      <div class="mt-12 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl p-8 text-white text-center">
+        <h2 class="text-2xl font-bold mb-3">Prefere ver o sistema funcionando primeiro?</h2>
+        <p class="text-blue-100 mb-6 max-w-xl mx-auto">Sem cartão, sem ligação de vendas. Crie a conta, importe alguns pacientes e veja se faz sentido pra sua clínica.</p>
+        <a href={SITE.appUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-white text-blue-700 px-6 py-3 rounded-xl font-bold hover:bg-gray-50 transition-colors shadow-lg">
+          Começar teste grátis
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

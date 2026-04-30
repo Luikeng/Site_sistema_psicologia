@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeatureLanding from '../../components/FeatureLanding.astro';
+import CTA from '../../components/CTA.astro';
+import { FEATURES } from '../../data/features.ts';
+
+const feature = FEATURES.find((f) => f.slug === 'multi-clinica')!;
+
+const title = 'Software de Gestão para Clínicas de Psicologia · Multi-profissional';
+const description =
+  'Workspace único pra clínica: vários psicólogos, secretárias com acesso restrito, salas físicas, repasses financeiros e permissões granulares (RBAC).';
+
+const benefits = [
+  { icon: 'Users2' as const, title: 'Múltiplos profissionais, um só painel', description: 'Vários psicólogos no mesmo workspace, com agenda própria e isolamento de pacientes — cada um vê só os seus.' },
+  { icon: 'Building2' as const, title: 'Multi-Salas com validação de conflito', description: 'Evita dupla reserva da mesma sala. Filtro por sala no calendário pra você visualizar a ocupação física.' },
+  { icon: 'KeyRound' as const, title: 'Secretária com acesso restrito', description: 'Recepcionista enxerga só agenda e confirmações. Não acessa prontuário nem financeiro sensível. Você decide.' },
+  { icon: 'WalletCards' as const, title: 'Repasses financeiros automatizados', description: 'Configure o percentual de cada profissional. O sistema calcula o repasse com base nas sessões pagas.' },
+  { icon: 'BookText' as const, title: 'Trilha de auditoria por usuário', description: 'Quem confirmou, quem cancelou, quem viu o quê. Útil pra clínica com equipe.' },
+  { icon: 'ShieldCheck' as const, title: 'Isolamento total entre clínicas', description: 'Multi-tenant real: dados de uma clínica nunca cruzam com os de outra, mesmo no banco.' },
+];
+
+const faqs = [
+  { q: 'Quantos profissionais cabem?', a: 'O Plano Clínica vem com o profissional principal incluído. Adicione mais a R$ 49/mês cada um — sem limite duro.' },
+  { q: 'Quantas secretárias posso criar?', a: 'Conforme o plano. Secretárias têm acesso restrito (não contam como "profissional"). Os limites vêm na página de Preços.' },
+  { q: 'Como funciona a divisão de pacientes entre profissionais?', a: 'Cada paciente é vinculado a um profissional principal. Esse profissional vê todo o histórico. Outros membros da clínica só vêem se forem explicitamente compartilhados.' },
+  { q: 'Posso ter clínicas em endereços diferentes?', a: 'Sim. Você pode criar várias salas representando ambientes físicos distintos, ou separar como workspaces independentes.' },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <FeatureLanding
+    feature={feature}
+    h1="Sua clínica <span class='text-blue-600'>organizada</span>, sua equipe na mesma página"
+    intro="Quando você passa de psicólogo autônomo pra clínica com 3, 5, 10 profissionais, o caos administrativo escala junto. O sistema absorve esse caos: equipe, salas, repasses e permissões num lugar só."
+    benefits={benefits}
+    faqs={faqs}
+  />
+  <CTA />
+</BaseLayout>

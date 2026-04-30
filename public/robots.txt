@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap (gerado pelo @astrojs/sitemap)
+Sitemap: https://sistemapsicologia.com.br/sitemap-index.xml

@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeatureLanding from '../../components/FeatureLanding.astro';
+import CTA from '../../components/CTA.astro';
+import { FEATURES } from '../../data/features.ts';
+
+const feature = FEATURES.find((f) => f.slug === 'prontuario-eletronico')!;
+
+const title = 'Prontuário Eletrônico para psicólogos · LGPD AES-256';
+const description =
+  'Registro de sessões, anamnese e evolução com criptografia AES-256, trilha de auditoria e adequação total às Resoluções CFP nº 01/2009 e LGPD.';
+
+const benefits = [
+  { icon: 'ShieldCheck' as const, title: 'Criptografia em repouso', description: 'Anamnese e evoluções armazenadas com AES-256. Sem chave, ninguém lê — nem mesmo um eventual operador de banco.' },
+  { icon: 'BookText' as const, title: 'Estrutura clínica organizada', description: 'Anamnese inicial, evolução por sessão, hipóteses diagnósticas, plano terapêutico e história clínica — campos prontos pra prática.' },
+  { icon: 'KeyRound' as const, title: 'Acesso por permissão', description: 'Plano Clínica: cada parceiro só vê seus próprios pacientes. Secretária não acessa prontuário. Você define quem vê o quê.' },
+  { icon: 'Lock' as const, title: 'Trilha de auditoria', description: 'Cada visualização de prontuário fica registrada com usuário e timestamp. Útil pra LGPD e investigação interna.' },
+  { icon: 'FileText' as const, title: 'Editor rico (TipTap/WYSIWYG)', description: 'Formatação livre como num editor profissional, com checklist, destaques e organização visual da evolução.' },
+  { icon: 'Repeat' as const, title: 'Portabilidade', description: 'Exporte tudo em formato aberto a qualquer momento. Você é o Controlador dos dados (LGPD); nós somos só o Operador.' },
+];
+
+const faqs = [
+  { q: 'Atende a Resolução CFP nº 01/2009?', a: 'Sim. Registro datado, identificado, fidedigno e com trilha de alterações — princípios centrais da Resolução. Adicionalmente, controle de acesso por papel atende ao princípio de sigilo profissional.' },
+  { q: 'Posso usar pra atendimento online (CFP 11/2018)?', a: 'Sim. O sistema é parte da plataforma adequada para atendimento online: registra a sessão, mantém o sigilo (criptografia, RBAC), e permite gerar comprovante quando necessário.' },
+  { q: 'Como funciona o backup do prontuário?', a: 'Snapshot diário do banco em Cloud Storage com retenção. Dados sensíveis no backup também ficam criptografados.' },
+  { q: 'O paciente pode acessar o prontuário pelo portal?', a: 'Não, por padrão. O portal mostra agendamentos e recibos, não prontuário. Se você quiser dar acesso a alguma anotação específica, envia como documento (recibo/declaração).' },
+  { q: 'Como sair do sistema sem perder histórico?', a: 'Exportação completa em formato aberto a qualquer momento — pacientes, sessões, prontuários, recibos. Sem refém.' },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <FeatureLanding
+    feature={feature}
+    h1="Prontuário <span class='text-blue-600'>blindado</span> e dentro da lei"
+    intro="Registro clínico tratado com o rigor que o sigilo profissional exige: criptografado, auditável, portátil. Sem comprometer a velocidade da escrita no dia a dia."
+    benefits={benefits}
+    faqs={faqs}
+  />
+  <CTA />
+</BaseLayout>

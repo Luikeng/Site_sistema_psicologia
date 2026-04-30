@@ -1,8 +1,29 @@
-node_modules/
-build/
+# build output
 dist/
-coverage/
-.DS_Store
+.astro/
+build/
+
+# dependencies
+node_modules/
+
+# logs
 *.log
+
+# environment variables
 .env*
 !.env.example
+
+# OS
+.DS_Store
+
+# editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# coverage
+coverage/
+
+# legacy backup (mantido localmente, fora do git)
+*.legacy
+src.legacy/

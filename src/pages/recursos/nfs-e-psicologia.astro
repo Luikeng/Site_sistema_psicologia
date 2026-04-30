@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeatureLanding from '../../components/FeatureLanding.astro';
+import CTA from '../../components/CTA.astro';
+import { FEATURES } from '../../data/features.ts';
+
+const feature = FEATURES.find((f) => f.slug === 'nfs-e-psicologia')!;
+
+const title = 'NFS-e para psicólogos · Emissão direto do sistema';
+const description =
+  'Emita Nota Fiscal de Serviço Eletrônica (NFS-e Nacional) direto do sistema, em 1 clique. Certificado A1, código 04.16, transmissão automática à Receita Federal.';
+
+const benefits = [
+  { icon: 'FileBadge' as const, title: 'NFS-e Nacional padrão Receita Federal', description: 'Atendemos o padrão único da NFS-e Nacional, válido em todo município que aderiu — não importa onde sua clínica está.' },
+  { icon: 'Lock' as const, title: 'Certificado A1 (PKCS#12) integrado', description: 'Você sobe o .pfx uma vez e ele fica seguro no sistema. Toda emissão é assinada automaticamente sem precisar reabrir o certificado.' },
+  { icon: 'Briefcase' as const, title: 'Código 04.16 (psicologia) pré-configurado', description: 'O código de serviço de psicologia já vem certo. Sem precisar pedir ajuda ao contador pra cada nota.' },
+  { icon: 'Repeat' as const, title: 'DPS sequencial controlado', description: 'O sistema gerencia a numeração da DPS automaticamente, sem risco de duplicidade ou pular número.' },
+  { icon: 'WalletCards' as const, title: 'Simples Nacional ou Regime Normal', description: 'Configurável por clínica. Suporte aos dois regimes tributários, com cálculo correto de retenções.' },
+  { icon: 'Image' as const, title: 'XML armazenado, PDF gerado', description: 'XML assinado vai pro storage seguro (Cloudflare R2). PDF da nota é gerado pra enviar ao paciente — tudo a partir do mesmo botão.' },
+];
+
+const steps = [
+  { title: 'Configure o emissor', description: 'CNPJ/CPF, regime tributário, certificado A1 (.pfx) e dados de endereço. Configuração única.' },
+  { title: 'Marque a sessão como paga', description: 'Em qualquer sessão do calendário ou do financeiro, você marca como recebida e o sistema sabe que pode emitir nota.' },
+  { title: 'Clique em "Emitir NFS-e"', description: 'O sistema monta a DPS, assina com seu certificado, transmite à Receita Federal e armazena o XML/PDF — tudo automático.' },
+  { title: 'Envie pro paciente', description: 'Baixe o PDF ou compartilhe direto pelo portal do paciente. Cópia legal sempre disponível.' },
+];
+
+const faqs = [
+  { q: 'Preciso de contador pra emitir NFS-e pelo sistema?', a: 'Não pra emitir o dia a dia. O contador entra na configuração inicial (regime tributário, alíquota) e nas declarações fiscais mensais/anuais. A emissão você faz sozinho em segundos.' },
+  { q: 'Funciona pro meu município?', a: 'A NFS-e Nacional é o padrão único definido pela Receita Federal e adotado pelos municípios. Onde o município aderiu (a maioria já), o sistema funciona. Em municípios ainda sem adesão, oferecemos recibo simples como alternativa.' },
+  { q: 'O que acontece se a transmissão falhar?', a: 'O sistema retenta automaticamente. Se persistir, você é avisado com o motivo (rejeição da Receita) — geralmente é dado faltando ou divergente, que é simples corrigir.' },
+  { q: 'Posso cancelar uma nota emitida por engano?', a: 'Sim. O cancelamento segue as regras da NFS-e Nacional (geralmente até 24h da emissão sem motivação, depois com justificativa). O sistema gerencia o pedido pra você.' },
+  { q: 'Preciso pagar mais pra ter NFS-e?', a: 'Não. NFS-e está incluída em todos os planos, sem cobrança por nota emitida.' },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <FeatureLanding
+    feature={feature}
+    h1="NFS-e Nacional <span class='text-blue-600'>direto da sessão</span>"
+    intro="Pare de logar no sistema da prefeitura, copiar dados na mão, errar no código de serviço. Em 1 clique a partir da sessão paga, o sistema emite, assina e arquiva sua NFS-e."
+    benefits={benefits}
+    steps={steps}
+    faqs={faqs}
+  />
+  <CTA />
+</BaseLayout>

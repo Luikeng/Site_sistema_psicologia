@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeatureLanding from '../../components/FeatureLanding.astro';
+import CTA from '../../components/CTA.astro';
+import { FEATURES } from '../../data/features.ts';
+
+const feature = FEATURES.find((f) => f.slug === 'portal-paciente')!;
+
+const title = 'Portal do Paciente · Reduza o ruído do WhatsApp';
+const description =
+  'Cada paciente tem acesso exclusivo às próprias sessões, recibos e confirmações. Você reduz mensagens repetitivas e ele ganha autonomia.';
+
+const benefits = [
+  { icon: 'HeartPulse' as const, title: 'Acesso por link/código exclusivo', description: 'Sem senha de prontuário. O paciente entra com um código privado e enxerga só o que diz respeito a ele.' },
+  { icon: 'CalendarClock' as const, title: 'Próximas sessões e histórico', description: 'O paciente vê quando é a próxima, confirma presença e consulta histórico de atendimentos sem te perguntar.' },
+  { icon: 'Receipt' as const, title: 'Recibos pra baixar', description: 'Recibo de sessão paga fica disponível direto no portal. Adeus "professora, manda de novo o recibo de março".' },
+  { icon: 'MessageCircle' as const, title: 'Menos WhatsApp repetitivo', description: 'Confirmação, lembrete e dúvida básica saem do seu WhatsApp. Você responde só o que realmente exige seu tempo.' },
+  { icon: 'KeyRound' as const, title: 'Privacidade respeitada', description: 'Cada paciente vê só os próprios dados. Sem cruzamento, sem vazamento entre pacientes.' },
+  { icon: 'Pocket' as const, title: 'Configurável por paciente', description: 'Você escolhe quais features liberar (recibo, confirmação, histórico) por paciente — flexível pra cada perfil.' },
+];
+
+const faqs = [
+  { q: 'É um app que o paciente baixa?', a: 'Não. É uma página web responsiva que o paciente abre pelo celular. Sem instalação.' },
+  { q: 'Como o paciente recebe o link?', a: 'Você gera o código no perfil do paciente e envia por WhatsApp/e-mail (template pronto). Uma vez só.' },
+  { q: 'Funciona pra paciente sem habilidade tech?', a: 'Sim. A interface é minimalista, otimizada pra mobile. Se ele consegue abrir um link no WhatsApp, consegue usar.' },
+  { q: 'Posso desabilitar o portal pra um paciente específico?', a: 'Sim. Por paciente, você liga e desliga features individualmente.' },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <FeatureLanding
+    feature={feature}
+    h1="Portal do Paciente <span class='text-blue-600'>silencia o WhatsApp</span>"
+    intro="O paciente quer saber quando é a próxima sessão e baixar o recibo do mês. Você não precisa responder isso 30 vezes por semana — o portal resolve."
+    benefits={benefits}
+    faqs={faqs}
+  />
+  <CTA />
+</BaseLayout>
