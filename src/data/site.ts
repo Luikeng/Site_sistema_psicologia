@@ -3,8 +3,8 @@ export const SITE = {
   shortName: 'Sistema Psicologia',
   url: 'https://sistemapsicologia.com.br',
   appUrl: 'https://sistema.sistemapsicologia.com.br/',
-  contactEmail: 'contato@sistemapsicologia.com.br',
-  whatsapp: '5551999999999', // TODO: substituir pelo número real
+  contactEmail: 'suporte@sistemapsicologia.com.br',
+  whatsapp: '5551992749130',
   twitter: '@sistemapsicologia',
   description:
     'Sistema de gestão para psicólogos e clínicas: agenda integrada ao Google, prontuário eletrônico LGPD, NFS-e, Receita Saúde, financeiro e portal do paciente em uma única plataforma.',
