@@ -17,8 +17,8 @@ export const PLANS: Plan[] = [
     id: 'individual',
     name: 'Individual',
     tagline: 'Para o psicólogo autônomo focado na clínica.',
-    monthly: 39.9,
-    annual: 39.9 * 10, // ~17% off em relação a 12 meses
+    monthly: 39,
+    annual: 399, // ~15% off vs 12x mensal
     features: [
       'Agenda 2-way Google Calendar',
       'Prontuário Eletrônico LGPD (AES-256)',
@@ -38,7 +38,7 @@ export const PLANS: Plan[] = [
     name: 'Clínica',
     tagline: 'Organize equipe, salas e repasses financeiros.',
     monthly: 69,
-    annual: 69 * 10,
+    annual: 699, // ~15% off vs 12x mensal
     highlight: true,
     badge: 'Mais completo',
     features: [
