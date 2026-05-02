@@ -48,11 +48,6 @@ const formatBRL = (n: number) =>
               <span class:list={['text-4xl font-bold', plan.highlight ? 'text-white' : 'text-gray-900']}>{formatBRL(plan.monthly)}</span>
               <span class:list={['font-medium', plan.highlight ? 'text-blue-100' : 'text-gray-500']}>/mês</span>
             </div>
-            {plan.perProfessional && (
-              <div class:list={['text-xs mt-1', plan.highlight ? 'text-blue-100' : 'text-gray-500']}>
-                + {formatBRL(plan.perProfessional)}/mês por profissional adicional
-              </div>
-            )}
             <div class:list={['text-xs mt-2', plan.highlight ? 'text-blue-100' : 'text-gray-500']}>
               ou {formatBRL(plan.annual)}/ano (~17% off)
             </div>

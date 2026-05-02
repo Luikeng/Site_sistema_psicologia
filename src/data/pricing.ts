@@ -4,7 +4,6 @@ export type Plan = {
   tagline: string;
   monthly: number;
   annual: number;
-  perProfessional?: number;
   highlight?: boolean;
   badge?: string;
   features: string[];
@@ -38,15 +37,14 @@ export const PLANS: Plan[] = [
     id: 'clinica',
     name: 'Clínica',
     tagline: 'Organize equipe, salas e repasses financeiros.',
-    monthly: 59.9,
-    annual: 59.9 * 10,
-    perProfessional: 49,
+    monthly: 69,
+    annual: 69 * 10,
     highlight: true,
     badge: 'Mais completo',
     features: [
       'Tudo do plano Individual',
-      'Multi-profissional no mesmo workspace',
-      'Usuário "Secretária(o)" com acesso restrito',
+      'Até 5 profissionais (1 dono + 4) no mesmo workspace',
+      'Até 2 secretárias com acesso restrito',
       'Gestão de Multi-Salas',
       'Repasses financeiros por profissional',
       'Permissões granulares (RBAC) por membro',
