@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <title>Exportar Logo Sistema Psicologia — PNG</title>
+  <meta name="robots" content="noindex"/>
+  <style>
+    body { font-family: Inter, system-ui, sans-serif; background: #FAFAFA; color: #0f172a; padding: 32px; max-width: 960px; margin: 0 auto; }
+    h1 { font-size: 28px; margin: 0 0 4px; }
+    p.lead { color: #64748b; margin: 0 0 32px; }
+    .grid { display: grid; grid-template-columns: 200px 1fr; gap: 16px; align-items: center; padding: 16px 0; border-top: 1px solid #e2e8f0; }
+    select, button, input { padding: 10px 14px; font-size: 14px; border-radius: 8px; border: 1px solid #cbd5e1; background: white; }
+    button { background: #4f46e5; color: white; border: none; cursor: pointer; font-weight: 600; }
+    button:hover { background: #4338ca; }
+    label { font-weight: 600; font-size: 13px; color: #475569; }
+    .preview { background: repeating-conic-gradient(#f1f5f9 0% 25%, white 0% 50%) 50% / 20px 20px; padding: 12px; border-radius: 12px; display: inline-block; margin-top: 16px; }
+    .preview-dark { background: #0f172a; padding: 12px; border-radius: 12px; display: inline-block; margin-top: 16px; }
+    canvas { display: block; }
+    code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <h1>Exportar Logo — PNG</h1>
+  <p class="lead">Escolha o arquivo SVG, o tamanho e o fundo. Clique em "Baixar PNG".</p>
+
+  <div class="grid">
+    <label for="src">Arquivo SVG</label>
+    <select id="src">
+      <option value="logo-icon.svg" selected>logo-icon.svg (ícone gradiente)</option>
+      <option value="logo-icon-flat.svg">logo-icon-flat.svg (ícone cor sólida)</option>
+      <option value="logo-horizontal.svg">logo-horizontal.svg (ícone + texto horizontal)</option>
+      <option value="logo-vertical.svg">logo-vertical.svg (ícone + texto vertical)</option>
+      <option value="wordmark.svg">wordmark.svg (só texto)</option>
+      <option value="logo-monochrome-white.svg">logo-monochrome-white.svg (branco em fundo escuro)</option>
+    </select>
+  </div>
+
+  <div class="grid">
+    <label for="size">Tamanho (lado maior, em px)</label>
+    <input id="size" type="number" min="32" max="4096" value="120"/>
+  </div>
+
+  <div class="grid">
+    <label for="bg">Fundo</label>
+    <select id="bg">
+      <option value="transparent" selected>Transparente</option>
+      <option value="white">Branco (#FFFFFF)</option>
+      <option value="dark">Slate-900 (#0F172A)</option>
+    </select>
+  </div>
+
+  <div class="grid">
+    <label></label>
+    <div>
+      <button onclick="exportPng()">Baixar PNG</button>
+      <span id="status" style="margin-left:12px;color:#64748b;"></span>
+    </div>
+  </div>
+
+  <div id="previewArea"></div>
+
+  <p style="margin-top:48px;color:#64748b;font-size:13px;">
+    Tamanhos comuns: <code>120</code> (Google OAuth), <code>192/512</code> (PWA),
+    <code>1024</code> (App Store), <code>2400</code> (banner alta resolução).
+  </p>
+
+  <script>
+    async function exportPng() {
+      const src = document.getElementById('src').value;
+      const size = parseInt(document.getElementById('size').value, 10);
+      const bg = document.getElementById('bg').value;
+      const status = document.getElementById('status');
+      status.textContent = 'Carregando…';
+
+      const resp = await fetch(src);
+      const svgText = await resp.text();
+      const parser = new DOMParser();
+      const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
+      const svgEl = svgDoc.querySelector('svg');
+      const vb = svgEl.getAttribute('viewBox').split(/\s+/).map(Number);
+      const aspect = vb[2] / vb[3];
+
+      let w, h;
+      if (aspect >= 1) { w = size; h = Math.round(size / aspect); }
+      else { h = size; w = Math.round(size * aspect); }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      if (bg === 'white') { ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0,0,w,h); }
+      else if (bg === 'dark') { ctx.fillStyle = '#0F172A'; ctx.fillRect(0,0,w,h); }
+
+      const blob = new Blob([svgText], {type: 'image/svg+xml'});
+      const url = URL.createObjectURL(blob);
+      const img = new Image();
+      img.onload = () => {
+        ctx.drawImage(img, 0, 0, w, h);
+        URL.revokeObjectURL(url);
+
+        const previewArea = document.getElementById('previewArea');
+        previewArea.innerHTML = '';
+        const previewWrap = document.createElement('div');
+        previewWrap.className = bg === 'dark' ? 'preview-dark' : 'preview';
+        const previewCanvas = canvas.cloneNode(true);
+        previewCanvas.getContext('2d').drawImage(canvas, 0, 0);
+        previewWrap.appendChild(previewCanvas);
+        previewArea.appendChild(previewWrap);
+
+        canvas.toBlob((b) => {
+          const a = document.createElement('a');
+          const baseName = src.replace('.svg', '');
+          a.download = `${baseName}-${w}x${h}.png`;
+          a.href = URL.createObjectURL(b);
+          a.click();
+          status.textContent = `Baixado: ${a.download}`;
+        }, 'image/png');
+      };
+      img.onerror = () => { status.textContent = 'Erro ao carregar SVG.'; };
+      img.src = url;
+    }
+  </script>
+</body>
+</html>

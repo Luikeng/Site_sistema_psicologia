@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <title>Sistema Psicologia — Brand Book v1.0</title>
+  <meta name="robots" content="noindex"/>
+  <style>
+    @page { size: A4; margin: 18mm; }
+    :root {
+      --primary: #4f46e5;
+      --primary-light: #2563eb;
+      --slate-900: #0f172a;
+      --slate-700: #334155;
+      --slate-500: #64748b;
+      --slate-300: #cbd5e1;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --bg: #FAFAFA;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+      color: var(--slate-900);
+      background: var(--bg);
+      margin: 0;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px 56px;
+      background: white;
+      page-break-after: always;
+    }
+    .page:last-child { page-break-after: auto; }
+    h1 { font-size: 56px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.05; margin: 0 0 8px; }
+    h2 { font-size: 32px; font-weight: 800; letter-spacing: -0.8px; margin: 56px 0 16px; padding-top: 24px; border-top: 2px solid var(--slate-900); }
+    h2:first-child { margin-top: 0; padding-top: 0; border: none; }
+    h3 { font-size: 18px; font-weight: 700; margin: 32px 0 8px; }
+    p { margin: 0 0 12px; color: var(--slate-700); }
+    .lead { font-size: 18px; color: var(--slate-500); margin-bottom: 32px; }
+    .meta { font-size: 12px; color: var(--slate-500); text-transform: uppercase; letter-spacing: 1.5px; }
+    .accent { color: var(--primary); }
+    code { background: var(--slate-100); padding: 2px 6px; border-radius: 4px; font-size: 12px; font-family: "SF Mono", Consolas, monospace; }
+    .swatches { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 24px 0; }
+    .swatch { border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .swatch-color { height: 96px; }
+    .swatch-meta { padding: 12px 16px; background: white; }
+    .swatch-meta strong { display: block; font-size: 14px; }
+    .swatch-meta span { font-size: 12px; color: var(--slate-500); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; align-items: start; }
+    .logo-card { background: white; border: 1px solid var(--slate-300); border-radius: 12px; padding: 32px; text-align: center; }
+    .logo-card.dark { background: var(--slate-900); }
+    .logo-card img { max-width: 100%; height: 80px; }
+    .logo-card .label { display: block; margin-top: 16px; font-size: 12px; color: var(--slate-500); }
+    .logo-card.dark .label { color: var(--slate-300); }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--slate-300); font-size: 13px; }
+    th { background: var(--slate-50); font-weight: 600; }
+    .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 24px 0; }
+    .do, .dont { padding: 20px; border-radius: 12px; }
+    .do { background: #ecfdf5; border-left: 4px solid #10b981; }
+    .dont { background: #fef2f2; border-left: 4px solid #ef4444; }
+    .do h4, .dont h4 { margin: 0 0 8px; font-size: 14px; }
+    .do h4::before { content: "✓ "; }
+    .dont h4::before { content: "✗ "; }
+    ul { padding-left: 20px; margin: 8px 0; }
+    li { margin-bottom: 4px; font-size: 13px; }
+    .clear-space { background: var(--slate-50); padding: 32px; border-radius: 12px; text-align: center; position: relative; }
+    .clear-space-box { display: inline-block; position: relative; padding: 32px; background: white; border: 2px dashed var(--slate-300); }
+    .typo-sample { padding: 16px 0; border-bottom: 1px solid var(--slate-300); }
+    .typo-sample:last-child { border: none; }
+    .typo-meta { font-size: 11px; color: var(--slate-500); text-transform: uppercase; letter-spacing: 1.5px; }
+    .footer-mark { font-size: 11px; color: var(--slate-500); margin-top: 64px; text-align: center; }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <p class="meta">Sistema Psicologia · Brand Book v1.0 · Maio 2026</p>
+  <h1>A marca em <span class="accent">poucas páginas</span>.</h1>
+  <p class="lead">
+    Este documento define o uso correto da identidade visual do
+    <strong>Sistema Psicologia</strong>: cores, tipografia, logo e suas variações.
+    Tudo que aparece com nosso nome — anúncio, e-mail, app, parceria — segue daqui.
+  </p>
+
+  <div class="grid-2" style="margin-top:48px;">
+    <div class="logo-card">
+      <img src="logo-horizontal.svg" alt="Logo principal"/>
+      <span class="label">Logo principal</span>
+    </div>
+    <div class="logo-card">
+      <img src="logo-icon.svg" alt="Marca gráfica"/>
+      <span class="label">Marca gráfica (ícone)</span>
+    </div>
+  </div>
+
+  <h2 style="margin-top:64px;">Posicionamento</h2>
+  <p>
+    Sistema Psicologia é a plataforma de gestão para clínicas e consultórios de psicologia
+    no Brasil. Nossa marca comunica <strong>profissionalismo</strong>, <strong>confiança</strong>
+    e <strong>cuidado</strong> — três valores que devem aparecer em qualquer ponto de contato.
+  </p>
+  <p>
+    O tom é <strong>direto e sem rodeios</strong>: tecnologia que resolve, não que enfeita.
+    Evitamos jargão de marketing, exageros ("revolucionário", "único") e promessas que não
+    cumprimos. Falamos com psicólogos como pares, não como leigos.
+  </p>
+</div>
+
+<div class="page">
+  <h2>Logo</h2>
+  <p class="lead">Cinco variações pra cada contexto. Use sempre os arquivos oficiais — não recrie.</p>
+
+  <div class="grid-2">
+    <div class="logo-card">
+      <img src="logo-horizontal.svg" alt="Horizontal"/>
+      <span class="label">Horizontal — uso geral, headers, e-mails</span>
+    </div>
+    <div class="logo-card">
+      <img src="logo-vertical.svg" alt="Vertical"/>
+      <span class="label">Vertical — pôsteres, cartões, redes sociais</span>
+    </div>
+    <div class="logo-card">
+      <img src="logo-icon.svg" alt="Ícone"/>
+      <span class="label">Ícone — favicon, app, OAuth, perfis sociais</span>
+    </div>
+    <div class="logo-card">
+      <img src="wordmark.svg" alt="Wordmark"/>
+      <span class="label">Wordmark — espaços muito horizontais</span>
+    </div>
+    <div class="logo-card dark" style="grid-column: span 2;">
+      <img src="logo-monochrome-white.svg" alt="Monocromático branco"/>
+      <span class="label">Monocromático branco — fundos escuros</span>
+    </div>
+  </div>
+
+  <h3>Espaço de respiração (clear space)</h3>
+  <p>
+    Reserve sempre uma margem mínima ao redor do logo equivalente à <strong>altura da letra "S"</strong>
+    da marca gráfica. Nada deve invadir esse espaço — nem texto, nem outras imagens, nem bordas.
+  </p>
+
+  <h3>Tamanho mínimo</h3>
+  <p>
+    Nunca use o logo abaixo destes tamanhos — perde legibilidade:
+  </p>
+  <ul>
+    <li>Logo horizontal: <strong>120 px</strong> de largura (digital) / <strong>30 mm</strong> (impresso)</li>
+    <li>Ícone: <strong>32 px</strong> (digital) / <strong>10 mm</strong> (impresso)</li>
+    <li>Wordmark: <strong>100 px</strong> de largura (digital)</li>
+  </ul>
+</div>
+
+<div class="page">
+  <h2>O que NÃO fazer com o logo</h2>
+
+  <div class="do-dont">
+    <div class="do">
+      <h4>Faça</h4>
+      <ul>
+        <li>Use os arquivos SVG oficiais</li>
+        <li>Mantenha proporção (Shift ao redimensionar)</li>
+        <li>Use sobre fundos com contraste suficiente</li>
+        <li>Respeite o espaço de respiração</li>
+        <li>Use a versão monocromática branca em fundos escuros</li>
+      </ul>
+    </div>
+    <div class="dont">
+      <h4>Não faça</h4>
+      <ul>
+        <li>Não distorça (esticar ou achatar)</li>
+        <li>Não troque as cores arbitrariamente</li>
+        <li>Não adicione sombra, contorno, brilho ou efeitos</li>
+        <li>Não recrie a tipografia — use o arquivo</li>
+        <li>Não use sobre fotos sem máscara/contraste</li>
+        <li>Não rotacione o logo</li>
+        <li>Não combine com outras marcas no mesmo bloco</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Paleta de cores</h2>
+  <p class="lead">Quatro cores primárias + uma escala neutra. Use o gradiente Indigo → Blue como assinatura visual.</p>
+
+  <div class="swatches">
+    <div class="swatch">
+      <div class="swatch-color" style="background: linear-gradient(135deg, #2563eb, #4f46e5);"></div>
+      <div class="swatch-meta">
+        <strong>Gradiente da marca</strong>
+        <span>Blue 600 (#2563EB) → Indigo 600 (#4F46E5)</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #4f46e5;"></div>
+      <div class="swatch-meta">
+        <strong>Indigo Primário</strong>
+        <span>#4F46E5 · Tailwind indigo-600 · botões, links, acentos</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #2563eb;"></div>
+      <div class="swatch-meta">
+        <strong>Blue Secundário</strong>
+        <span>#2563EB · Tailwind blue-600 · ícones, gradientes</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #0f172a;"></div>
+      <div class="swatch-meta">
+        <strong>Slate-900</strong>
+        <span>#0F172A · texto principal, headers</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #64748b;"></div>
+      <div class="swatch-meta">
+        <strong>Slate-500</strong>
+        <span>#64748B · texto secundário, placeholders</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #FAFAFA; border: 1px solid #e2e8f0;"></div>
+      <div class="swatch-meta">
+        <strong>Off-white</strong>
+        <span>#FAFAFA · fundo de páginas e cards</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>Cores semânticas</h3>
+  <table>
+    <thead>
+      <tr><th>Uso</th><th>Cor</th><th>Hex</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Sucesso</td><td><span style="display:inline-block;width:14px;height:14px;background:#10b981;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Emerald</td><td><code>#10B981</code></td></tr>
+      <tr><td>Aviso</td><td><span style="display:inline-block;width:14px;height:14px;background:#f59e0b;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Amber</td><td><code>#F59E0B</code></td></tr>
+      <tr><td>Erro</td><td><span style="display:inline-block;width:14px;height:14px;background:#ef4444;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Red</td><td><code>#EF4444</code></td></tr>
+      <tr><td>Info</td><td><span style="display:inline-block;width:14px;height:14px;background:#3b82f6;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Blue-500</td><td><code>#3B82F6</code></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page">
+  <h2>Tipografia</h2>
+  <p class="lead">Usamos uma única família — <strong>Inter</strong> — em três pesos. Reduz peso de download e mantém consistência.</p>
+
+  <div class="typo-sample">
+    <p class="typo-meta">Display · Inter ExtraBold (800) · -1.5px letter-spacing</p>
+    <div style="font-size: 56px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.05;">A marca em poucas páginas.</div>
+  </div>
+
+  <div class="typo-sample">
+    <p class="typo-meta">Heading 1 · Inter Bold (700)</p>
+    <div style="font-size: 36px; font-weight: 700; letter-spacing: -0.8px;">Pronto pra desburocratizar sua clínica?</div>
+  </div>
+
+  <div class="typo-sample">
+    <p class="typo-meta">Heading 2 · Inter SemiBold (600)</p>
+    <div style="font-size: 24px; font-weight: 600;">Recursos que economizam horas</div>
+  </div>
+
+  <div class="typo-sample">
+    <p class="typo-meta">Body · Inter Regular (400)</p>
+    <div style="font-size: 16px;">
+      Crie a conta sem cartão e veja o sistema funcionar com seus dados em menos de 10 minutos.
+      Você organiza pacientes, prontuários, agenda e financeiro num só lugar.
+    </div>
+  </div>
+
+  <div class="typo-sample">
+    <p class="typo-meta">Small · Inter Medium (500) · 12px</p>
+    <div style="font-size: 12px; font-weight: 500;">© 2026 Sistema Psicologia · Todos os direitos reservados</div>
+  </div>
+
+  <h3>Fontes alternativas</h3>
+  <p>
+    Quando Inter não estiver disponível (e-mails, sistemas legados), use a stack:
+    <code>system-ui, -apple-system, "Segoe UI", Arial, sans-serif</code>.
+    Nunca use Times, Georgia, Comic Sans ou fontes decorativas.
+  </p>
+</div>
+
+<div class="page">
+  <h2>Tom de voz</h2>
+  <p class="lead">Como falamos com o psicólogo — em qualquer canal.</p>
+
+  <div class="grid-2">
+    <div>
+      <h3>Somos</h3>
+      <ul style="font-size:14px;">
+        <li><strong>Direto.</strong> Vai ao ponto.</li>
+        <li><strong>Honesto.</strong> Admite limites.</li>
+        <li><strong>Pragmático.</strong> Mostra como, não só o quê.</li>
+        <li><strong>Respeitoso.</strong> Trata o profissional como par.</li>
+        <li><strong>Próximo.</strong> Tom de conversa, não de manual.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Não somos</h3>
+      <ul style="font-size:14px;">
+        <li><strong>Hype.</strong> "Revolucionário", "único", "incrível"…</li>
+        <li><strong>Vago.</strong> "Soluções inovadoras"…</li>
+        <li><strong>Paternalista.</strong> Não explicamos óbvio.</li>
+        <li><strong>Formal demais.</strong> Sem "prezado", "vossa senhoria".</li>
+        <li><strong>Marqueteiro.</strong> Sem buzzwords, sem promessas vazias.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Exemplos</h3>
+  <table>
+    <thead>
+      <tr><th>Em vez de</th><th>Diga</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>"Solução completa e inovadora"</td><td>"Plataforma que organiza prontuário, agenda e cobrança"</td></tr>
+      <tr><td>"Revolucione sua clínica hoje!"</td><td>"Veja se serve pra você em 10 minutos"</td></tr>
+      <tr><td>"Suporte 24/7 ilimitado"</td><td>"Suporte por WhatsApp em horário comercial"</td></tr>
+      <tr><td>"Prezado(a) psicólogo(a)"</td><td>"Oi, [nome]"</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page">
+  <h2>Arquivos disponíveis</h2>
+  <p class="lead">Tudo está em <code>sistemapsicologia.com.br/brand/</code>. Sempre baixe a versão mais recente.</p>
+
+  <table>
+    <thead>
+      <tr><th>Arquivo</th><th>Uso</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>logo-icon.svg</code></td><td>Ícone com gradiente — padrão pra perfis e apps</td></tr>
+      <tr><td><code>logo-icon-flat.svg</code></td><td>Ícone cor sólida — quando gradiente não renderiza bem</td></tr>
+      <tr><td><code>logo-horizontal.svg</code></td><td>Lockup horizontal completo</td></tr>
+      <tr><td><code>logo-vertical.svg</code></td><td>Lockup vertical (ícone sobre wordmark)</td></tr>
+      <tr><td><code>wordmark.svg</code></td><td>Só o nome, sem ícone</td></tr>
+      <tr><td><code>logo-monochrome-white.svg</code></td><td>Branco pra fundos escuros</td></tr>
+      <tr><td><code>brand-book.html</code></td><td>Este documento (Ctrl+P para PDF)</td></tr>
+      <tr><td><code>export-png.html</code></td><td>Ferramenta — converte SVG em PNG do tamanho que precisar</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Como exportar PNG</h3>
+  <p>
+    Os SVGs escalam infinitamente sem perder qualidade. Quando precisar de PNG (ex: Google OAuth pede 120×120),
+    abra <code>sistemapsicologia.com.br/brand/export-png.html</code> em qualquer navegador, escolha o arquivo,
+    o tamanho e clique em "Baixar PNG".
+  </p>
+  <p>
+    Tamanhos comuns: <strong>120×120</strong> (Google OAuth), <strong>192/512</strong> (PWA),
+    <strong>1024×1024</strong> (App Store, perfis sociais grandes), <strong>2400</strong> (banners).
+  </p>
+
+  <h3>Quem aprova mudanças?</h3>
+  <p>
+    Qualquer alteração nessas diretrizes — nova cor, novo logo, ajuste de tom — passa por
+    Geisson Oleques (<a href="mailto:contato@sistemapsicologia.com.br">contato@sistemapsicologia.com.br</a>).
+    Não improvise versões "alternativas" do logo: se o caso de uso não está coberto aqui,
+    pergunta antes de criar.
+  </p>
+
+  <p class="footer-mark">
+    Sistema Psicologia · Brand Book v1.0 · 2026 · Última atualização: 9 de maio de 2026
+  </p>
+</div>
+
+</body>
+</html>
