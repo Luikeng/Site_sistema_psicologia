@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import SocialProof from '../components/SocialProof.astro';
+import Spotlight from '../components/Spotlight.astro';
+import WorkflowTimeline from '../components/WorkflowTimeline.astro';
 import Features from '../components/Features.astro';
 import FiscalShowcase from '../components/FiscalShowcase.astro';
 import DocumentEditor from '../components/DocumentEditor.astro';
@@ -61,12 +63,17 @@ const softwareLd = {
   aggregateRating: undefined, // adicionar quando tiver reviews reais
   featureList: [
     'Agenda 2-way Google Calendar',
-    'Prontuário Eletrônico LGPD AES-256',
+    'Prontuário Eletrônico LGPD',
+    'Anamnese digital por link',
     'NFS-e Nacional integrada',
     'Receita Saúde (Carnê-Leão)',
+    'Recibo simples para municípios sem NFS-e',
     'Financeiro com mensalidades',
-    'Portal do Paciente',
+    'Portal do Paciente com diário de humor',
     'Multi-profissional e multi-salas',
+    'Multi-fuso horário pra atendimento online',
+    'Repasse automatizado clínica ↔ profissional',
+    'Cupons de desconto e portal de pagamento',
     'Permissões granulares (RBAC)',
   ],
 };
@@ -89,11 +96,13 @@ const faqLd = {
 >
   <Hero />
   <SocialProof />
+  <Spotlight />
   <Features
-    show={['agenda-google', 'prontuario-eletronico', 'nfs-e-psicologia', 'receita-saude', 'financeiro', 'portal-paciente', 'documentos', 'whatsapp-templates', 'multi-clinica']}
+    show={['agenda-google', 'prontuario-eletronico', 'anamnese-digital', 'nfs-e-psicologia', 'receita-saude', 'recibo-simples', 'financeiro', 'portal-paciente', 'documentos', 'whatsapp-templates', 'multi-clinica', 'multi-fuso']}
     title="Tudo que sua clínica precisa, num só lugar"
-    subtitle="Mapeamos cada detalhe da rotina psicológica para entregar módulos prontos. Do agendamento até a NFS-e, sem precisar de planilha, papel ou outro app."
+    subtitle="Mapeamos cada detalhe da rotina psicológica para entregar módulos prontos. Do primeiro contato até a NFS-e, sem precisar de planilha, papel ou outro app."
   />
+  <WorkflowTimeline />
   <FiscalShowcase />
   <DocumentEditor />
   <Security />

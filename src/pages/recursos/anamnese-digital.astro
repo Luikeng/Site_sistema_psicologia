@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeatureLanding from '../../components/FeatureLanding.astro';
+import CTA from '../../components/CTA.astro';
+import { FEATURES } from '../../data/features.ts';
+
+const feature = FEATURES.find((f) => f.slug === 'anamnese-digital')!;
+
+const title = 'Anamnese digital por link · Paciente preenche antes da consulta';
+const description =
+  'Envie um link único pro paciente preencher a anamnese pelo celular antes da primeira sessão. Auto-cadastro de paciente novo, validação de campos e import direto pro prontuário.';
+
+const benefits = [
+  { icon: 'ClipboardEdit' as const, title: '20-30 min economizados por 1ª consulta', description: 'O paciente preenche a história clínica em casa, no tempo dele. Você chega à sessão já com o panorama lido — começa direto pelo trabalho terapêutico.' },
+  { icon: 'Users2' as const, title: 'Auto-cadastro do paciente novo', description: 'Modo "registration": o link funciona mesmo sem o paciente cadastrado. Quando ele submete, o sistema cria o paciente automaticamente, com nome, contato, CPF e dados clínicos validados.' },
+  { icon: 'ShieldCheck' as const, title: 'Validação no campo certo', description: 'CPF formatado, e-mail validado, telefone com máscara, histórico clínico estruturado. Ninguém envia campo em branco ou rabiscado.' },
+  { icon: 'BookText' as const, title: 'Importação 1-clique pro prontuário', description: 'Quando o paciente submete, os dados viram automaticamente um registro de anamnese no prontuário — você não digita nada de novo.' },
+  { icon: 'Bell' as const, title: 'Notificação ao submeter', description: 'Sino do sistema te avisa: "Anamnese de Maria preenchida". Você revisa e confirma a sessão sabendo que a história já está pronta.' },
+  { icon: 'Repeat' as const, title: 'Reutilizável e atualizável', description: 'Pra paciente existente, atualiza o cadastro mantendo o histórico. Ideal pra reanamnese anual ou retomada de tratamento depois de pausa.' },
+];
+
+const steps = [
+  { title: 'Você gera o link único pelo painel', description: 'Em 2 cliques: dashboard → Anamnese → "Gerar link". Pode ser link genérico (auto-cadastro) ou vinculado a paciente já existente.' },
+  { title: 'Envie pelo WhatsApp ou e-mail', description: 'O link já vem com o template de mensagem pronto, com seu nome e o tempo médio de preenchimento ("leva 8 minutos"). Copia e cola.' },
+  { title: 'Paciente preenche pelo celular', description: 'Interface mobile-first, sem necessidade de criar conta. Salva progresso parcial caso ele precise pausar.' },
+  { title: 'Você recebe a anamnese pronta', description: 'Notificação no sino + e-mail. A anamnese já vira registro no prontuário; você só revisa antes da 1ª sessão.' },
+];
+
+const faqs = [
+  { q: 'O paciente precisa criar conta pra preencher?', a: 'Não. O link tem um token único que dá acesso temporário só ao formulário dele. Sem senha, sem cadastro.' },
+  { q: 'Posso editar o questionário de anamnese?', a: 'O sistema vem com o modelo padrão da prática clínica. Customização avançada do questionário está no roadmap — fala com a gente se precisar de campos específicos pra sua abordagem.' },
+  { q: 'E se o paciente desistir no meio?', a: 'O progresso parcial fica salvo. Quando ele voltar pelo mesmo link, retoma de onde parou. Se desistir totalmente, você vê o status "iniciada, não finalizada" e pode reenviar.' },
+  { q: 'Funciona pra menor de idade?', a: 'Sim. Você gera o link, envia pro responsável legal — que preenche em nome do paciente. Quando o paciente atinge maioridade, pode-se gerar nova anamnese vinculada à mesma ficha.' },
+  { q: 'Os dados ficam protegidos durante o preenchimento?', a: 'Tráfego sempre em TLS 1.3, e o link expira após o submit ou em 30 dias se não preenchido. Token único e não-adivinhável.' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <FeatureLanding
+    feature={feature}
+    h1="Anamnese pronta <span class='text-blue-600'>antes da 1ª sessão</span>"
+    intro="O paciente preenche a história clínica pelo celular antes mesmo de pisar no consultório. Você chega à consulta com a leitura feita — e começa direto pelo trabalho."
+    benefits={benefits}
+    steps={steps}
+    faqs={faqs}
+  />
+  <CTA />
+</BaseLayout>

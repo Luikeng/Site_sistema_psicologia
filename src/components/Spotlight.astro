@@ -1,0 +1,135 @@
+---
+import Icon from './Icon.astro';
+
+// Highlights de diferenciais — features novas que o concorrente médio não tem.
+// Visual chamativo: gradient, glow, ícone grande, badge "Novo".
+const highlights = [
+  {
+    icon: 'ClipboardEdit',
+    badge: 'Novo',
+    title: 'Anamnese digital por link',
+    pitch: 'Paciente preenche pelo celular antes da 1ª sessão',
+    detail: 'Auto-cadastro do paciente novo no submit. Você economiza 20-30 min de cada primeiro atendimento e chega à consulta com a história já lida.',
+    href: '/recursos/anamnese-digital',
+    accent: 'from-indigo-500 to-blue-600',
+  },
+  {
+    icon: 'Globe2',
+    badge: 'Novo',
+    title: 'Multi-fuso horário',
+    pitch: 'Atendimento online entre estados sem confusão',
+    detail: 'Workspace e profissionais com fuso independente. Sessões em UTC, exibição no fuso correto pra cada parte. Inclui horário de verão automático.',
+    href: '/recursos/multi-fuso',
+    accent: 'from-emerald-500 to-teal-600',
+  },
+  {
+    icon: 'HandCoins',
+    badge: 'Plano Clínica',
+    title: 'Repasse clínica ↔ profissional',
+    pitch: 'Split automático por sessão paga',
+    detail: 'Configure % ou valor fixo por psicólogo. Painel separado por parte, mensalidade do psi pra clínica e relatório consolidado mensal pra IR.',
+    href: '/recursos/repasse-clinica',
+    accent: 'from-amber-500 to-orange-600',
+  },
+  {
+    icon: 'Smile',
+    title: 'Diário de humor pelo portal',
+    pitch: 'Acompanhamento clínico entre sessões',
+    detail: 'Paciente registra humor diário pelo portal exclusivo. Você vê a evolução em gráfico antes da próxima sessão — útil pra transtornos de humor, ansiedade e resposta a intervenções.',
+    href: '/recursos/portal-paciente',
+    accent: 'from-pink-500 to-rose-600',
+  },
+  {
+    icon: 'Ticket',
+    title: 'Painel de cupons',
+    pitch: 'Promoções, indicação, primeira mensalidade',
+    detail: 'Crie cupons de desconto (% ou R$) com duração configurável. Validação em tempo real no checkout: cliente vê o preço atualizar antes de pagar.',
+    href: '/recursos/cupons',
+    accent: 'from-violet-500 to-purple-600',
+  },
+  {
+    icon: 'FileText',
+    title: 'Recibo simples (cidades sem NFS-e)',
+    pitch: 'Pra municípios que ainda não aderiram',
+    detail: 'PDF estruturado válido pra plano de saúde, IR via Carnê-Leão e arquivo do paciente. Migração indolor pra NFS-e quando sua cidade aderir.',
+    href: '/recursos/recibo-simples',
+    accent: 'from-sky-500 to-cyan-600',
+  },
+];
+---
+
+<section id="diferenciais" class="relative py-24 lg:py-28 bg-gradient-to-b from-white via-blue-50/30 to-white overflow-hidden">
+  <!-- Glow background decorativo -->
+  <div class="absolute inset-0 -z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-200/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-200/15 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-14 lg:mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 font-semibold text-[10px] uppercase tracking-widest mb-5">
+        <span class="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse"></span>
+        Diferenciais que mudam sua rotina
+      </div>
+      <h2 class="text-3xl lg:text-5xl font-bold text-gray-900 mb-5 tracking-tight text-balance">
+        O que <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">o concorrente médio</span> não te entrega
+      </h2>
+      <p class="text-lg text-gray-600 leading-relaxed">
+        Decisões pensadas pra rotina real do consultório brasileiro. Cada item aqui resolve um problema concreto que o psicólogo enfrenta — do primeiro atendimento ao fechamento mensal.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+      {highlights.map((h) => (
+        <a
+          href={h.href}
+          class="group relative bg-white rounded-2xl border border-gray-100 p-6 lg:p-7 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 hover:border-gray-200 transition-all overflow-hidden flex flex-col"
+        >
+          <!-- Halo gradient sutil que aparece no hover -->
+          <div class={`absolute -right-12 -top-12 w-40 h-40 rounded-full bg-gradient-to-br ${h.accent} opacity-0 group-hover:opacity-10 blur-2xl transition-opacity`} aria-hidden="true"></div>
+
+          <div class="relative flex justify-between items-start mb-5">
+            <div class={`w-12 h-12 rounded-xl bg-gradient-to-br ${h.accent} text-white flex items-center justify-center shadow-md group-hover:scale-110 group-hover:rotate-3 transition-transform`}>
+              <Icon name={h.icon as any} class="w-6 h-6" />
+            </div>
+            {h.badge && (
+              <span class="bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-widest border border-emerald-100">
+                {h.badge}
+              </span>
+            )}
+          </div>
+
+          <h3 class="relative text-lg font-bold text-gray-900 mb-1.5 tracking-tight">{h.title}</h3>
+          <p class="relative text-sm font-medium text-blue-600 mb-3">{h.pitch}</p>
+          <p class="relative text-sm text-gray-500 leading-relaxed flex-1">{h.detail}</p>
+
+          <div class="relative mt-5 inline-flex items-center gap-1 text-sm font-semibold text-gray-700 group-hover:text-blue-700 transition-colors">
+            Ver detalhes
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform">
+              <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Stats bar — números que validam a profundidade -->
+    <div class="mt-16 lg:mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 max-w-5xl mx-auto">
+      {[
+        { n: '50+', l: 'fusos horários IANA suportados' },
+        { n: '1000+', l: 'municípios com NFS-e Nacional' },
+        { n: '04.16', l: 'código de serviço psicologia' },
+        { n: '255', l: 'ocupação Receita Saúde' },
+      ].map((s) => (
+        <div class="text-center bg-white/60 backdrop-blur-sm border border-white rounded-2xl p-5 shadow-sm">
+          <div class="text-3xl lg:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-1">
+            {s.n}
+          </div>
+          <div class="text-[11px] text-gray-500 uppercase tracking-wider font-semibold leading-snug">
+            {s.l}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

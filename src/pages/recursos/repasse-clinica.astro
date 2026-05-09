@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeatureLanding from '../../components/FeatureLanding.astro';
+import CTA from '../../components/CTA.astro';
+import { FEATURES } from '../../data/features.ts';
+
+const feature = FEATURES.find((f) => f.slug === 'repasse-clinica')!;
+
+const title = 'Repasse clínica ↔ profissional · Split automático por sessão';
+const description =
+  'Configure percentual ou valor fixo de repasse por psicólogo da clínica. O sistema calcula split automático, com painel separado por parte, mensalidade do psi e relatório consolidado.';
+
+const benefits = [
+  { icon: 'HandCoins' as const, title: 'Percentual ou valor fixo por profissional', description: 'Cada psicólogo da clínica tem seu acordo: 70/30, 60/40, R$ 50 fixo por sessão. Configure uma vez e o sistema aplica em toda sessão paga.' },
+  { icon: 'WalletCards' as const, title: 'Painel separado por parte', description: 'Clínica vê o que recebeu vs o que repassa. Profissional vê só o que ganhou (sem ver bruto da clínica, se quiser ocultar). Cada lado com sua visão financeira.' },
+  { icon: 'Repeat' as const, title: 'Reversão visível em cancelamento', description: 'Sessão cancelada após repasse contabilizado? O sistema reverte automaticamente, com registro do motivo. Sem planilha paralela, sem ajuste manual.' },
+  { icon: 'BookText' as const, title: 'Mensalidade do psi pra clínica', description: 'Modelo invertido: o psicólogo paga mensalidade fixa pra clínica usar a estrutura. Suporte nativo, com cobrança automática mensal e desconto no repasse.' },
+  { icon: 'FileText' as const, title: 'Relatório consolidado mensal', description: 'PDF mensal com totais brutos, repasses por profissional, mensalidades, ajustes e líquido. Pronto pra IR e pra mostrar pro contador.' },
+  { icon: 'KeyRound' as const, title: 'Permissões por papel', description: 'Dono vê tudo. Psi parceiro vê só o próprio repasse. Secretária pode ou não ver financeiro, conforme RBAC. Cada um com o nível de acesso adequado.' },
+];
+
+const steps = [
+  { title: 'Convide o profissional pra clínica', description: 'Settings → Equipe → Adicionar membro. Defina papel (psicólogo dono, parceiro, secretária).' },
+  { title: 'Configure o repasse no perfil dele', description: 'Settings → Repasse → escolha tipo (% sobre sessão, valor fixo, mensalidade pra clínica) e o valor. Ative ou desative quando quiser.' },
+  { title: 'Sessão paga gera split automático', description: 'Quando a sessão é marcada como paga, o sistema registra a parte da clínica e a parte do profissional. Visível em ambos os painéis.' },
+  { title: 'Fechamento mensal automático', description: 'Todo mês, relatório PDF consolidado fica disponível. Você só envia pro psi e pro contador.' },
+];
+
+const faqs = [
+  { q: 'O psi parceiro vê quanto a clínica recebeu bruto?', a: 'Configurável. Você escolhe se ele vê o valor bruto ou só o líquido dele (modo "hide_gross"). Útil quando há acordo de não revelar margens.' },
+  { q: 'Funciona pra modelo de "aluguel de sala" (psi paga clínica)?', a: 'Sim. Configura a mensalidade do psi pra clínica como tipo "fee fixo mensal". O sistema cobra automaticamente todo mês e ainda permite combinar com repasse % se for híbrido.' },
+  { q: 'Posso mudar o percentual no meio do mês?', a: 'Sim. A nova regra vale só pra sessões registradas a partir da mudança. Sessões já contabilizadas mantêm o cálculo original (auditável).' },
+  { q: 'Tem retenção de impostos no repasse?', a: 'O sistema calcula bruto. Retenções específicas (IRRF, ISS) você configura conforme acordo com seu contador — não fazemos retenção fiscal automática pra evitar erros tributários.' },
+  { q: 'É exclusivo do plano Clínica?', a: 'Sim. O Plano Individual não tem cenário de repasse (1 profissional só). Se você é autônomo e quer dividir com 1 colega, considere o plano Clínica (5 profissionais por R$ 69/mês).' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <FeatureLanding
+    feature={feature}
+    h1="Split automático <span class='text-blue-600'>clínica ↔ profissional</span>"
+    intro="Configure percentual ou valor fixo de repasse por psicólogo. O sistema calcula tudo a cada sessão paga, com painel separado por parte e relatório mensal consolidado. Sem planilha paralela, sem cálculo errado."
+    benefits={benefits}
+    steps={steps}
+    faqs={faqs}
+  />
+  <CTA />
+</BaseLayout>

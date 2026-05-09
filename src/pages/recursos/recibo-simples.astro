@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeatureLanding from '../../components/FeatureLanding.astro';
+import CTA from '../../components/CTA.astro';
+import { FEATURES } from '../../data/features.ts';
+
+const feature = FEATURES.find((f) => f.slug === 'recibo-simples')!;
+
+const title = 'Recibo simples · Pra cidades que ainda não emitem NFS-e';
+const description =
+  'Documento PDF estruturado com dados completos da sessão, válido pra apresentação a planos de saúde, dedução IR via Carnê-Leão e arquivo do paciente. Migração indolor quando sua cidade aderir à NFS-e Nacional.';
+
+const benefits = [
+  { icon: 'FileText' as const, title: 'PDF estruturado e profissional', description: 'Layout padrão de recibo com dados do profissional (nome, CRP, CPF/CNPJ), do paciente (nome, CPF), valor por extenso e em número, data e descrição do serviço. Pronto pra qualquer uso.' },
+  { icon: 'Receipt' as const, title: 'Aceito em planos de saúde', description: 'Documento válido pra reembolso em planos de saúde que aceitam atendimento por psicólogo (a maioria). Inclui descrição do serviço e código de ocupação 255 (psicólogo).' },
+  { icon: 'WalletCards' as const, title: 'Vale pra dedução IR (Carnê-Leão)', description: 'Soma os recibos do ano pra incluir como despesa médica na declaração do IR pelo Carnê-Leão. Você pode exportar lote em CSV no formato Receita Saúde quando declarar.' },
+  { icon: 'CalendarSync' as const, title: 'Geração por sessão paga', description: 'Marcou a sessão como paga? O recibo já fica disponível na hora pra envio ao paciente — pelo portal, e-mail ou WhatsApp.' },
+  { icon: 'Repeat' as const, title: 'Migração indolor pra NFS-e', description: 'Quando sua cidade aderir ao padrão NFS-e Nacional, basta cadastrar o certificado A1 no sistema. Recibos antigos continuam acessíveis; novos saem como NFS-e.' },
+  { icon: 'BookText' as const, title: 'Histórico arquivado', description: 'Todos os recibos emitidos ficam no painel financeiro do paciente, organizados por data. Reemissão e exportação a qualquer momento.' },
+];
+
+const steps = [
+  { title: 'Configure seus dados como emissor', description: 'Settings → Perfil Profissional: nome completo, CPF/CNPJ, CRP. Settings → Clínica: endereço completo (opcional, pra constar no recibo).' },
+  { title: 'Marque a sessão como paga', description: 'Na agenda ou no perfil do paciente, "Marcar como paga". O sistema gera o recibo automaticamente.' },
+  { title: 'Envie pro paciente', description: 'PDF disponível no painel financeiro do paciente. Compartilhe pelo portal, link direto ou anexe num e-mail.' },
+];
+
+const faqs = [
+  { q: 'Esse recibo substitui NFS-e?', a: 'Não. NFS-e é nota fiscal eletrônica oficial; o recibo simples é documento auxiliar. Se sua cidade emite NFS-e Nacional (já são quase 1.000 municípios), recomendamos usar NFS-e — gera vantagem fiscal e cobertura plena.' },
+  { q: 'Em que casos usar recibo simples?', a: 'Casos onde você não pode emitir NFS-e: cidade ainda não aderiu ao padrão nacional, atendimento esporádico fora do município, ou paciente solicita recibo informal. Sempre que possível, prefira NFS-e.' },
+  { q: 'O recibo simples vale pra IR?', a: 'Sim, conforme jurisprudência da Receita: documento que comprova prestação de serviço com identificação das partes serve pra dedução. Pra Carnê-Leão (psicólogo é obrigado), o sistema gera CSV oficial em Receita Saúde.' },
+  { q: 'Posso personalizar o template?', a: 'Sim. Em Settings → Modelos de Documentos, customize o layout do recibo: variáveis dinâmicas, formatação, cabeçalho. Salva por workspace; vale pra todos os profissionais.' },
+  { q: 'Como sei se minha cidade emite NFS-e Nacional?', a: 'Consulte gov.br/nfse → "Municípios Aderidos". Se ainda não aderiu, use o recibo simples; quando aderir (e a tendência é aderir até 2027), basta ativar o certificado.' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <FeatureLanding
+    feature={feature}
+    h1="Recibo simples <span class='text-blue-600'>quando NFS-e ainda não chegou</span>"
+    intro="Pra municípios que ainda não aderiram à NFS-e Nacional, o sistema emite documento PDF estruturado válido pra plano de saúde, IR via Carnê-Leão e arquivo do paciente. Quando sua cidade aderir, ativa NFS-e e segue sem perder histórico."
+    benefits={benefits}
+    steps={steps}
+    faqs={faqs}
+  />
+  <CTA />
+</BaseLayout>

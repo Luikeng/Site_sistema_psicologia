@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeatureLanding from '../../components/FeatureLanding.astro';
+import CTA from '../../components/CTA.astro';
+import { FEATURES } from '../../data/features.ts';
+
+const feature = FEATURES.find((f) => f.slug === 'multi-fuso')!;
+
+const title = 'Multi-fuso horário · Atendimento online sem confusão de horário';
+const description =
+  'Workspace e profissionais com fuso horário independente. Sessões em UTC, exibição no fuso de cada parte. Ideal pra atendimento online entre estados ou países.';
+
+const benefits = [
+  { icon: 'Globe2' as const, title: 'Fuso por workspace e por psicólogo', description: 'A clínica define o fuso padrão (ex: America/Sao_Paulo). Cada profissional pode override (ex: Europe/Lisbon). Pacientes em outro estado/país aparecem no horário deles no lembrete.' },
+  { icon: 'CalendarSync' as const, title: 'Sincronização Google Calendar correta', description: 'O Google Calendar respeita o fuso de cada parte automaticamente. Sem mais "será que ele entendeu 14h Brasília ou 14h Lisboa?".' },
+  { icon: 'CalendarClock' as const, title: 'Horário de verão automático', description: 'Use IANA timezones (America/Sao_Paulo, Europe/London). Quando há mudança de horário de verão, a conversão acontece sem você lembrar de ajustar nada.' },
+  { icon: 'Users2' as const, title: 'Equipe internacional possível', description: 'Plano Clínica: psicólogo no Rio, secretária em Lisboa, paciente em Tóquio — cada um vê o horário no fuso que faz sentido pra ele. Trilha de auditoria registra UTC pra evitar ambiguidade.' },
+  { icon: 'BookText' as const, title: 'Migração indolor pra contas existentes', description: 'Refator concluído em maio/2026: dados antigos foram migrados pra TIMESTAMPTZ sem perda. Quem já estava conosco antes não sentiu nada.' },
+];
+
+const steps = [
+  { title: 'Configure o fuso da clínica', description: 'Settings → Fuso Horário → escolha entre 50+ fusos IANA padrão. Default: America/Sao_Paulo.' },
+  { title: 'Profissional ajusta o próprio fuso (opcional)', description: 'Se trabalha em outra timezone, sobrescreve o padrão da clínica em Configurações de Perfil.' },
+  { title: 'Sessões e lembretes ajustam-se sozinhos', description: 'Você marca uma sessão às 10h SP; paciente em Lisboa recebe lembrete às 14h locais; tudo registrado em UTC no banco.' },
+];
+
+const faqs = [
+  { q: 'Funciona pra atender pacientes no exterior?', a: 'Sim. Atendimento online via Google Meet ou plataforma de sua escolha; o sistema gerencia agendamento, lembrete e cobrança no fuso correto pra cada lado.' },
+  { q: 'E se o paciente viajar — muda o horário da sessão dele?', a: 'O fuso é vinculado ao workspace e profissional, não ao paciente. Se ele viajar, vai usar o link/lembrete no horário de Brasília mesmo. Se quiser ajuste pontual, basta reagendar.' },
+  { q: 'Histórico de sessões antigas continua correto?', a: 'Sim. A migração converteu todos os registros pra TIMESTAMPTZ com fuso original preservado. Sessões no histórico aparecem no horário em que aconteceram, no fuso original.' },
+  { q: 'Preciso de plano Clínica pra ter multi-fuso?', a: 'Não. O fuso por workspace está disponível em todos os planos. Override por profissional faz mais sentido em equipe — mas tecnicamente o Individual também tem.' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <FeatureLanding
+    feature={feature}
+    h1="Atendimento online <span class='text-blue-600'>entre fusos</span>, sem confusão"
+    intro="Workspace e profissionais com fuso independente. Paciente em Lisboa recebe lembrete no horário dele; você vê na sua agenda local. Tudo armazenado em UTC, exibido no fuso correto pra cada parte."
+    benefits={benefits}
+    steps={steps}
+    faqs={faqs}
+  />
+  <CTA />
+</BaseLayout>

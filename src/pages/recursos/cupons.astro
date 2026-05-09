@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeatureLanding from '../../components/FeatureLanding.astro';
+import CTA from '../../components/CTA.astro';
+import { FEATURES } from '../../data/features.ts';
+
+const feature = FEATURES.find((f) => f.slug === 'cupons')!;
+
+const title = 'Cupons de desconto · Indicação, primeira mensalidade e campanha';
+const description =
+  'Painel próprio pra criar cupons de desconto: % ou valor fixo, duração configurável, validação em tempo real no checkout. Útil pra captação, indicação e primeira mensalidade.';
+
+const benefits = [
+  { icon: 'Ticket' as const, title: 'Tipos flexíveis: % ou valor fixo', description: 'Crie cupons de 10%, 30% ou R$ 20 OFF — o sistema aceita ambos os formatos. Útil pra adequar à sua estratégia (porcentagem em planos altos, valor fixo em planos baixos).' },
+  { icon: 'CalendarClock' as const, title: 'Duração à sua escolha', description: 'Aplica só no 1º pagamento, recorre por N meses (ex: "3 meses 20% OFF"), ou vitalício enquanto a assinatura estiver ativa. Cada cenário de campanha tem sua estratégia.' },
+  { icon: 'WalletCards' as const, title: 'Validação em tempo real no checkout', description: 'Cliente digita o código, vê o preço atualizar antes de pagar — riscando o valor cheio e mostrando o com desconto. Sem surpresa, sem objeção.' },
+  { icon: 'KeyRound' as const, title: 'Limites e validade', description: 'Limite de uso total ("primeiros 50"), limite por cliente ("1x por CPF"), data de validade. Cupom expirado é automaticamente recusado.' },
+  { icon: 'BookText' as const, title: 'Auditoria de uso', description: 'Veja quem usou cada cupom, quanto desconto foi aplicado, qual plano foi assinado. Mede ROI da campanha sem planilha.' },
+  { icon: 'HandCoins' as const, title: 'Combina com programa de indicação', description: 'Crie cupom personalizado pra cada cliente que indicar a plataforma. Você dá 20% pra ele e 20% pro indicado — programa de growth pronto.' },
+];
+
+const steps = [
+  { title: 'Crie o cupom no painel admin', description: 'Settings → Cupons → "Novo cupom". Defina código (ex: LANCAMENTO20), tipo, valor, duração, limites e validade.' },
+  { title: 'Compartilhe com seu público', description: 'Por e-mail, redes sociais, indicação direta. Ou crie cupom personalizado por cliente, pra rastrear conversão por canal.' },
+  { title: 'Cliente aplica no checkout', description: 'Na tela de assinatura, ele digita o código no campo "Tem um cupom?". O sistema valida e atualiza o preço na hora.' },
+  { title: 'Acompanhe o desempenho', description: 'No painel admin, veja quantos usaram, quanto foi descontado, quais planos resultaram. Decide se renova, ajusta ou desativa.' },
+];
+
+const faqs = [
+  { q: 'O cupom funciona em upgrade de plano?', a: 'Configurável. Você pode restringir a "novas assinaturas" ou permitir em upgrade — útil pra incentivar quem está no Individual a migrar pro Clínica.' },
+  { q: 'Posso desativar um cupom no meio da campanha?', a: 'Sim. Desativação imediata. Quem já usou mantém o desconto até o fim do período contratado; novos não conseguem aplicar mais.' },
+  { q: 'Tem cupom oculto (que dá desconto sem cliente saber)?', a: 'O sistema não suporta cupom invisível — todo desconto é transparente pro cliente. Se quiser dar desconto sem comunicar, use o campo "desconto customizado" no cadastro do usuário (admin).' },
+  { q: 'Combina com período de teste grátis?', a: 'Sim. O cupom só "ativa" quando a primeira cobrança rola. Cliente termina o teste, paga o primeiro mês com desconto e segue conforme a duração configurada.' },
+  { q: 'Posso criar cupons em massa pra import de lista?', a: 'Roadmap. Hoje os cupons são criados um a um pelo painel admin. Pra campanhas grandes (ex: 1.000 cupons únicos pra Black Friday), fala com a gente — fazemos manualmente até liberar a feature.' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <FeatureLanding
+    feature={feature}
+    h1="Cupons de desconto <span class='text-blue-600'>pra captação e indicação</span>"
+    intro="Painel próprio pra criar promoções: % ou valor fixo, duração configurável (uma vez, por N meses ou vitalício), limites e validade. Validação em tempo real no checkout — cliente vê o preço atualizar antes de pagar."
+    benefits={benefits}
+    steps={steps}
+    faqs={faqs}
+  />
+  <CTA />
+</BaseLayout>

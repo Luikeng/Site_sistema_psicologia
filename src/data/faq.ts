@@ -6,11 +6,15 @@ export type FAQItem = {
 export const FAQ: FAQItem[] = [
   {
     q: 'O Sistema Psicologia atende às exigências do CFP para prontuários eletrônicos?',
-    a: 'Sim. Seguimos a Resolução CFP nº 01/2009 (prontuários psicológicos) e a Resolução CFP nº 11/2018 (atendimento online). Os prontuários ficam criptografados com AES-256, com trilha de auditoria de acessos e controle granular de quem pode visualizar cada paciente.',
+    a: 'Sim. Seguimos a Resolução CFP nº 01/2009 (prontuários psicológicos) e a Resolução CFP nº 11/2018 (atendimento online). Trilha de auditoria de acessos por paciente, permissões granulares por membro da clínica e tráfego sempre em TLS 1.3.',
   },
   {
     q: 'Como funciona a emissão de NFS-e direto pelo sistema?',
-    a: 'Você cadastra seu certificado digital A1 (.pfx), informa CNPJ/CPF emissor e o código de serviço (04.16 — psicologia). A partir de qualquer sessão paga, em 1 clique o sistema gera a DPS, assina, transmite à Receita Federal e armazena o XML/PDF no R2. Funciona para Simples Nacional e regime normal.',
+    a: 'Você cadastra seu certificado digital A1 (.pfx), informa CNPJ/CPF emissor e o código de serviço (04.16 — psicologia). A partir de qualquer sessão paga, o sistema gera a DPS, assina digitalmente, transmite à Receita Federal e armazena o XML/PDF. Funciona para Simples Nacional e regime normal.',
+  },
+  {
+    q: 'E se minha cidade ainda não emite NFS-e Nacional?',
+    a: 'Tem o módulo de Recibo Simples — gera um documento PDF estruturado com os dados do atendimento, válido pra apresentação a planos de saúde e dedução de IR via Carnê-Leão. Quando sua cidade aderir ao padrão nacional, basta ativar o certificado.',
   },
   {
     q: 'O sistema gera o arquivo de Receita Saúde (Carnê-Leão) corretamente?',
@@ -38,7 +42,11 @@ export const FAQ: FAQItem[] = [
   },
   {
     q: 'Como o paciente acessa o portal?',
-    a: 'Ele entra com um link/código exclusivo (sem senha do prontuário). Vê próximas sessões, baixa recibos e pode confirmar presença. Você reduz mensagens repetitivas no WhatsApp e dá autonomia ao paciente.',
+    a: 'Ele entra com um link/código exclusivo (sem senha do prontuário). Vê próximas sessões, registra humor diário (mood log), preenche anamnese, atualiza foto e pode confirmar presença. Você reduz mensagens repetitivas no WhatsApp e ganha registros clínicos entre sessões.',
+  },
+  {
+    q: 'Posso oferecer cupom de desconto pros meus pacientes ou colegas?',
+    a: 'Sim. O sistema tem painel de cupons com tipo (% ou valor fixo), duração configurável (uma vez, recorrente ou vitalício) e validação em tempo real no checkout. Útil pra campanhas de indicação ou primeira mensalidade.',
   },
   {
     q: 'Vocês ajudam na migração se eu já tiver pacientes em outro sistema?',
