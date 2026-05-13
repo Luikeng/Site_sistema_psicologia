@@ -44,22 +44,8 @@ const faqs = [
     benefits={benefits}
     steps={steps}
     faqs={faqs}
-  />
-
-  <!-- Mockup preview -->
-  <section class="py-16 bg-[#FAFAFA]">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-8">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">Veja a agenda em ação</h2>
-        <p class="text-sm text-gray-600 mt-2 max-w-xl mx-auto">A visualização semanal que o psicólogo enxerga, com sincronização automática Google Calendar.</p>
-      </div>
-      <div class="rounded-2xl bg-white p-2 sm:p-3 border border-gray-200 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
-        <div class="h-[460px] sm:h-[520px]">
-          <AgendaMockup />
-        </div>
-      </div>
-    </div>
-  </section>
-
+  >
+    <AgendaMockup slot="preview" />
+  </FeatureLanding>
   <CTA />
 </BaseLayout>

@@ -11,9 +11,15 @@ export interface Props {
   steps?: { title: string; description: string }[];
   faqs?: { q: string; a: string }[];
   relatedSlugs?: string[];
+  // Tipo do preview: 'desktop' (default) força min-width 860px com scroll
+  // horizontal em mobile pra preservar layout. 'mobile' renderiza no
+  // tamanho de celular (max-w-sm centralizado) — ideal pra Portal do
+  // Paciente que é mobile-first no app real.
+  previewVariant?: 'desktop' | 'mobile';
 }
 
-const { feature, h1, intro, benefits, steps, faqs } = Astro.props;
+const { feature, h1, intro, benefits, steps, faqs, previewVariant = 'desktop' } = Astro.props;
+const isMobilePreview = previewVariant === 'mobile';
 ---
 
 <header class="pt-32 pb-12 bg-gradient-to-b from-white to-blue-50/40">
@@ -42,6 +48,31 @@ const { feature, h1, intro, benefits, steps, faqs } = Astro.props;
     </div>
   </div>
 </header>
+
+{Astro.slots.has('preview') && (
+  <section class="pb-12 -mt-4 bg-gradient-to-b from-blue-50/40 to-white">
+    <div class={isMobilePreview ? 'max-w-md mx-auto px-4 sm:px-6' : 'max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'}>
+      <div class="rounded-2xl bg-white p-2 sm:p-3 border border-gray-200 shadow-[0_12px_40px_rgba(15,23,42,0.08)] overflow-hidden">
+        {isMobilePreview ? (
+          <!-- Mobile-first mockup (Portal Paciente): renderiza no tamanho nativo, centralizado -->
+          <div class="h-[560px] sm:h-[600px]">
+            <slot name="preview" />
+          </div>
+        ) : (
+          <!-- Desktop mockup: em mobile, scroll horizontal preserva o layout completo -->
+          <div class="overflow-x-auto" style="-webkit-overflow-scrolling: touch;">
+            <div class="min-w-[860px] sm:min-w-0 h-[460px] sm:h-[520px] lg:h-[560px]">
+              <slot name="preview" />
+            </div>
+          </div>
+        )}
+      </div>
+      {!isMobilePreview && (
+        <p class="text-center text-[11px] text-gray-400 mt-3 sm:hidden">← Arraste para ver a tela completa</p>
+      )}
+    </div>
+  </section>
+)}
 
 <section class="py-16 bg-white">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
