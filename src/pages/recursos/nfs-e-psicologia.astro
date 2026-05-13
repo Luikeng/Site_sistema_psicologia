@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FeatureLanding from '../../components/FeatureLanding.astro';
+import NfseMockup from '../../components/NfseMockup.astro';
 import CTA from '../../components/CTA.astro';
 import { FEATURES } from '../../data/features.ts';
 
@@ -44,5 +45,21 @@ const faqs = [
     steps={steps}
     faqs={faqs}
   />
+
+  <!-- Mockup preview -->
+  <section class="py-16 bg-[#FAFAFA]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">A tela de NFS-e</h2>
+        <p class="text-sm text-gray-600 mt-2 max-w-xl mx-auto">Histórico de notas emitidas com status em tempo real do portal gov.br, download de PDF e XML.</p>
+      </div>
+      <div class="rounded-2xl bg-white p-2 sm:p-3 border border-gray-200 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+        <div class="h-[460px] sm:h-[520px]">
+          <NfseMockup />
+        </div>
+      </div>
+    </div>
+  </section>
+
   <CTA />
 </BaseLayout>

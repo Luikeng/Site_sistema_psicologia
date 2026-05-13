@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FeatureLanding from '../../components/FeatureLanding.astro';
+import PortalPacienteMockup from '../../components/PortalPacienteMockup.astro';
 import CTA from '../../components/CTA.astro';
 import { FEATURES } from '../../data/features.ts';
 
@@ -35,5 +36,21 @@ const faqs = [
     benefits={benefits}
     faqs={faqs}
   />
+
+  <!-- Mockup preview -->
+  <section class="py-16 bg-[#FAFAFA]">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">O que o paciente vê</h2>
+        <p class="text-sm text-gray-600 mt-2 max-w-xl mx-auto">Diário de humor, pagamentos pendentes, próximas sessões e download de NFS-e — tudo num só lugar.</p>
+      </div>
+      <div class="rounded-2xl bg-white p-2 sm:p-3 border border-gray-200 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+        <div class="h-[560px]">
+          <PortalPacienteMockup />
+        </div>
+      </div>
+    </div>
+  </section>
+
   <CTA />
 </BaseLayout>

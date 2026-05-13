@@ -1,104 +1,184 @@
 ---
-// Mockup estático em SVG/HTML do dashboard. Pure-Astro, zero JS.
+// Mockup do dashboard do Sistema Psicologia (Visão Geral).
+// Fiel ao app real — mesmas tabs, mesmos cards de stats, mesmos
+// componentes (Histórico de Faturamento, Pagamento Pendente, Próximas
+// Sessões com card MMM DD).
+// Pure-Astro, zero JS. Dados ficticios convincentes.
 const today = new Date();
-const monthName = today.toLocaleDateString('pt-BR', { month: 'long' });
+const monthName = today.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+
+// Próximas sessões com datas relativas (semana que vem)
+const sessions = [
+  { date: 'MAI 18', name: 'Ana M.', time: '14:00', tag: 'Cortesia', tagColor: 'bg-amber-50 text-amber-700' },
+  { date: 'MAI 25', name: 'Carlos P.', time: '15:00', tag: 'Cortesia', tagColor: 'bg-amber-50 text-amber-700' },
+  { date: 'JUN 1', name: 'Mariana S.', time: '10:00', tag: 'Confirmado', tagColor: 'bg-emerald-50 text-emerald-700' },
+  { date: 'JUN 8', name: 'Lucas V.', time: '16:00', tag: 'Confirmado', tagColor: 'bg-emerald-50 text-emerald-700' },
+];
+
+const navItems = [
+  { l: 'Dashboard', active: true, icon: 'grid' },
+  { l: 'Pacientes', icon: 'users' },
+  { l: 'Agenda', icon: 'calendar' },
+  { l: 'Financeiro', icon: 'dollar' },
+  { l: 'Emitir Nota', icon: 'file-text' },
+  { l: 'Configurações', icon: 'settings' },
+];
 ---
 
-<div class="w-full h-full flex bg-gray-50/40">
+<div class="w-full h-full flex bg-[#FAFAFA]">
   <!-- Sidebar -->
-  <aside class="hidden md:flex flex-col w-56 bg-white border-r border-gray-100 px-4 py-5">
-    <div class="flex items-center gap-2 mb-8">
-      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-sm">S</div>
-      <span class="font-bold text-gray-900 text-sm">Sistema Psicologia</span>
+  <aside class="hidden md:flex flex-col w-52 bg-white border-r border-gray-100 px-3 py-5">
+    <div class="flex items-center gap-2 mb-8 px-2">
+      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-extrabold text-sm">SP</div>
+      <div class="flex flex-col">
+        <span class="font-bold text-gray-900 text-[13px] leading-tight">Sistema</span>
+        <span class="font-bold text-blue-600 text-[13px] leading-tight">Psicologia</span>
+      </div>
     </div>
     <nav class="space-y-1 flex-1">
-      {[
-        { l: 'Dashboard', a: true },
-        { l: 'Agenda' },
-        { l: 'Pacientes' },
-        { l: 'Prontuários' },
-        { l: 'Financeiro' },
-        { l: 'NFS-e' },
-        { l: 'Receita Saúde' },
-        { l: 'Documentos' },
-        { l: 'Configurações' },
-      ].map((item) => (
+      {navItems.map((item) => (
         <div class:list={[
-          'px-3 py-2 rounded-lg text-xs font-medium',
-          item.a ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-50',
-        ]}>{item.l}</div>
+          'flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium',
+          item.active ? 'bg-blue-50 text-blue-700' : 'text-gray-600',
+        ]}>
+          <div class:list={['w-1.5 h-1.5 rounded-full', item.active ? 'bg-blue-600' : 'bg-gray-300']}></div>
+          {item.l}
+        </div>
       ))}
     </nav>
-    <div class="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl p-3 text-white text-xs">
-      <div class="font-bold mb-1">Plano Clínica</div>
-      <div class="opacity-80">3 profissionais ativos</div>
+    <div class="border-t border-gray-100 pt-3 px-2">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] font-bold">AB</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-[11px] font-semibold text-gray-900 truncate">Dra. Ana Beatriz</div>
+          <div class="text-[10px] text-gray-500 truncate">Psicóloga</div>
+        </div>
+      </div>
+      <div class="mt-2 flex items-center gap-1.5 px-1">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+        <span class="text-[10px] text-emerald-700 font-medium">Google Conectado</span>
+      </div>
     </div>
   </aside>
 
   <!-- Main -->
-  <div class="flex-1 flex flex-col">
-    <header class="h-12 border-b border-gray-100 px-4 sm:px-6 flex items-center justify-between bg-white">
-      <div class="text-xs text-gray-500 capitalize">{monthName} de {today.getFullYear()}</div>
-      <div class="flex items-center gap-3">
-        <div class="text-xs text-gray-600 hidden sm:block">Dra. Ana Beatriz</div>
-        <div class="w-7 h-7 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold">AB</div>
+  <div class="flex-1 flex flex-col overflow-hidden">
+    <!-- Header com banner trial -->
+    <div class="px-4 sm:px-6 pt-4">
+      <div class="bg-amber-50 border border-amber-100 rounded-lg px-4 py-2 flex items-center justify-between text-xs">
+        <span class="text-amber-900 font-medium">⚡ Período de teste: Restam 25 dias</span>
+        <span class="text-amber-700 font-semibold cursor-pointer">Assine Agora</span>
       </div>
-    </header>
+    </div>
 
-    <div class="flex-1 p-4 sm:p-6 overflow-hidden">
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
-        {[
-          { l: 'Sessões hoje', v: '8', s: '+2 vs ontem', c: 'text-emerald-600' },
-          { l: 'Faturado no mês', v: 'R$ 12.480', s: '+18%', c: 'text-emerald-600' },
-          { l: 'NFS-e emitidas', v: '47', s: 'Out/2026', c: 'text-gray-500' },
-          { l: 'Inadimplência', v: 'R$ 320', s: '2 pacientes', c: 'text-amber-600' },
-        ].map((kpi) => (
-          <div class="bg-white border border-gray-100 rounded-xl p-3">
-            <div class="text-[10px] uppercase tracking-wider text-gray-500 font-semibold mb-1">{kpi.l}</div>
-            <div class="text-lg font-bold text-gray-900">{kpi.v}</div>
-            <div class={`text-[10px] font-medium ${kpi.c}`}>{kpi.s}</div>
-          </div>
-        ))}
+    <!-- Title row -->
+    <div class="px-4 sm:px-6 pt-5 pb-3 flex items-start justify-between gap-3">
+      <div>
+        <h1 class="text-lg font-extrabold text-gray-900">Visão Geral</h1>
+        <p class="text-xs text-gray-500 mt-0.5">Bem-vindo de volta! Aqui está o resumo do seu consultório.</p>
       </div>
+      <div class="hidden sm:flex items-center gap-2">
+        <div class="text-xs font-medium text-gray-700 border border-gray-200 rounded-lg px-3 py-1.5 bg-white">📊 Exportar</div>
+        <div class="text-xs font-medium text-white bg-blue-600 rounded-lg px-3 py-1.5">+ Novo Paciente</div>
+      </div>
+    </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
-        <div class="lg:col-span-2 bg-white border border-gray-100 rounded-xl p-4">
-          <div class="flex items-center justify-between mb-3">
-            <h3 class="text-sm font-bold text-gray-900">Próximas sessões</h3>
-            <span class="text-[10px] text-gray-400">Sincronizado · Google Agenda</span>
+    <!-- Stats cards -->
+    <div class="px-4 sm:px-6 grid grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+      {[
+        { icon: '💰', label: 'Faturamento Mensal', value: 'R$ 18.450', sub: '+ R$ 2.300 a receber', tag: 'Este Mês', tagColor: 'text-blue-600' },
+        { icon: '📅', label: 'Sessões Agendadas', value: '24', sub: '3 sessões hoje', tag: 'Este Mês', tagColor: 'text-blue-600' },
+        { icon: '👥', label: 'Pacientes Ativos', value: '42', sub: 'Total cadastrado', tag: '', tagColor: '' },
+        { icon: '⏰', label: 'Horas Livres', value: '16h', sub: 'Capacidade restante', tag: 'Semana', tagColor: 'text-blue-600' },
+      ].map((kpi) => (
+        <div class="bg-white border border-gray-100 rounded-xl p-3.5">
+          <div class="flex items-start justify-between mb-2">
+            <div class="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center text-sm">{kpi.icon}</div>
+            {kpi.tag && <span class={`text-[10px] font-semibold ${kpi.tagColor}`}>{kpi.tag}</span>}
           </div>
-          <ul class="space-y-2">
-            {[
-              { h: '14:00', n: 'João Pedro', s: 'Sala 2', c: 'bg-emerald-500' },
-              { h: '15:00', n: 'Mariana C.', s: 'Sala 1', c: 'bg-blue-500' },
-              { h: '16:00', n: 'Lucas V.', s: 'Online', c: 'bg-indigo-500' },
-              { h: '17:00', n: 'Camila S.', s: 'Sala 2', c: 'bg-emerald-500' },
-            ].map((sess) => (
-              <li class="flex items-center gap-3 px-2 py-2 hover:bg-gray-50 rounded-lg">
-                <div class={`w-1 h-8 rounded-full ${sess.c}`}></div>
-                <div class="flex-1 min-w-0">
-                  <div class="text-xs font-bold text-gray-900">{sess.h} · {sess.n}</div>
-                  <div class="text-[11px] text-gray-500">{sess.s}</div>
-                </div>
-                <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">Confirmado</span>
-              </li>
-            ))}
-          </ul>
+          <div class="text-[10px] uppercase tracking-wider text-gray-500 font-semibold">{kpi.label}</div>
+          <div class="text-xl font-extrabold text-gray-900 mt-0.5 leading-none">{kpi.value}</div>
+          <div class="text-[10px] text-gray-500 mt-1">{kpi.sub}</div>
         </div>
+      ))}
+    </div>
 
-        <div class="bg-white border border-gray-100 rounded-xl p-4">
-          <h3 class="text-sm font-bold text-gray-900 mb-3">Atalhos</h3>
-          <div class="grid grid-cols-2 gap-2">
-            {[
-              { l: 'Emitir NFS-e', c: 'bg-blue-50 text-blue-700' },
-              { l: 'Receita Saúde', c: 'bg-emerald-50 text-emerald-700' },
-              { l: 'Novo Recibo', c: 'bg-indigo-50 text-indigo-700' },
-              { l: 'Convidar pro Portal', c: 'bg-amber-50 text-amber-700' },
-            ].map((s) => (
-              <div class={`text-[10px] font-bold px-3 py-3 rounded-lg ${s.c} text-center`}>{s.l}</div>
-            ))}
+    <!-- Payment pending banner -->
+    <div class="px-4 sm:px-6 mb-3">
+      <div class="bg-amber-50 border border-amber-100 rounded-xl px-4 py-2.5 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-base">⚠️</div>
+          <div>
+            <div class="text-xs font-bold text-amber-900">Pagamento Pendente</div>
+            <div class="text-[10px] text-amber-700">Valor total em aberto.</div>
           </div>
         </div>
+        <div class="text-right">
+          <div class="text-[10px] text-amber-700 uppercase tracking-wider font-semibold">Total a regularizar</div>
+          <div class="text-base font-extrabold text-amber-900">R$ 320</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2-col: chart + upcoming -->
+    <div class="flex-1 px-4 sm:px-6 pb-4 grid grid-cols-1 lg:grid-cols-3 gap-3 min-h-0">
+      <!-- Histórico de Faturamento -->
+      <div class="lg:col-span-2 bg-white border border-gray-100 rounded-xl p-4 flex flex-col">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <span class="text-base">📈</span>
+            <h3 class="text-sm font-bold text-gray-900">Histórico de Faturamento</h3>
+          </div>
+          <div class="flex items-center gap-3 text-[10px] text-gray-600">
+            <span class="flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-300"></span> Previsto
+            </span>
+            <span class="flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Realizado
+            </span>
+          </div>
+        </div>
+        <div class="flex-1 flex items-end gap-2 px-1 min-h-[120px]">
+          {[
+            { m: 'Dez', forecast: 60, real: 45 },
+            { m: 'Jan', forecast: 70, real: 65 },
+            { m: 'Fev', forecast: 75, real: 72 },
+            { m: 'Mar', forecast: 80, real: 78 },
+            { m: 'Abr', forecast: 85, real: 80 },
+            { m: 'Mai', forecast: 90, real: 70 },
+          ].map((bar) => (
+            <div class="flex-1 flex flex-col items-center gap-1">
+              <div class="w-full flex gap-1 items-end" style="height: 100px;">
+                <div class="flex-1 rounded-t bg-emerald-200" style={`height: ${bar.forecast}%`}></div>
+                <div class="flex-1 rounded-t bg-emerald-500" style={`height: ${bar.real}%`}></div>
+              </div>
+              <div class="text-[10px] text-gray-500 font-medium">{bar.m}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Próximas Sessões -->
+      <div class="bg-white border border-gray-100 rounded-xl p-4 flex flex-col min-h-0">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-sm font-bold text-gray-900">Próximas Sessões</h3>
+          <span class="text-[10px] text-blue-600 font-semibold">Ver Agenda →</span>
+        </div>
+        <ul class="space-y-2 flex-1">
+          {sessions.map((s) => (
+            <li class="flex items-center gap-3 py-1.5">
+              <div class="flex flex-col items-center justify-center w-10 h-10 rounded-lg bg-blue-50 text-blue-700 shrink-0">
+                <span class="text-[8px] font-bold uppercase tracking-wider leading-none">{s.date.split(' ')[0]}</span>
+                <span class="text-sm font-extrabold leading-none mt-0.5">{s.date.split(' ')[1]}</span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-xs font-bold text-gray-900 truncate">{s.name}</div>
+                <div class="text-[10px] text-gray-500">⏱ {s.time}</div>
+              </div>
+              <span class={`text-[9px] font-semibold px-1.5 py-0.5 rounded ${s.tagColor}`}>{s.tag}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   </div>
