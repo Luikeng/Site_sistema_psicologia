@@ -30,7 +30,7 @@ export const PLANS: Plan[] = [
       'Financeiro com mensalidades automáticas',
       'Portal do Paciente com diário de humor',
       'Templates de mensagens (WhatsApp)',
-      'Cupom de desconto e portal de pagamento próprio',
+      'Portal de pagamento próprio',
       'Suporte por e-mail',
     ],
     ctaLabel: 'Começar teste grátis',

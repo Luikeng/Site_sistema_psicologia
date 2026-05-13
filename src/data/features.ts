@@ -203,15 +203,6 @@ export const FEATURES: FeatureItem[] = [
     plan: 'both',
   },
   {
-    slug: 'cupons',
-    title: 'Painel de cupons e descontos',
-    short: 'Crie promoções pra captação, indicação ou primeira mensalidade.',
-    long:
-      'Painel próprio pra criar cupons de desconto: tipo (% ou valor fixo), duração (uma vez, recorrente por N meses, ou vitalício), validade e limites. Validação em tempo real no checkout — o cliente digita o código, vê o preço atualizar, e fecha confiante.',
-    icon: 'Ticket',
-    plan: 'both',
-  },
-  {
     slug: 'audit-log',
     title: 'Trilha de auditoria',
     short: 'Quem fez o quê, e quando — registrado.',

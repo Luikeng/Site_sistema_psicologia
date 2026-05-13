@@ -45,10 +45,6 @@ export const FAQ: FAQItem[] = [
     a: 'Ele entra com um link/código exclusivo (sem senha do prontuário). Vê próximas sessões, registra humor diário (mood log), preenche anamnese, atualiza foto e pode confirmar presença. Você reduz mensagens repetitivas no WhatsApp e ganha registros clínicos entre sessões.',
   },
   {
-    q: 'Posso oferecer cupom de desconto pros meus pacientes ou colegas?',
-    a: 'Sim. O sistema tem painel de cupons com tipo (% ou valor fixo), duração configurável (uma vez, recorrente ou vitalício) e validação em tempo real no checkout. Útil pra campanhas de indicação ou primeira mensalidade.',
-  },
-  {
     q: 'Vocês ajudam na migração se eu já tiver pacientes em outro sistema?',
     a: 'Sim. Suportamos importação por planilha (CSV/Excel) e ajudamos manualmente nas primeiras migrações. Entre em contato pelo /contato e te orientamos.',
   },
