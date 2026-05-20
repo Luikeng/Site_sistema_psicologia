@@ -13,6 +13,8 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
+      // Paginas marcadas noindex (status, status-staging) ficam fora do sitemap.
+      filter: (page) => !/\/status(-staging)?\/?$/.test(page),
       i18n: {
         defaultLocale: 'pt-BR',
         locales: { 'pt-BR': 'pt-BR' },

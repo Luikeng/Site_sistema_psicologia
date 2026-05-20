@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Status — STAGING';
+const description = 'Status do ambiente de staging do Sistema Psicologia (não-público).';
+---
+
+<BaseLayout title={title} description={description} noindex={true}>
+  <section class="bg-gradient-to-b from-amber-50/60 to-white py-16 sm:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Faixa amarela de aviso -->
+      <div class="rounded-2xl border-2 border-amber-300 bg-amber-50 px-5 py-4 mb-8 flex items-start gap-3 text-amber-900">
+        <span class="text-xl leading-none mt-0.5">⚠</span>
+        <div class="flex-1 text-sm">
+          <div class="font-bold">Ambiente de staging</div>
+          <div class="opacity-90">Esta página não é pública. Aponta para <code class="bg-amber-100 px-1 py-0.5 rounded text-xs font-mono">apc-backend-staging</code>. Dados aqui são descartáveis.</div>
+        </div>
+      </div>
+
+      <div class="text-center mb-10">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-semibold tracking-wider uppercase border border-amber-200">
+          Staging · Interno
+        </span>
+        <h1 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          Status do Staging
+        </h1>
+        <p class="mt-3 text-base text-slate-600">
+          Espelho da página pública <code class="text-sm">/status</code>, apontando para o ambiente de homologação.
+        </p>
+      </div>
+
+      <!-- Card grande de status overall -->
+      <div
+        id="overall-card"
+        class="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"
+      >
+        <div id="overall-banner" class="px-6 py-5 flex items-center gap-4 bg-slate-50 border-b border-slate-200">
+          <div id="overall-dot" class="w-3 h-3 rounded-full bg-slate-400 animate-pulse"></div>
+          <div class="flex-1">
+            <div id="overall-label" class="text-lg font-bold text-slate-900">Verificando...</div>
+            <div id="overall-sub" class="text-sm text-slate-500">Consultando a API de staging.</div>
+          </div>
+          <button
+            id="refresh-btn"
+            type="button"
+            class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold text-slate-700 border border-slate-200 hover:bg-slate-50 transition"
+          >
+            ↻ Reverificar
+          </button>
+        </div>
+
+        <ul id="components-list" class="divide-y divide-slate-100">
+          <li class="px-6 py-4 flex items-center gap-3 text-slate-500 text-sm">
+            <span class="w-2 h-2 rounded-full bg-slate-300 animate-pulse"></span>
+            Aguardando primeira resposta...
+          </li>
+        </ul>
+
+        <div class="px-6 py-3 bg-slate-50 border-t border-slate-100 text-xs text-slate-500 flex flex-wrap items-center justify-between gap-2">
+          <span id="checked-at">Última verificação: —</span>
+          <span>Auto-refresh a cada 30s</span>
+        </div>
+      </div>
+
+      <!-- Info técnica útil em staging -->
+      <div class="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Endpoint consultado</h2>
+        <p class="mt-2 text-sm text-slate-600 font-mono break-all" id="endpoint-url">—</p>
+        <p class="mt-3 text-xs text-slate-500">
+          Resposta crua disponível em <a id="endpoint-link" href="#" class="text-blue-600 hover:underline">/status</a>
+          (abre em nova aba).
+        </p>
+      </div>
+
+      <p class="mt-8 text-center text-xs text-slate-500">
+        Sistema Psicologia · Staging interno · não indexado
+      </p>
+    </div>
+  </section>
+
+  <script is:inline>
+    // URL do backend STAGING. Nao expomos em produto publico.
+    const API_BASE = 'https://apc-backend-staging-353388831391.southamerica-east1.run.app';
+
+    const ui = {
+      banner: document.getElementById('overall-banner'),
+      dot: document.getElementById('overall-dot'),
+      label: document.getElementById('overall-label'),
+      sub: document.getElementById('overall-sub'),
+      list: document.getElementById('components-list'),
+      checkedAt: document.getElementById('checked-at'),
+      refresh: document.getElementById('refresh-btn'),
+      endpointUrl: document.getElementById('endpoint-url'),
+      endpointLink: document.getElementById('endpoint-link'),
+    };
+
+    ui.endpointUrl.textContent = API_BASE + '/status';
+    ui.endpointLink.href = API_BASE + '/status';
+    ui.endpointLink.target = '_blank';
+    ui.endpointLink.rel = 'noopener';
+
+    const STATE = {
+      ok: {
+        dot: 'bg-emerald-500 ring-4 ring-emerald-100',
+        banner: 'bg-emerald-50',
+        label: 'Staging operacional',
+        sub: 'apc-backend-staging respondendo normalmente.',
+      },
+      degraded: {
+        dot: 'bg-amber-500 ring-4 ring-amber-100',
+        banner: 'bg-amber-50',
+        label: 'Staging degradado',
+        sub: 'Algum componente está lento. Útil pra reproduzir bug em ambiente real.',
+      },
+      down: {
+        dot: 'bg-rose-500 ring-4 ring-rose-100',
+        banner: 'bg-rose-50',
+        label: 'Staging fora do ar',
+        sub: 'apc-backend-staging não respondeu. Pode estar com min-instances=0 esfriando, ou bug.',
+      },
+      unknown: {
+        dot: 'bg-slate-400 animate-pulse',
+        banner: 'bg-slate-50',
+        label: 'Não foi possível consultar',
+        sub: 'Backend de staging não respondeu na janela. Pode estar com cold start.',
+      },
+    };
+
+    const COMPONENT_LABEL = { api: 'API · Backend staging', database: 'Banco · Supabase staging' };
+
+    function applyState(state) {
+      const s = STATE[state] || STATE.unknown;
+      ui.dot.className = 'w-3 h-3 rounded-full ' + s.dot;
+      ui.banner.className =
+        'px-6 py-5 flex items-center gap-4 border-b border-slate-200 ' + s.banner;
+      ui.label.textContent = s.label;
+      ui.sub.textContent = s.sub;
+    }
+
+    function renderComponents(components) {
+      ui.list.innerHTML = '';
+      const order = ['api', 'database'];
+      const seen = new Set();
+      for (const key of order) {
+        if (components[key]) {
+          ui.list.appendChild(renderRow(key, components[key]));
+          seen.add(key);
+        }
+      }
+      for (const [key, val] of Object.entries(components)) {
+        if (!seen.has(key)) ui.list.appendChild(renderRow(key, val));
+      }
+    }
+
+    function renderRow(key, info) {
+      const li = document.createElement('li');
+      li.className = 'px-6 py-4 flex items-center gap-4';
+      const status = info.status || 'unknown';
+      const dotClass =
+        { ok: 'bg-emerald-500', degraded: 'bg-amber-500', down: 'bg-rose-500' }[status] ||
+        'bg-slate-400';
+      const statusLabel =
+        { ok: 'Operacional', degraded: 'Degradado', down: 'Indisponível' }[status] ||
+        'Desconhecido';
+      const extra =
+        info.latency_ms != null
+          ? ' · ' + info.latency_ms + ' ms'
+          : info.error
+          ? ' · ' + info.error
+          : '';
+      li.innerHTML =
+        '<span class="w-2.5 h-2.5 rounded-full ' +
+        dotClass +
+        '"></span>' +
+        '<div class="flex-1">' +
+        '<div class="font-semibold text-slate-900 text-sm">' +
+        (COMPONENT_LABEL[key] || key) +
+        '</div>' +
+        '<div class="text-xs text-slate-500">' +
+        statusLabel +
+        extra +
+        '</div>' +
+        '</div>';
+      return li;
+    }
+
+    function fmtTime(epochSeconds) {
+      try {
+        const d = new Date((epochSeconds || Date.now() / 1000) * 1000);
+        return d.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+      } catch {
+        return new Date().toLocaleString('pt-BR');
+      }
+    }
+
+    async function check() {
+      try {
+        // Timeout maior (8s) porque staging pode estar em cold start
+        const ctrl = new AbortController();
+        const t = setTimeout(() => ctrl.abort(), 8000);
+        const res = await fetch(API_BASE + '/status', { cache: 'no-store', signal: ctrl.signal });
+        clearTimeout(t);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        applyState(data.status || 'unknown');
+        renderComponents(data.components || {});
+        ui.checkedAt.textContent = 'Última verificação: ' + fmtTime(data.checked_at);
+      } catch (e) {
+        applyState('unknown');
+        ui.list.innerHTML =
+          '<li class="px-6 py-4 text-sm text-slate-500">Não foi possível consultar o backend de staging.</li>';
+        ui.checkedAt.textContent = 'Última tentativa: ' + fmtTime();
+      }
+    }
+
+    check();
+    setInterval(check, 30000);
+    ui.refresh?.addEventListener('click', check);
+  </script>
+</BaseLayout>

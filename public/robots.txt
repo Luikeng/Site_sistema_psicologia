@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
 
+# Paginas internas — nao crawlear
+Disallow: /status-staging
+
 # Sitemap (gerado pelo @astrojs/sitemap)
 Sitemap: https://sistemapsicologia.com.br/sitemap-index.xml
