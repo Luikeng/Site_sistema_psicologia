@@ -37,6 +37,17 @@ const { title, description, canonical, image, noindex, jsonLd, bodyClass = '' } 
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Google Ads tag (gtag.js) — conta Sistema Psicologia (7416902600).
+         Captura gclid de cliques em ads e seta cookie cross-subdomain
+         (.sistemapsicologia.com.br) pro app atribuir a conversao no signup. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18119618300"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-18119618300');
+    </script>
   </head>
   <body class={`min-h-screen font-sans antialiased text-gray-900 bg-[#FAFAFA] overflow-x-hidden ${bodyClass}`}>
     <a
