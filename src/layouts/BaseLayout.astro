@@ -23,6 +23,12 @@ const { title, description, canonical, image, noindex, jsonLd, bodyClass = '' } 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Meta domain verification — vincula sistemapsicologia.com.br ao
+         Business Manager "Sistema Psicologia" (ID 938115235893774). Necessario
+         pra liberar Aggregated Event Measurement (limite iOS 14+) e marcar
+         CompleteRegistration como evento de conversao priorizada. -->
+    <meta name="facebook-domain-verification" content="0rioinfbtmscd36yx16d29g525zgeh" />
     <SEO
       title={title}
       description={description}
