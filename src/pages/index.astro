@@ -62,6 +62,7 @@ const softwareLd = {
   })),
   aggregateRating: undefined, // adicionar quando tiver reviews reais
   featureList: [
+    'Página pública de agendamento (link Cal.com-style com embed iframe)',
     'Agenda 2-way Google Calendar',
     'Prontuário Eletrônico LGPD',
     'Anamnese digital por link',
@@ -75,6 +76,8 @@ const softwareLd = {
     'Repasse automatizado clínica ↔ profissional',
     'Portal de pagamento próprio',
     'Permissões granulares (RBAC)',
+    'Lembrete 24h por e-mail automático',
+    'Cancelamento pelo paciente via link sem login',
   ],
 };
 
@@ -98,9 +101,9 @@ const faqLd = {
   <SocialProof />
   <Spotlight />
   <Features
-    show={['agenda-google', 'prontuario-eletronico', 'anamnese-digital', 'nfs-e-psicologia', 'receita-saude', 'recibo-simples', 'financeiro', 'portal-paciente', 'documentos', 'whatsapp-templates', 'multi-clinica', 'multi-fuso']}
+    show={['agendamento-publico', 'agenda-google', 'prontuario-eletronico', 'anamnese-digital', 'nfs-e-psicologia', 'receita-saude', 'recibo-simples', 'financeiro', 'portal-paciente', 'documentos', 'whatsapp-templates', 'multi-clinica', 'multi-fuso']}
     title="Tudo que sua clínica precisa, num só lugar"
-    subtitle="Mapeamos cada detalhe da rotina psicológica para entregar módulos prontos. Do primeiro contato até a NFS-e, sem precisar de planilha, papel ou outro app."
+    subtitle="Mapeamos cada detalhe da rotina psicológica para entregar módulos prontos. Do link público de agendamento até a NFS-e, sem precisar de planilha, papel ou outro app."
   />
   <WorkflowTimeline />
   <FiscalShowcase />

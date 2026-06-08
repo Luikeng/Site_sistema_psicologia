@@ -5,6 +5,15 @@ import Icon from './Icon.astro';
 // Visual chamativo: gradient, glow, ícone grande, badge "Novo".
 const highlights = [
   {
+    icon: 'CalendarLink',
+    badge: 'Novo · Jun/2026',
+    title: 'Página pública de agendamento',
+    pitch: 'Cal.com-style, pensado pra psicólogo brasileiro',
+    detail: 'Link curto pra divulgar, slots em tempo real até 30 dias à frente, auto-cadastro do paciente novo no submit e embed iframe pro seu site. Lembrete 24h por e-mail, cancelamento por link sem login, aprovação manual ou automática — você escolhe.',
+    href: '/recursos/agendamento-publico',
+    accent: 'from-violet-500 to-purple-600',
+  },
+  {
     icon: 'ClipboardEdit',
     badge: 'Novo',
     title: 'Anamnese digital por link',
@@ -108,10 +117,10 @@ const highlights = [
     <!-- Stats bar — números que validam a profundidade -->
     <div class="mt-16 lg:mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 max-w-5xl mx-auto">
       {[
+        { n: '30 dias', l: 'de slots em tempo real no link público' },
         { n: '50+', l: 'fusos horários IANA suportados' },
         { n: '1000+', l: 'municípios com NFS-e Nacional' },
         { n: '04.16', l: 'código de serviço psicologia' },
-        { n: '255', l: 'ocupação Receita Saúde' },
       ].map((s) => (
         <div class="text-center bg-white/60 backdrop-blur-sm border border-white rounded-2xl p-5 shadow-sm">
           <div class="text-3xl lg:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-1">

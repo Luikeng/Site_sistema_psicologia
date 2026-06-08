@@ -26,6 +26,13 @@ const productLd = PLANS.map((plan) => ({
 }));
 
 const compareTable: Array<{ feature: string; individual: string | true; clinica: string | true }> = [
+  { feature: 'Página pública de agendamento (link curto + auto-cadastro)', individual: true, clinica: true },
+  { feature: 'Embed da página de agendamento no seu site (iframe)', individual: true, clinica: true },
+  { feature: 'Aprovação manual ou confirmação automática de reserva', individual: true, clinica: true },
+  { feature: 'Cancelamento pelo paciente via link (sem login)', individual: true, clinica: true },
+  { feature: 'Lembrete 24h automático por e-mail', individual: true, clinica: true },
+  { feature: 'Antecedência mínima configurável (0-168h)', individual: true, clinica: true },
+  { feature: 'Landing pública da clínica com cards dos psis', individual: '—', clinica: true },
   { feature: 'Agenda 2-way Google Calendar', individual: true, clinica: true },
   { feature: 'Prontuário Eletrônico (AES-256, LGPD)', individual: true, clinica: true },
   { feature: 'Central de Documentos (recibo, atestado, declaração)', individual: true, clinica: true },

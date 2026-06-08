@@ -20,6 +20,7 @@ export const PLANS: Plan[] = [
     monthly: 39,
     annual: 399, // ~15% off vs 12x mensal
     features: [
+      'Página pública de agendamento (link Cal.com-style + embed iframe)',
       'Agenda 2-way Google Calendar',
       'Prontuário eletrônico (LGPD + CFP 01/2009)',
       'Anamnese digital por link (paciente preenche sozinho)',
@@ -44,9 +45,10 @@ export const PLANS: Plan[] = [
     highlight: true,
     badge: 'Mais completo',
     features: [
-      'Tudo do plano Individual',
+      'Tudo do plano Individual (inclui página pública de agendamento por psi)',
       'Até 5 profissionais (1 dono + 4) no mesmo workspace',
       'Até 2 secretárias com acesso restrito',
+      'Landing pública da clínica com cards dos psicólogos',
       'Gestão de Multi-Salas',
       'Repasse automatizado clínica ↔ profissional',
       'Permissões granulares (RBAC) por membro',

@@ -27,18 +27,31 @@ export type FeatureItem = {
     | 'Globe2'
     | 'HandCoins'
     | 'Bell'
-    | 'Smile';
+    | 'Smile'
+    | 'CalendarLink'
+    | 'Zap'
+    | 'Code2';
   badge?: string;
   plan?: 'individual' | 'clinica' | 'both';
 };
 
 export const FEATURES: FeatureItem[] = [
   {
+    slug: 'agendamento-publico',
+    title: 'Página pública de agendamento',
+    short: 'Link curto estilo Cal.com pro paciente marcar sozinho.',
+    long:
+      'Página pública estilo Cal.com pra divulgar no Instagram, Google Maps ou embedar no seu site. O paciente escolhe dia e hora num calendário com slots em tempo real (até 30 dias à frente), preenche 3 campos e cai direto na sua agenda — sem login, sem WhatsApp. Você decide entre confirmação automática ou aprovação manual; antecedência mínima configurável de 0 a 168h; lembrete por e-mail 24h antes da sessão; cancelamento pelo paciente via link assinado (sem login). Modo férias com mensagem custom, foto de capa do consultório, badge CRP/UF, botão WhatsApp inline, sinal PIX opcional e embed iframe (?embed=1) responsivo. Cross-clínica respeitado se você atende em mais de um lugar.',
+    icon: 'CalendarLink',
+    badge: 'Novo',
+    plan: 'both',
+  },
+  {
     slug: 'agenda-google',
     title: 'Agenda integrada ao Google Calendar (2-way)',
     short: 'Sincronização bidirecional total com seu Google Agenda.',
     long:
-      'Integração bidirecional com Google Calendar: você marca no app, aparece no Google. O paciente confirma pelo lembrete nativo do Google e o sistema atualiza. Funciona offline pelo próprio Google Calendar do celular e ressincroniza ao voltar a internet. Sessões recorrentes configuráveis (semanal, quinzenal, customizado) e suporte a multi-fuso horário pra atendimento online entre estados.',
+      'Integração bidirecional com Google Calendar: você marca no app, aparece no Google. O paciente confirma pelo lembrete nativo do Google e o sistema atualiza. Funciona offline pelo próprio Google Calendar do celular e ressincroniza ao voltar a internet. Sessões recorrentes configuráveis (semanal, quinzenal, customizado), recorrência contínua com janela rolante, suporte a multi-fuso horário e funciona em paralelo com a página pública de agendamento (reserva feita via link cai direto no seu Google).',
     icon: 'CalendarSync',
     badge: 'Sincronização 2-way',
     plan: 'both',

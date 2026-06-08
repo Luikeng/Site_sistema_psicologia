@@ -3,43 +3,50 @@ import Icon from './Icon.astro';
 
 const steps = [
   {
+    icon: 'CalendarLink',
+    label: '1. Paciente marca sozinho',
+    pitch: 'Link público estilo Cal.com',
+    description: 'Divulgue o link curto no Instagram, Google Maps ou embed no seu site. Paciente novo escolhe horário em slots de tempo real, preenche 3 campos e é auto-cadastrado. Você aprova ou recebe automático — depende do toggle.',
+    color: 'violet',
+  },
+  {
     icon: 'ClipboardEdit',
-    label: '1. Anamnese digital',
+    label: '2. Anamnese digital',
     pitch: 'Antes da 1ª sessão',
-    description: 'Paciente preenche o questionário pelo celular pelo link único. Auto-cadastro cria o perfil dele no sistema.',
+    description: 'Após reservar, paciente recebe link único pra preencher o questionário pelo celular. Histórico clínico chega na sua tela antes do primeiro atendimento.',
     color: 'indigo',
   },
   {
     icon: 'CalendarSync',
-    label: '2. Agenda + lembrete',
+    label: '3. Agenda + lembrete',
     pitch: 'Sincroniza com Google',
-    description: 'Marca a sessão e ela aparece no Google Calendar do psi e do paciente. Lembrete nativo no horário (no fuso correto).',
+    description: 'A sessão aparece no Google Calendar do psi e do paciente. Lembrete nativo no horário, com fuso correto pra cada parte. Lembrete extra por e-mail 24h antes.',
     color: 'blue',
   },
   {
     icon: 'BookText',
-    label: '3. Sessão + evolução',
+    label: '4. Sessão + evolução',
     pitch: 'Prontuário aberto',
     description: 'Durante ou após o atendimento, registra evolução no prontuário. Trilha de auditoria por acesso. Anamnese disponível ao lado.',
     color: 'emerald',
   },
   {
     icon: 'Smile',
-    label: '4. Acompanhamento',
+    label: '5. Acompanhamento',
     pitch: 'Mood log entre sessões',
     description: 'Paciente registra humor diário pelo portal. Você vê a evolução em gráfico antes da próxima consulta.',
     color: 'pink',
   },
   {
     icon: 'WalletCards',
-    label: '5. Cobrança',
+    label: '6. Cobrança',
     pitch: 'Sessão ou mensalidade',
     description: 'Marca como paga ou ativa mensalidade automática. Repasse split (Plano Clínica) calcula a parte do psicólogo na hora.',
     color: 'amber',
   },
   {
     icon: 'FileBadge',
-    label: '6. NFS-e ou Receita Saúde',
+    label: '7. NFS-e ou Receita Saúde',
     pitch: 'Emissão fiscal',
     description: 'Sessão paga vira NFS-e Nacional (1000+ municípios) ou linha do CSV Receita Saúde (Carnê-Leão). Recibo simples como fallback.',
     color: 'sky',
@@ -47,6 +54,7 @@ const steps = [
 ];
 
 const colorMap: Record<string, string> = {
+  violet: 'from-violet-500 to-purple-600 ring-violet-200',
   indigo: 'from-indigo-500 to-blue-600 ring-indigo-200',
   blue: 'from-blue-500 to-cyan-600 ring-blue-200',
   emerald: 'from-emerald-500 to-teal-600 ring-emerald-200',

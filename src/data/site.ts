@@ -21,6 +21,7 @@ export const NAV_LINKS = [
 ] as const;
 
 export const RECURSOS_LINKS = [
+  { href: '/recursos/agendamento-publico', label: 'Página pública de agendamento' },
   { href: '/recursos/agenda-google', label: 'Agenda Google' },
   { href: '/recursos/prontuario-eletronico', label: 'Prontuário Eletrônico' },
   { href: '/recursos/nfs-e-psicologia', label: 'NFS-e (Nota Fiscal)' },

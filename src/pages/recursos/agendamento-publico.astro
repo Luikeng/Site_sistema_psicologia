@@ -1,0 +1,245 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeatureLanding from '../../components/FeatureLanding.astro';
+import CTA from '../../components/CTA.astro';
+import Icon from '../../components/Icon.astro';
+import { FEATURES } from '../../data/features.ts';
+
+const feature = FEATURES.find((f) => f.slug === 'agendamento-publico')!;
+
+const title = 'Página pública de agendamento · Link Cal.com-style pra psicólogo';
+const description =
+  'Pagina publica de agendamento estilo Cal.com pensada pro consultorio brasileiro: link curto, slots em tempo real ate 30 dias, auto-cadastro, embed iframe, aprovação manual ou automática, lembrete 24h por e-mail e cancelamento por link sem login.';
+
+const benefits = [
+  {
+    icon: 'CalendarLink' as const,
+    title: 'Link curto pra divulgar',
+    description: 'sistemapsicologia.com.br/agendar/sua-clinica/voce — divulgue no Instagram, Google Maps, biolink ou QR Code do consultório. Sem dependência de WhatsApp pra fechar reserva.',
+  },
+  {
+    icon: 'CalendarClock' as const,
+    title: 'Slots em tempo real até 30 dias',
+    description: 'O calendário mostra apenas horários realmente livres — respeitando sua agenda Google, outras clínicas onde você atende e seu horário de trabalho por dia da semana (com suporte a múltiplos turnos).',
+  },
+  {
+    icon: 'Code2' as const,
+    title: 'Embed iframe no seu site',
+    description: 'Cole 1 linha de iframe (com ?embed=1) e o agendamento aparece dentro do site/Linktree da clínica, sem voltar/LGPD/padding. Visitante reserva sem sair do seu domínio.',
+  },
+  {
+    icon: 'Zap' as const,
+    title: 'Auto-cadastro no submit',
+    description: 'Paciente novo é criado automaticamente quando preenche e confirma. Paciente que já existe é deduplicado por (psi, e-mail). Sem login, sem fricção — você recebe o cadastro completo na sua tela.',
+  },
+  {
+    icon: 'ShieldCheck' as const,
+    title: 'Você no controle',
+    description: 'Toggle entre confirmação automática ou aprovação manual caso a caso. Pausa rápida pra férias com mensagem custom. Antecedência mínima configurável de 0 a 168h. Hora cheia ou encaixe natural.',
+  },
+  {
+    icon: 'Bell' as const,
+    title: 'Anti no-show de fábrica',
+    description: 'Lembrete por e-mail 24h antes da sessão (cron horário). Auto-cancela reservas pendentes não aprovadas em 24h. Cancelamento pelo paciente via link assinado (HMAC) — sem login, sem ligar pra recepção.',
+  },
+  {
+    icon: 'Globe2' as const,
+    title: 'Cross-clínica respeitado',
+    description: 'Atende em 3 lugares? Slot bloqueado em uma clínica nunca aparece livre em outra. O motor de disponibilidade consulta todos os workspaces onde você é membro antes de oferecer horário.',
+  },
+  {
+    icon: 'MessageCircle' as const,
+    title: 'WhatsApp inline pra dúvidas',
+    description: 'Botão verde na página abre conversa com você já com mensagem pré-preenchida. Paciente em dúvida sobre valor ou modalidade não desiste — manda zap e fecha pela página depois.',
+  },
+  {
+    icon: 'Image' as const,
+    title: 'Foto de capa + branding',
+    description: 'Paciente vê foto do consultório, cor da clínica (brand_color), bio personalizada e badge CRP/UF como prova de registro profissional. Headline e nome comercial alternativo (public_display_name) configuráveis.',
+  },
+  {
+    icon: 'HandCoins' as const,
+    title: 'Sinal PIX opcional',
+    description: 'Configure chave PIX + QR + instruções e o sistema inclui automaticamente no e-mail de confirmação. Reduz no-show de paciente novo sem cobrar 100% antecipado.',
+  },
+  {
+    icon: 'Globe2' as const,
+    title: 'Fuso correto pro paciente',
+    description: 'Você em Porto Alegre, paciente em Lisboa? Ele clica no rótulo do fuso e vê slots no horário dele. Você continua vendo no seu. O e-mail de confirmação sai com horário formatado pra cada parte.',
+  },
+  {
+    icon: 'Lock' as const,
+    title: 'Segurança em camadas',
+    description: 'Rate-limit por IP (5/mês + 5/hora) anti-bot, lock no banco pra resolver disputa de slot em <50ms, cancel token HMAC-SHA256 com comparação constant-time, idempotência em re-submit de 5min.',
+  },
+];
+
+const steps = [
+  {
+    title: 'Você ativa a página em Settings',
+    description: 'Escolhe um slug curto pra clínica e outro pra você (validados em tempo real, com reserved words bloqueadas). Define brand_color, headline, bio e foto de capa. Pronto — o link já está no ar com Cache-Control + SWR de 60s.',
+  },
+  {
+    title: 'Paciente descobre e abre o link',
+    description: 'Pelo Instagram, Google Maps, embed no seu site ou QR Code do consultório. Cookie cross-subdomain registra atribuição landing → app no Meta Pixel pra você medir conversão por canal.',
+  },
+  {
+    title: 'Ele escolhe horário em 3 cliques',
+    description: 'Calendário 3-colunas Cal.com-style mostra slots em tempo real respeitando agenda Google, outras clínicas, horário de trabalho, antecedência mínima e bloqueios. Skeleton loading evita tela vazia em cold-start.',
+  },
+  {
+    title: 'Preenche 3 campos e confirma',
+    description: 'Nome, e-mail, telefone. Paciente novo é auto-cadastrado; existente é deduplicado. Anti-bot Cloudflare Turnstile + rate-limit por IP + idempotência protegem contra abuso.',
+  },
+  {
+    title: 'Cai na sua agenda em segundos',
+    description: 'Se modo automático: aparece confirmada e sincroniza pro Google Calendar em background. Se modo aprovação manual: vira PENDING_APPROVAL e você aprova inline no modal da agenda ou pelo NotificationsBell.',
+  },
+  {
+    title: 'E-mails automáticos cuidam do resto',
+    description: 'Paciente recebe confirmação com link de add-to-calendar (Google/ICS) e link de cancelamento por HMAC. Lembrete 24h antes da sessão sai automático pelo cron horário. Se ele cancelar pelo link, você também é notificado por e-mail.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'O paciente precisa criar conta pra reservar?',
+    a: 'Não. Ele preenche 3 campos (nome, e-mail, telefone) e confirma. O sistema cria o cadastro de paciente automaticamente vinculado a você. Se ele já existe (mesmo e-mail), o sistema deduplica e reaproveita o cadastro. O login no portal do paciente é separado e só faz sentido depois — pra ver recibos, registrar humor ou marcar sessões futuras.',
+  },
+  {
+    q: 'Posso receber só reservas que eu aprovo manualmente?',
+    a: 'Sim. Em Settings você liga o modo "Aprovação manual" e toda reserva vira PENDING_APPROVAL. Você vê no NotificationsBell (com contador), no modal da agenda (banner Aprovar inline) e em um card dedicado de "Reservas pendentes". Se você não aprovar em 24h, o sistema cancela automático e libera o slot — paciente recebe e-mail explicando.',
+  },
+  {
+    q: 'Como funciona o cancelamento pelo paciente?',
+    a: 'Cada e-mail de confirmação leva um link assinado por HMAC-SHA256 (constant-time compare, sem coluna nova no banco). Paciente clica, confirma, e a sessão é cancelada — você recebe e-mail e a vaga é liberada pra outros pacientes. Sem ligação pra recepção, sem mensagem no seu WhatsApp.',
+  },
+  {
+    q: 'Posso embedar a página no meu site?',
+    a: 'Sim. Adicione ?embed=1 ao link e o iframe remove o botão de voltar, o aviso LGPD repetido e o padding externo, ficando responsivo dentro do seu site. O cookie cross-subdomain preserva atribuição de origem pro Meta Pixel mesmo via embed.',
+  },
+  {
+    q: 'O que acontece se eu atender em mais de uma clínica?',
+    a: 'O motor de disponibilidade (availability_engine) consulta todos os workspaces onde você é membro ativo antes de oferecer um horário. Slot ocupado em uma clínica nunca aparece livre em outra. Funciona em paralelo com a sincronização Google: eventos externos no seu Google Calendar também bloqueiam slots.',
+  },
+  {
+    q: 'Como configuro a antecedência mínima?',
+    a: 'No Settings você define um número de 0 a 168 horas. 0 = paciente pode marcar pra daqui a poucos minutos. 24 = mínimo 1 dia de antecedência. 168 = uma semana. O calendário esconde slots dentro da janela de antecedência mínima automaticamente.',
+  },
+  {
+    q: 'Tem proteção contra bot e spam?',
+    a: 'Sim. Rate-limit de 5 reservas por IP a cada 30 dias + 5 por hora (anti-burst), idempotência de 5 minutos em re-submit, lock no banco (pg_advisory_xact_lock) resolvendo disputa de slot em menos de 50ms, e suporte opcional ao Cloudflare Turnstile (anti-bot invisível). O token de cancelamento é HMAC-SHA256 com comparação constant-time.',
+  },
+  {
+    q: 'Posso cobrar sinal PIX?',
+    a: 'Sim, opcionalmente. Você cadastra chave PIX, anexa o QR Code e escreve uma instrução custom. O sistema inclui essas informações no e-mail de confirmação que o paciente recebe após reservar. Útil pra reduzir no-show de paciente novo sem precisar bloquear a vaga 100% antecipado.',
+  },
+  {
+    q: 'Posso pausar reservas durante as férias?',
+    a: 'Sim. Toggle "Pausar reservas" em Settings desativa o link imediatamente e mostra uma mensagem custom que você escreve (ex: "Estou de férias até 15/07. Volto a aceitar novos pacientes nessa data."). O link continua acessível, paciente vê só a mensagem.',
+  },
+  {
+    q: 'Tem mensalidade adicional pelo recurso?',
+    a: 'Não. Já vem incluso no plano Individual sem custo extra. No plano Clínica, cada psicólogo do workspace tem sua própria página pública, e existe também a landing pública da clínica com cards de todos os psis (estilo Doctoralia).',
+  },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <FeatureLanding
+    feature={feature}
+    h1="Seu paciente marca sozinho. Do <span class='text-blue-600'>primeiro clique</span> à confirmação no Google Agenda."
+    intro="Página pública de agendamento estilo Cal.com, pensada pra psicólogo brasileiro. Link curto, slots em tempo real, auto-cadastro no submit, embed pro seu site, lembrete 24h por e-mail, cancelamento pelo paciente via link sem login. Aprovação automática ou manual — você escolhe."
+    benefits={benefits}
+    steps={steps}
+    faqs={faqs}
+  />
+
+  <!-- Provas técnicas (caixa estilo /seguranca) -->
+  <section class="py-16 bg-[#F8FAFC]">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold text-[10px] uppercase tracking-widest mb-4">
+          <Icon name="Lock" class="w-3.5 h-3.5" />
+          Sob o capô
+        </div>
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 tracking-tight">Detalhes técnicos que o concorrente não detalha</h2>
+        <p class="text-gray-600 mt-3 max-w-2xl mx-auto">Transparência completa de como a página pública resolve disputa de slot, evita bot e protege seu link de cancelamento.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-9 h-9 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
+              <Icon name="Lock" class="w-4 h-4" />
+            </div>
+            <h3 class="font-bold text-gray-900">Disputa de slot resolvida em &lt;50ms</h3>
+          </div>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Quando 2 pacientes clicam no mesmo horário ao mesmo tempo, o backend usa <code class="text-xs bg-gray-100 px-1.5 py-0.5 rounded">pg_advisory_xact_lock</code> por slot dentro da transação. O segundo paciente vê erro amigável e escolhe outro horário; o primeiro confirma sem race condition.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-9 h-9 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
+              <Icon name="ShieldCheck" class="w-4 h-4" />
+            </div>
+            <h3 class="font-bold text-gray-900">Token de cancelamento HMAC-SHA256</h3>
+          </div>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Link de cancelamento é assinado com HMAC-SHA256 derivado de chave secreta + session_id, com comparação constant-time pra evitar timing attacks. Sem coluna nova no banco, sem possibilidade de adivinhar o token.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-9 h-9 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
+              <Icon name="Zap" class="w-4 h-4" />
+            </div>
+            <h3 class="font-bold text-gray-900">Rate-limit por IP em 2 camadas</h3>
+          </div>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            5 reservas por IP a cada 30 dias (anti-spam crônico) + 5 por IP por hora (anti-burst). Idempotência de 5 minutos em re-submit do mesmo formulário. Auto-cancela reservas pendentes que ficaram 24h sem aprovação.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-9 h-9 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
+              <Icon name="Repeat" class="w-4 h-4" />
+            </div>
+            <h3 class="font-bold text-gray-900">Carrega instantâneo mesmo em cold-start</h3>
+          </div>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Cache-Control público + Stale-While-Revalidate de 60s na CDN + skeleton 3-col enquanto os dados chegam. Mesmo se o backend acabou de subir do scale-to-zero, o paciente nunca vê tela em branco.
+          </p>
+        </div>
+      </div>
+
+      <!-- Stats bar -->
+      <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        {[
+          { n: '30 dias', l: 'de slots à frente' },
+          { n: '24h', l: 'pra cancelar sozinho' },
+          { n: '<50ms', l: 'pra resolver disputa' },
+          { n: '0-168h', l: 'antecedência mínima configurável' },
+        ].map((s) => (
+          <div class="text-center bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+            <div class="text-2xl lg:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600 mb-1">
+              {s.n}
+            </div>
+            <div class="text-[11px] text-gray-500 uppercase tracking-wider font-semibold leading-snug">
+              {s.l}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    title="Pronto pra parar de marcar sessão no WhatsApp?"
+    subtitle="Crie a conta sem cartão, ative a página pública em 2 minutos e divulgue o link. O teste grátis inclui todas as funcionalidades."
+  />
+</BaseLayout>
