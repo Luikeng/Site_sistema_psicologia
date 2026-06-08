@@ -16,10 +16,14 @@ export interface Props {
 
 const { title, description, canonical, image, noindex, jsonLd, bodyClass = '' } = Astro.props;
 
-// Analytics opt-in via env vars. Build pega no proximo push depois de setar.
-// PUBLIC_ prefix pra Astro expor no client.
-const ga4Id = import.meta.env.PUBLIC_GA4_ID as string | undefined;
-const clarityId = import.meta.env.PUBLIC_CLARITY_ID as string | undefined;
+// Analytics — IDs publicos (aparecem no HTML/Network, nao sao segredo).
+// So ativa em PROD (npm run build); em dev local (npm run dev) fica off
+// pra nao contaminar a property real com sessoes de desenvolvimento.
+// Env var PUBLIC_GA4_ID / PUBLIC_CLARITY_ID podem sobrescrever (ex: staging).
+const GA4_ID_DEFAULT = 'G-PN3CP1BTLG';  // Property "Sistema Psicologia" (criada 08/06/2026)
+const CLARITY_ID_DEFAULT = 'x3vd1tcpf5'; // Projeto "sistema psicologia" (criado 08/06/2026)
+const ga4Id = import.meta.env.PUBLIC_GA4_ID || (import.meta.env.PROD ? GA4_ID_DEFAULT : '');
+const clarityId = import.meta.env.PUBLIC_CLARITY_ID || (import.meta.env.PROD ? CLARITY_ID_DEFAULT : '');
 ---
 
 <!doctype html>
