@@ -81,7 +81,7 @@ const steps = [
   },
   {
     title: 'Paciente descobre e abre o link',
-    description: 'Pelo Instagram, Google Maps, embed no seu site ou QR Code do consultório. Cookie cross-subdomain registra atribuição landing → app no Meta Pixel pra você medir conversão por canal.',
+    description: 'Pelo Instagram, Google Maps, embed no seu site ou QR Code do consultório. UTMs (utm_source, utm_campaign) são capturados e preservados até o cadastro — você sabe de onde veio cada conversão.',
   },
   {
     title: 'Ele escolhe horário em 3 cliques',
@@ -116,7 +116,7 @@ const faqs = [
   },
   {
     q: 'Posso embedar a página no meu site?',
-    a: 'Sim. Adicione ?embed=1 ao link e o iframe remove o botão de voltar, o aviso LGPD repetido e o padding externo, ficando responsivo dentro do seu site. O cookie cross-subdomain preserva atribuição de origem pro Meta Pixel mesmo via embed.',
+    a: 'Sim. Adicione ?embed=1 ao link e o iframe remove o botão "Voltar" e o padding externo, ficando responsivo dentro do seu site. Auto-detecta largura: menos de 640px renderiza vertical mobile; acima usa 3 colunas.',
   },
   {
     q: 'O que acontece se eu atender em mais de uma clínica?',
@@ -128,7 +128,7 @@ const faqs = [
   },
   {
     q: 'Tem proteção contra bot e spam?',
-    a: 'Sim. Rate-limit de 5 reservas por IP a cada 30 dias + 5 por hora (anti-burst), idempotência de 5 minutos em re-submit, lock no banco (pg_advisory_xact_lock) resolvendo disputa de slot em menos de 50ms, e suporte opcional ao Cloudflare Turnstile (anti-bot invisível). O token de cancelamento é HMAC-SHA256 com comparação constant-time.',
+    a: 'Sim. Rate-limit de 5 reservas por IP a cada 30 dias + 5 por hora (anti-burst), idempotência de 5 minutos em re-submit, lock no banco (pg_advisory_xact_lock) resolvendo disputa de slot dentro da transação, e suporte opcional ao Cloudflare Turnstile (anti-bot invisível). O token de cancelamento é HMAC-SHA256 com comparação constant-time.',
   },
   {
     q: 'Posso cobrar sinal PIX?',
@@ -153,7 +153,74 @@ const faqs = [
     benefits={benefits}
     steps={steps}
     faqs={faqs}
-  />
+  >
+    <img
+      slot="preview"
+      src="/images/booking-public-desktop.png"
+      alt="Página pública de agendamento — foto de capa do consultório, calendário 3 colunas e horários disponíveis"
+      width="1280"
+      height="900"
+      class="w-full h-full object-cover object-top rounded-xl"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </FeatureLanding>
+
+  <!-- Demo visual: foto real da pagina publica em prod -->
+  <section class="py-12 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-50 text-violet-700 font-semibold text-[10px] uppercase tracking-widest mb-3">
+          <Icon name="Image" class="w-3.5 h-3.5" />
+          Página pública real, em produção
+        </div>
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 tracking-tight">Veja como seu paciente vai usar</h2>
+        <p class="text-gray-600 mt-3 max-w-2xl mx-auto">Mesma tela que o paciente abre — desktop e celular renderizam diferente automaticamente. Foto de capa, CRP, WhatsApp inline e calendário com slots reais carregam em &lt;1s.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-[1fr_320px] gap-6 items-start">
+        <!-- Desktop screenshot -->
+        <div class="rounded-2xl bg-white border border-gray-200 shadow-[0_12px_40px_rgba(15,23,42,0.08)] overflow-hidden">
+          <div class="bg-gray-100 px-4 py-2.5 flex items-center gap-2 border-b border-gray-200">
+            <div class="flex gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
+            </div>
+            <div class="flex-1 text-center">
+              <span class="text-xs text-gray-500 font-mono">sistemapsicologia.com.br/agendar/sua-clinica/voce</span>
+            </div>
+          </div>
+          <img
+            src="/images/booking-public-desktop.png"
+            alt="Demo desktop: hammock laranja como foto de capa, calendário 3 colunas, slots disponíveis"
+            width="1280"
+            height="900"
+            class="w-full h-auto"
+            loading="lazy"
+          />
+        </div>
+
+        <!-- Mobile screenshot -->
+        <div class="mx-auto lg:mx-0">
+          <div class="rounded-[2rem] bg-gray-900 p-2 shadow-[0_12px_40px_rgba(15,23,42,0.15)]">
+            <div class="rounded-[1.5rem] overflow-hidden bg-white">
+              <img
+                src="/images/booking-public-mobile.png"
+                alt="Demo mobile: layout vertical adaptado, mesmos dados"
+                width="390"
+                height="780"
+                class="w-full h-auto"
+                loading="lazy"
+                style="max-height: 600px; object-fit: cover; object-position: top;"
+              />
+            </div>
+          </div>
+          <p class="text-center text-xs text-gray-500 mt-2 font-medium">Mobile — layout vertical automático</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Provas técnicas (caixa estilo /seguranca) -->
   <section class="py-16 bg-[#F8FAFC]">
@@ -173,7 +240,7 @@ const faqs = [
             <div class="w-9 h-9 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
               <Icon name="Lock" class="w-4 h-4" />
             </div>
-            <h3 class="font-bold text-gray-900">Disputa de slot resolvida em &lt;50ms</h3>
+            <h3 class="font-bold text-gray-900">Disputa de slot resolvida na transação</h3>
           </div>
           <p class="text-sm text-gray-600 leading-relaxed">
             Quando 2 pacientes clicam no mesmo horário ao mesmo tempo, o backend usa <code class="text-xs bg-gray-100 px-1.5 py-0.5 rounded">pg_advisory_xact_lock</code> por slot dentro da transação. O segundo paciente vê erro amigável e escolhe outro horário; o primeiro confirma sem race condition.
@@ -222,7 +289,7 @@ const faqs = [
         {[
           { n: '30 dias', l: 'de slots à frente' },
           { n: '24h', l: 'pra cancelar sozinho' },
-          { n: '<50ms', l: 'pra resolver disputa' },
+          { n: 'HMAC', l: 'cancel token + lock no slot' },
           { n: '0-168h', l: 'antecedência mínima configurável' },
         ].map((s) => (
           <div class="text-center bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
