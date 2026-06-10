@@ -3,6 +3,7 @@ export const SITE = {
   shortName: 'Sistema Psicologia',
   url: 'https://sistemapsicologia.com.br',
   appUrl: 'https://sistema.sistemapsicologia.com.br/',
+  registerUrl: 'https://sistema.sistemapsicologia.com.br/register',
   contactEmail: 'suporte@sistemapsicologia.com.br',
   whatsapp: '5551992749130',
   twitter: '@sistemapsicologia',
@@ -18,6 +19,7 @@ export const NAV_LINKS = [
   { href: '/seguranca', label: 'Segurança' },
   { href: '/sobre', label: 'Sobre' },
   { href: '/contato', label: 'Contato' },
+  { href: '/recursos/agendamento-publico', label: 'Agenda' },
 ] as const;
 
 export const RECURSOS_LINKS = [
