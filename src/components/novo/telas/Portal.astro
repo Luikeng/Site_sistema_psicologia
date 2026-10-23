@@ -1,0 +1,25 @@
+---
+// Portal do paciente: próxima sessão, o que está liberado e o registro de humor.
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+const faces = ['Muito mal', 'Mal', 'Neutro', 'Bem', 'Muito bem'];
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="portal" data-ui>
+  <div class="portal">
+    <div class="portal-cab"><b class="ui-titulo">Olá, Júlia</b><span style="color:#64748b">Consultório Paula Reis</span></div>
+    <div class="portal-prox"><small>Próxima sessão</small><b>quarta, 28 de outubro, 10:00</b></div>
+    <div class="cartao" style="padding:12px 14px">
+      <b>Como você está hoje?</b>
+      <div class="humor-faces" style="margin-top:8px">
+        {faces.map((f) => <span data-r={f === 'Bem' ? 'face bem' : 'face'}>{f}</span>)}
+      </div>
+      <p class="registrado-humor" data-r="registrado" style="margin:8px 0 0">Registrado. Quer adicionar algo?</p>
+    </div>
+    <div class="portal-cards">
+      <div><small>Sessões</small><b>8 realizadas</b></div>
+      <div><small>Recibos</small><b>3 disponíveis</b></div>
+      <div><small>Notas fiscais</small><b>2 emitidas</b></div>
+      <div><small>Anamnese</small><b>Preenchida em 18/10</b></div>
+    </div>
+  </div>
+</div>

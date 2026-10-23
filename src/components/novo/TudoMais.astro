@@ -1,0 +1,31 @@
+---
+// Tudo o que vem junto: o resto do sistema, em lista, sem cartões.
+const itens = [
+  ['Google Agenda nos dois sentidos', 'O que você marca aqui aparece no Google, e o que entra no Google aparece aqui. Cancelou uma sessão? Ela sai dos dois lugares.'],
+  ['Traga o que você já tem', 'Vem do Psicomanager? Pacientes e sessões entram pela planilha exportada, com opção de desfazer. A agenda do Google também pode ser importada.'],
+  ['Sessões que se repetem', 'Toda quarta às 10h, até você encerrar. Vale também para casal e grupo.'],
+  ['Bloqueio de agenda', 'Férias, congresso ou almoço: arraste na agenda e o horário fica bloqueado, por um dia ou por vários.'],
+  ['Feriados do seu jeito', 'Você escolhe, feriado por feriado, se atende ou não.'],
+  ['Atendimento em outro fuso', 'Paciente em outro estado ou país? Cada um vê a sessão no próprio horário.'],
+  ['Mensagens prontas para o WhatsApp', 'Escreva o modelo uma vez e mande em um clique, com a data da sessão já preenchida.'],
+  ['E-mails com a sua marca', 'Lembretes e cobranças saem do seu e-mail, com o nome da sua clínica. Você escolhe quem recebe o quê, e o paciente pode se descadastrar.'],
+  ['Comunicado aos pacientes', 'Um e-mail para todos, com imagem: mudança de endereço, férias, novidades.'],
+  ['Avisos num lugar só', 'Reserva para aprovar, anamnese preenchida e humor registrado aparecem no sino.'],
+  ['Histórico do paciente', 'O que mudou na ficha, em frases, com data e autor, respeitando o sigilo.'],
+  ['De onde vêm os pacientes', 'Estatísticas de origem, investimento em divulgação, quem começou e quem deixou de vir, com planilha para baixar.'],
+  ['Arquivos e foto na ficha', 'Os anexos e a foto de cada paciente guardados com ele.'],
+  ['Tipos de atendimento', 'Cada tipo com a sua duração: individual, casal, avaliação.'],
+  ['Pix na confirmação', 'Se você quiser, a confirmação da reserva já mostra a sua chave Pix.'],
+  ['Reservas dentro do seu site', 'A página de reservas pode ficar dentro do seu próprio site.'],
+  ['Financeiro em planilha', 'As sessões e os valores do período para baixar quando precisar.'],
+];
+---
+<section class="tudo" id="tudo" aria-labelledby="t-tudo">
+  <div class="tudo-cabeca">
+    <h2 id="t-tudo">Tudo o que vem junto</h2>
+    <p>O resto do sistema, que não cabe nos capítulos acima e faz falta no dia a dia.</p>
+  </div>
+  <ul class="indice">
+    {itens.map(([nome, texto]) => <li><b>{nome}</b><span>{texto}</span></li>)}
+  </ul>
+</section>

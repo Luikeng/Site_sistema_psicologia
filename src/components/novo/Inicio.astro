@@ -1,0 +1,63 @@
+---
+// Abertura + "Como fica a sua semana": o mesmo palco segue da primeira tela até o fim da semana.
+import PalcoExtras from './PalcoExtras.astro';
+import Topo from './Topo.astro';
+import Agenda from './telas/Agenda.astro';
+import Reserva from './telas/Reserva.astro';
+import Lembrete from './telas/Lembrete.astro';
+import Conta from './telas/Conta.astro';
+import Documentos from './telas/Documentos.astro';
+
+const passos = [
+  {
+    tela: 'reserva', Tela: Reserva,
+    afirma: 'Primeiro, o paciente marca pelo seu link.',
+    apoio: 'Ele escolhe um horário livre na sua página, que também pode ficar dentro do seu site. Você decide se a reserva entra direto ou espera a sua aprovação.',
+  },
+  {
+    tela: 'lembrete', Tela: Lembrete,
+    afirma: 'Um dia antes, sai o lembrete.',
+    apoio: 'O paciente recebe um e-mail 24 horas antes da sessão, que pode sair do seu próprio e-mail. Se marcou pelo seu link, o lembrete traz também o link para cancelar.',
+  },
+  {
+    tela: 'conta', Tela: Conta,
+    afirma: 'Depois, o crédito paga as sessões.',
+    apoio: 'Quando o paciente paga adiantado, você registra o Pix uma vez. Cada sessão que acontece é quitada com o crédito, e a conta dele mostra o que já está coberto.',
+  },
+  {
+    tela: 'documentos', Tela: Documentos,
+    afirma: 'No fim do mês, recibo e nota prontos.',
+    apoio: 'O recibo sai com os dados preenchidos. Com CNPJ, a nota fiscal sai daqui também; como pessoa física, o arquivo do Receita Saúde.',
+  },
+];
+---
+<section class="capitulo" id="inicio" aria-label="Sistema Psicologia" data-capitulo>
+  <div class="cap-palco" aria-hidden="true">
+    <Agenda ativa />
+    {passos.map((p) => { const Tela = p.Tela; return <Tela />; })}
+    <PalcoExtras />
+  </div>
+  <div class="coluna">
+    <header class="abertura" data-passo data-tela="agenda">
+      <Topo />
+      <h1 class="nome"><span class="claro-n">Sistema Psicologia</span><span class="escuro-n" aria-hidden="true">Sistema Psicologia</span></h1>
+      <div class="palco-movel unica" aria-hidden="true"><Agenda ativa /><PalcoExtras /></div>
+      <div class="texto">
+        <div>
+          <p class="frase">Você atende. A gente cuida da agenda, da cobrança e da parte fiscal.</p>
+          <p class="nota">R$ 39 por mês. Teste 30 dias grátis, sem cartão.</p>
+        </div>
+      </div>
+    </header>
+    <div class="cap-texto" id="semana">
+      <h2 class="semana-titulo entra">Como fica a sua semana</h2>
+      {passos.map((p) => { const Tela = p.Tela; return (
+        <article class="passo" data-passo data-tela={p.tela}>
+          <div class="palco-movel unica" aria-hidden="true"><Tela ativa={true} /><PalcoExtras /></div>
+          <p class="afirma entra">{p.afirma}</p>
+          <p class="apoio entra d1">{p.apoio}</p>
+        </article>
+      ); })}
+    </div>
+  </div>
+</section>

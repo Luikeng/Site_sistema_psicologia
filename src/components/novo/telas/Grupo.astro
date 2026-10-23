@@ -1,0 +1,30 @@
+---
+// Grupo de pacientes (casal): prontuário do grupo e financeiro com quem paga.
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="grupo" data-ui>
+  <Lateral ativo="pessoas" />
+  <div class="area centro">
+    <div class="pac-cab"><span class="avatar roxo">CM</span><b>Casal Moraes</b><span class="ui-selo">Casal</span></div>
+    <div class="membros">
+      <span class="membro"><span class="avatar azul">CM</span>Carlos M.</span>
+      <span class="membro"><span class="avatar laranja">RM</span>Rita M.</span>
+    </div>
+    <div class="ui-abas"><span class="ativa" data-r="aba-pront">Prontuário do grupo</span><span data-r="aba-fin">Financeiro</span></div>
+    <div class="cartao" style="padding:14px 16px;min-height:170px">
+      <div data-r="vista-pront">
+        <span class="ui-rot">SESSÃO DE 15/10</span>
+        <p style="margin:6px 0 10px;font-size:14px;line-height:1.6">Conversamos sobre a divisão das tarefas da casa. Os dois trouxeram exemplos da semana.</p>
+        <span class="ui-rot">PRÓXIMA SESSÃO</span>
+        <p style="margin:4px 0 0;font-size:14px">Quinta, 22 de outubro, 19:00, presencial</p>
+      </div>
+      <div data-r="vista-fin" hidden>
+        <div class="ui-linha"><span>Sessão do casal, 15/10</span><span class="ui-selo verde">PAGA</span><b>R$ 300,00</b></div>
+        <div class="ui-linha"><span>Sessão do casal, 22/10</span><span class="ui-selo azul">agendada</span><b>R$ 300,00</b></div>
+        <p style="margin:10px 0 0;font-size:14px;color:#475569">Quem paga: <b style="color:#0f172a">Carlos M.</b>. A nota fiscal sai em nome dele.</p>
+      </div>
+    </div>
+  </div>
+</div>

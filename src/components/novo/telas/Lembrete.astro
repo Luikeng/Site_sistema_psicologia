@@ -1,0 +1,18 @@
+---
+// O e-mail de lembrete, com o texto que o sistema manda de verdade.
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="lembrete" data-ui>
+  <div class="caixa">
+    <div class="mail" data-r="mail">
+      <div class="mail-cab"><span class="avatar cinza">CP</span><div><b>Consultório Paula Reis</b><small>para Júlia A., terça, 20 de outubro, 10:00</small></div></div>
+      <b class="mail-assunto">Lembrete: sua sessão é amanhã — quarta, 21 de outubro, 10:00</b>
+      <p>Olá, <b>Júlia A.</b>!</p>
+      <p>Passando pra lembrar — sua sessão é <b class="indigo">amanhã</b>:</p>
+      <div class="resumo"><b>Consultório Paula Reis</b><span>Paula Reis</span><span>quarta, 21 de outubro, 10:00</span></div>
+      <p>Até lá! Se precisar reagendar, fale com o consultório com a maior antecedência possível.</p>
+      <p class="mudo">Imprevisto? Cancele pelo link:<br /><span class="indigo">sistema.sistemapsicologia.com.br/…</span></p>
+    </div>
+  </div>
+</div>

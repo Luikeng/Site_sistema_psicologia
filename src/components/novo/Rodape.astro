@@ -1,0 +1,39 @@
+---
+// Rodapé com a mesma organização do site atual (marca + Recursos + Empresa + Legal),
+// usando a logo oficial (public/brand/logo-horizontal.svg).
+import { SITE, RECURSOS_LINKS } from '../../data/site.ts';
+import Logo from './Logo.astro';
+const ano = new Date().getFullYear();
+const n = SITE.whatsapp;
+const telefone = `(${n.slice(2, 4)}) ${n.slice(4, 9)}-${n.slice(9)}`;
+---
+<footer class="rodape">
+  <div class="rodape-grade">
+    <div class="rodape-marca">
+      <a href="/" aria-label={SITE.name}><Logo tamanho={38} /></a>
+      <p>Gestão para psicólogos e clínicas: agenda, prontuário, financeiro, nota fiscal e Receita Saúde num lugar só.</p>
+      <p class="rodape-contato"><a href={`https://wa.me/${n}`} target="_blank" rel="noopener">WhatsApp {telefone}</a><br /><a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a></p>
+    </div>
+    <nav aria-label="Recursos">
+      <b>Recursos</b>
+      {RECURSOS_LINKS.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+    <nav aria-label="Empresa">
+      <b>Empresa</b>
+      <a href="/sobre">Sobre</a>
+      <a href="/precos">Preços</a>
+      <a href="/contato">Contato</a>
+      <a href={SITE.appUrl}>Entrar no sistema</a>
+    </nav>
+    <nav aria-label="Legal e segurança">
+      <b>Legal e segurança</b>
+      <a href="/seguranca">Segurança e LGPD</a>
+      <a href="/privacidade">Política de privacidade</a>
+      <a href="/termos">Termos de uso</a>
+    </nav>
+  </div>
+  <div class="rodape-base">
+    <span>© {ano} Sistema Psicologia. CNPJ 52.249.772/0001-65.</span>
+    <span>Feito no Brasil, em português.</span>
+  </div>
+</footer>

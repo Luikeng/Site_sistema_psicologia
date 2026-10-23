@@ -1,0 +1,33 @@
+---
+// Agenda da equipe com as salas: o sistema barra duas sessões na mesma sala.
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+const horas = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00'];
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="equipe" data-ui>
+  <Lateral ativo="agenda" />
+  <div class="area" style="display:flex;flex-direction:column">
+    <div class="ag-topo" style="padding:0 0 10px"><span class="ag-titulo">Agenda da equipe</span><span class="ui-contorno">Todas as salas</span></div>
+    <div class="cartao" style="flex:1;display:flex;min-height:0;overflow:hidden">
+      <div class="equipe-grade">
+        <div class="cab p1" style="grid-column:2">Paula</div>
+        <div class="cab p2" style="grid-column:3">Rafael</div>
+        <div class="cab p3" style="grid-column:4">Lia</div>
+        <div class="ag-col p1" style="grid-column:2"></div>
+        <div class="ag-col p2" style="grid-column:3"></div>
+        <div class="ag-col p3" style="grid-column:4"></div>
+        {horas.map((_, i) => <div class="faixa" style={`grid-row:${i + 2}`}></div>)}
+        {horas.map((h, i) => <div class="hora" style={`grid-row:${i + 2}`}>{h}</div>)}
+        <div class="bloco s-azul" style="grid-column:2;grid-row:3"><b>Ana S.</b><span class="sala">Sala 1</span></div>
+        <div class="bloco s-azul" style="grid-column:2;grid-row:4"><b>Bruno M.</b><span class="sala">Sala 2</span></div>
+        <div class="bloco s-azul" style="grid-column:2;grid-row:6"><b>Carla R.</b><span class="sala">Sala 1</span></div>
+        <div class="bloco s-azul" style="grid-column:3;grid-row:2"><b>Diego F.</b><span class="sala">Sala 2</span></div>
+        <div class="bloco s-cinza p2 oculto" style="grid-column:3;grid-row:4" data-r="nova"><b>Nina O.</b><span class="sala" data-r="sala">Sala 2</span></div>
+        <div class="bloco s-azul p3" style="grid-column:4;grid-row:3"><b>Otávio B.</b><span class="sala">Online</span></div>
+        <div class="bloco s-azul p3" style="grid-column:4;grid-row:5"><b>Fábio T.</b><span class="sala">Sala 2</span></div>
+      </div>
+    </div>
+    <div class="alerta" data-r="alerta"><svg class="i"><use href="#i-alerta"/></svg><span>Conflito de sala detectado. A sala já está ocupada por Bruno M. às 10:00.</span></div>
+  </div>
+</div>

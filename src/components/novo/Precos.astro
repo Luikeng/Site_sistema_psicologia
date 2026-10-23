@@ -1,0 +1,52 @@
+---
+// Preços: dois campos de cor (Individual e Clínica) e a faixa do Personalizado.
+// Valores conferidos em produção (system_settings) em 22/10/2026.
+import { SITE } from '../../data/site.ts';
+export interface Props { pagina?: boolean }
+const { pagina = false } = Astro.props;
+const Titulo = pagina ? 'h1' : 'h2';
+const whatsPersonalizado = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent('Olá! Quero saber do plano personalizado do Sistema Psicologia.')}`;
+---
+<section class:list={['precos', { 'na-pagina': pagina }]} id="precos" aria-labelledby="t-precos">
+  <div class="precos-cabeca">
+    <div>
+      <Titulo id="t-precos">Preços</Titulo>
+      <p>30 dias grátis para testar, sem cartão. Depois, o plano que combina com o seu jeito de atender.</p>
+    </div>
+    <div class="periodo" role="group" aria-label="Período de pagamento" data-periodo>
+      <button type="button" data-valor="mensal" aria-pressed="true">Mensal</button>
+      <button type="button" data-valor="anual" aria-pressed="false">Anual</button>
+    </div>
+  </div>
+  <div class="planos">
+    <div class="plano individual">
+      <h3>Individual</h3>
+      <p class="para">Para quem atende sozinho.</p>
+      <div class="valor">
+        <span class="preco"><span data-mensal="R$ 39" data-anual="R$ 399">R$ 39</span><small data-mensal="por mês" data-anual="por ano">por mês</small></span>
+        <span class="equivale" data-mensal="" data-anual="Sai por R$ 33,25 por mês"></span>
+      </div>
+      <ul class="inclui">
+        {['Agenda com reservas pelo seu link e lembrete por e-mail', 'Prontuário, anamnese, humor e documentos', 'Financeiro, nota fiscal e Receita Saúde', 'Portal do paciente', '1 secretária'].map((t) => <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg>{t}</li>)}
+      </ul>
+      <a class="botao" href={SITE.registerUrl} rel="noopener noreferrer" data-cta="pricing-individual">Criar conta grátis</a>
+    </div>
+    <div class="plano clinica">
+      <h3>Clínica</h3>
+      <p class="para">Para quem tem equipe.</p>
+      <div class="valor">
+        <span class="preco"><span data-mensal="R$ 69" data-anual="R$ 699">R$ 69</span><small data-mensal="por mês" data-anual="por ano">por mês</small></span>
+        <span class="equivale" data-mensal="" data-anual="Sai por R$ 58,25 por mês"></span>
+      </div>
+      <ul class="inclui">
+        {['Tudo do Individual', 'Até 5 profissionais e 2 secretárias', 'Agenda da equipe com salas', 'Repasse de cada profissional, calculado', 'Quem lê o quê, com permissões por pessoa'].map((t) => <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg>{t}</li>)}
+      </ul>
+      <a class="botao branco" href={SITE.registerUrl} rel="noopener noreferrer" data-cta="pricing-clinica">Criar conta grátis</a>
+    </div>
+  </div>
+  <div class="personalizado">
+    <p><b>Personalizado.</b> Mais de 5 profissionais, mais secretárias ou um jeito diferente de trabalhar? A gente monta o plano com você.</p>
+    <a class="botao branco" href={whatsPersonalizado} target="_blank" rel="noopener">Falar com a gente</a>
+  </div>
+  <p class="precos-letras">Cancele quando quiser, sem multa. Se cancelar em até 7 dias depois da primeira cobrança, o reembolso é integral.{!pagina && <> <a href="/precos">Ver os planos em detalhe</a>.</>}</p>
+</section>

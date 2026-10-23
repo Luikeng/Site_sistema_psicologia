@@ -1,0 +1,35 @@
+---
+// A parte fiscal com o seletor: quem tem CNPJ vê a nota; pessoa física, o Receita Saúde.
+import PalcoExtras from './PalcoExtras.astro';
+import Nota from './telas/Nota.astro';
+import Receita from './telas/Receita.astro';
+---
+<section class="capitulo azul" id="fiscal" aria-labelledby="t-fiscal" data-capitulo>
+  <div class="cap-palco" aria-hidden="true">
+    <Nota ativa />
+    <Receita />
+    <PalcoExtras />
+  </div>
+  <div class="cap-texto">
+    <div class="cap-cabeca">
+      <h2 class="cap-titulo entra" id="t-fiscal">A parte fiscal</h2>
+      <p class="cap-intro entra d1">Como você emite hoje?</p>
+      <div class="seletor" role="group" aria-label="Como você emite" data-seletor-fiscal>
+        <button type="button" data-valor="nota" aria-pressed="true">Tenho CNPJ</button>
+        <button type="button" data-valor="receita" aria-pressed="false">Atendo como pessoa física</button>
+      </div>
+    </div>
+    <div class="fiscal-bloco" data-passo data-tela="nota">
+      <div class="palco-movel" aria-hidden="true" data-atual="nota"><Nota ativa /><Receita /><PalcoExtras /></div>
+      <div class="fiscal-caso" data-caso="nota" aria-live="polite">
+        <p class="afirma">A nota fiscal sai daqui, no padrão nacional.</p>
+        <p class="apoio">Com o seu certificado digital, a NFS-e é emitida sem abrir outro site. O PDF vai por e-mail para o paciente, o texto da nota é seu para ajustar e o mês fica organizado com o total emitido. Na sessão de casal, a nota vai para quem paga.</p>
+      </div>
+      <div class="fiscal-caso" data-caso="receita" hidden>
+        <p class="afirma">O arquivo do Receita Saúde sai pronto.</p>
+        <p class="apoio">O sistema monta o lote com os recibos do período no formato oficial, mostra uma prévia do arquivo e aponta o que precisa de correção antes de gerar. Depois é só enviar.</p>
+      </div>
+      <p class="fiscal-rodape">A sua cidade ainda não aceita a nota nacional? O recibo simples cobre a rotina, e a nota continua sendo feita pelo site da prefeitura.</p>
+    </div>
+  </div>
+</section>

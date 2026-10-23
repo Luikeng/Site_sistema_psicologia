@@ -1,0 +1,128 @@
+---
+// Página inicial nova (redesenho out/2026): o sistema em ação, no visual dele.
+import LayoutNovo from '../layouts/LayoutNovo.astro';
+import Inicio from '../components/novo/Inicio.astro';
+import Capitulo from '../components/novo/Capitulo.astro';
+import Fiscal from '../components/novo/Fiscal.astro';
+import Paciente from '../components/novo/Paciente.astro';
+import TudoMais from '../components/novo/TudoMais.astro';
+import Sigilo from '../components/novo/Sigilo.astro';
+import Precos from '../components/novo/Precos.astro';
+import Perguntas from '../components/novo/Perguntas.astro';
+import Comecar from '../components/novo/Comecar.astro';
+import Rodape from '../components/novo/Rodape.astro';
+import Prontuario from '../components/novo/telas/Prontuario.astro';
+import Anamnese from '../components/novo/telas/Anamnese.astro';
+import Humor from '../components/novo/telas/Humor.astro';
+import Documento from '../components/novo/telas/Documento.astro';
+import Grupo from '../components/novo/telas/Grupo.astro';
+import Painel from '../components/novo/telas/Painel.astro';
+import Mensalidade from '../components/novo/telas/Mensalidade.astro';
+import Cancelamento from '../components/novo/telas/Cancelamento.astro';
+import Equipe from '../components/novo/telas/Equipe.astro';
+import Convite from '../components/novo/telas/Convite.astro';
+import Repasse from '../components/novo/telas/Repasse.astro';
+import Clinica from '../components/novo/telas/Clinica.astro';
+import { SITE } from '../data/site.ts';
+import { PLANS } from '../data/pricing.ts';
+import { PERGUNTAS } from '../data/perguntas.ts';
+
+const title = 'Sistema Psicologia · Agenda, Prontuário, NFS-e e Financeiro para psicólogos';
+const description =
+  'Sistema de gestão para psicólogos e clínicas: reservas pelo seu link com lembrete, prontuário com sigilo, financeiro, NFS-e e Receita Saúde. R$ 39 por mês, 30 dias grátis sem cartão.';
+
+const atendimento = [
+  { tela: 'prontuario', Tela: Prontuario, afirma: 'Cada sessão tem a sua evolução.', apoio: 'Você escreve no prontuário da sessão, com formatação, e só você edita o que escreveu. Nem o dono da clínica altera o registro de outro profissional.' },
+  { tela: 'anamnese', Tela: Anamnese, afirma: 'A anamnese chega antes do paciente.', apoio: 'Você manda um link e ele preenche pelo celular, em casa. Se for paciente novo, o cadastro é criado quando ele envia.' },
+  { tela: 'humor', Tela: Humor, afirma: 'Entre uma sessão e outra, o humor do paciente.', apoio: 'Pelo portal, ele registra como está, de Muito mal a Muito bem, e pode escrever algo. Você vê os últimos 14 dias em gráfico, e o sino avisa quando chega um registro novo.' },
+  { tela: 'documento', Tela: Documento, afirma: 'Atestado, declaração e recibo em um minuto.', apoio: 'Os modelos já trazem o nome, o CPF, a data e o valor do paciente. Você ajusta o texto do seu jeito e salva como modelo, inclusive para relatórios.' },
+  { tela: 'grupo', Tela: Grupo, afirma: 'Casal, família e grupo, cada um no seu lugar.', apoio: 'A sessão de grupo tem prontuário e financeiro próprios, a nota vai para quem paga e cada participante vê a sessão no próprio portal.' },
+];
+
+const dinheiro = [
+  { tela: 'painel', Tela: Painel, afirma: 'O mês num olhar.', apoio: 'O painel mostra o que já entrou, o que está em aberto e o que ficou de meses anteriores. Nas Estatísticas, a previsão do ano inteiro.' },
+  { tela: 'mensalidade', Tela: Mensalidade, afirma: 'Mensalidade ou sessão avulsa.', apoio: 'Na mensalidade, o sistema gera a cobrança do mês e mostra quais sessões estão dentro dela. Na avulsa, cada sessão tem o seu valor.' },
+  { tela: 'cancelamento', Tela: Cancelamento, afirma: 'Cancelou em cima da hora? O sistema sugere, você decide.', apoio: 'Você define com quantas horas de antecedência o cancelamento é gratuito. Na falta ou no cancelamento tardio, o sistema sugere cobrar, e a decisão é sua, sessão a sessão.' },
+];
+
+const clinicas = [
+  { tela: 'equipe', Tela: Equipe, afirma: 'A agenda da equipe, com as salas.', apoio: 'Cada profissional tem a sua agenda, e o sistema não deixa marcar duas sessões na mesma sala no mesmo horário.' },
+  { tela: 'convite', Tela: Convite, afirma: 'Cada pessoa vê só o que precisa.', apoio: 'No convite você já escolhe a função e as permissões, uma por uma. A secretária cuida da agenda e não lê prontuário.' },
+  { tela: 'repasse', Tela: Repasse, afirma: 'O repasse de cada profissional, calculado.', apoio: 'Do valor recebido, o sistema desconta a taxa do meio de pagamento e a taxa da clínica, e aplica o acordo de cada profissional.' },
+  { tela: 'clinica', Tela: Clinica, afirma: 'Uma página da clínica com todos os profissionais.', apoio: 'O paciente escolhe com quem quer marcar, e a reserva cai na agenda certa.' },
+];
+
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${SITE.url}#organization`,
+  name: SITE.name,
+  url: SITE.url,
+  logo: `${SITE.url}/favicon.svg`,
+  contactPoint: { '@type': 'ContactPoint', contactType: 'customer support', email: SITE.contactEmail, areaServed: 'BR', availableLanguage: ['pt-BR'] },
+};
+
+const softwareLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: SITE.name,
+  applicationCategory: 'BusinessApplication',
+  applicationSubCategory: 'Healthcare Practice Management',
+  operatingSystem: 'Web',
+  description,
+  inLanguage: 'pt-BR',
+  url: SITE.url,
+  offers: PLANS.map((plan) => ({
+    '@type': 'Offer',
+    name: `Plano ${plan.name}`,
+    price: plan.monthly.toFixed(2),
+    priceCurrency: 'BRL',
+    priceSpecification: { '@type': 'UnitPriceSpecification', price: plan.monthly.toFixed(2), priceCurrency: 'BRL', billingIncrement: 1, unitText: 'MONTH' },
+    url: SITE.registerUrl,
+  })),
+  featureList: [
+    'Página de reservas pelo seu link, com aprovação ou confirmação automática',
+    'Lembrete por e-mail 24 horas antes da sessão',
+    'Agenda sincronizada com o Google Agenda nos dois sentidos',
+    'Prontuário com evolução por sessão e edição só pelo autor',
+    'Anamnese pelo celular',
+    'Registro de humor do paciente com gráfico',
+    'Documentos: recibo, atestado, declaração e relatório',
+    'Financeiro com mensalidades e crédito do paciente',
+    'NFS-e Nacional para quem tem CNPJ',
+    'Arquivo do Receita Saúde',
+    'Recibo simples',
+    'Portal do paciente',
+    'Sessões de casal, família e grupo',
+    'Agenda da equipe com salas',
+    'Repasse por profissional',
+    'Permissões por pessoa',
+    'Estatísticas e origem dos pacientes',
+  ],
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: PERGUNTAS.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } })),
+};
+---
+<LayoutNovo title={title} description={description} jsonLd={[orgLd, softwareLd, faqLd]}>
+  <main>
+    <Inicio />
+    <Capitulo id="atendimento" tema="claro" titulo="O atendimento" intro="O prontuário, a anamnese e os documentos juntos, com o sigilo que a profissão pede." passos={atendimento} />
+    <Capitulo id="dinheiro" titulo="O dinheiro" intro="Quem pagou, quem deve e quanto entra até o fim do ano, sem planilha." passos={dinheiro} />
+    <Fiscal />
+    <Capitulo id="clinicas" tema="claro" titulo="Para clínicas" intro="Até 5 profissionais e 2 secretárias no plano Clínica, cada um com a sua agenda e o seu acesso." passos={clinicas} />
+    <Paciente />
+    <TudoMais />
+    <Sigilo />
+    <Precos />
+    <Perguntas />
+    <Comecar />
+  </main>
+  <Rodape />
+  <script>
+    import '../scripts/palco.ts';
+  </script>
+</LayoutNovo>

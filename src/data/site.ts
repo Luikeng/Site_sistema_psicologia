@@ -4,7 +4,7 @@ export const SITE = {
   url: 'https://sistemapsicologia.com.br',
   appUrl: 'https://sistema.sistemapsicologia.com.br/',
   registerUrl: 'https://sistema.sistemapsicologia.com.br/register',
-  contactEmail: 'suporte@sistemapsicologia.com.br',
+  contactEmail: 'contato@sistemapsicologia.com.br', // o e-mail que existe, por enquanto (decisão de 23/10/2026)
   whatsapp: '5551992749130',
   twitter: '@sistemapsicologia',
   description:

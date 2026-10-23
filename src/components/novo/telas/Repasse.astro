@@ -1,0 +1,33 @@
+---
+// Repasse do mês por profissional, na ordem de cálculo do sistema.
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+const linhas = [
+  ['Paula Reis', 9000, 6237],
+  ['Rafael Lima', 6400, 4435],
+  ['Lia Torres', 4800, 3326],
+] as const;
+const moeda = (n: number) => 'R$ ' + n.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="repasse" data-ui>
+  <Lateral ativo="dinheiro" />
+  <div class="area centro">
+    <div class="cartao">
+      <div class="ui-topo"><b class="ui-titulo">Repasses de outubro</b><span class="ui-selo">Clínica Reis</span></div>
+      <div class="hist">
+        <table class="tabela">
+          <thead><tr><th>Profissional</th><th class="n">Recebido</th><th class="n">Repasse</th></tr></thead>
+          <tbody>
+            {linhas.map(([nome, recebido, repasse]) => (
+              <tr><td>{nome}</td><td class="n">{moeda(recebido)}</td><td class="n"><b data-r="valor" data-fim={repasse}>{moeda(repasse)}</b></td></tr>
+            ))}
+          </tbody>
+        </table>
+        <div class="ui-caixa" style="margin-top:12px;color:#334155">
+          <b>Ordem do cálculo:</b> valor recebido pela clínica, menos a taxa do meio de pagamento, menos a taxa fixa da clínica por sessão (se houver), e então o modo de cálculo de cada profissional.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

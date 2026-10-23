@@ -1,13 +1,16 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import LayoutNovo from '../layouts/LayoutNovo.astro';
+import TopoFixo from '../components/rascunho/TopoFixo.astro';
+import Rodape from '../components/novo/Rodape.astro';
 
 const title = 'Termos de Uso';
 const description =
   'Termos de Serviço do Sistema Psicologia: condições de uso, planos, integrações com terceiros, propriedade intelectual e demais cláusulas.';
 ---
 
-<BaseLayout title={title} description={description}>
-  <div class="pt-32 pb-20 bg-[#FAFAFA] min-h-screen">
+<LayoutNovo title={title} description={description}>
+  <TopoFixo base="/" />
+  <main id="inicio" class="legal">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <h1 class="text-4xl font-extrabold text-gray-900 mb-8 tracking-tight">Termos de Serviço</h1>
       <p class="text-sm text-gray-500 mb-6">Última atualização: 19 de maio de 2026</p>
@@ -112,5 +115,6 @@ const description =
         </section>
       </div>
     </div>
-  </div>
-</BaseLayout>
+  </main>
+  <Rodape />
+</LayoutNovo>

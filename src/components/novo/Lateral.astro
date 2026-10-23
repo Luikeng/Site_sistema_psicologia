@@ -1,0 +1,12 @@
+---
+// Menu lateral do sistema, encolhido em ícones, com o item da tela marcado.
+export interface Props { ativo: 'painel' | 'pessoas' | 'agenda' | 'dinheiro' | 'nota' | 'graf' | 'ajustes' }
+const { ativo } = Astro.props;
+const itens = ['painel', 'pessoas', 'agenda', 'dinheiro', 'nota', 'graf', 'ajustes'] as const;
+---
+<aside class="lateral" aria-hidden="true">
+  <svg class="i marca-app"><use href="#i-pulso"/></svg>
+  {itens.map((it) => (
+    <span class={`item${it === ativo ? ' ativo' : ''}`}><svg class="i"><use href={`#i-${it}`}/></svg></span>
+  ))}
+</aside>

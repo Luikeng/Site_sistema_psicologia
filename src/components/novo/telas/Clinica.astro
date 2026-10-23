@@ -1,0 +1,16 @@
+---
+// Página pública da clínica: o paciente escolhe com quem marcar.
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="clinica" data-ui>
+  <div class="clinica-pub">
+    <div class="capa"></div>
+    <div class="clinica-cab"><span class="avatar azul">CR</span><b>Clínica Reis</b><span style="color:#64748b">Psicologia presencial e online</span></div>
+    <div class="profs">
+      <div class="prof" data-r="prof"><span class="avatar verde">PR</span><div><b>Paula Reis</b><small>Psicóloga, adultos e casais</small></div><span class="ui-azul">Agendar</span></div>
+      <div class="prof" data-r="prof rafael"><span class="avatar azul">RL</span><div><b>Rafael Lima</b><small>Psicólogo, adolescentes</small></div><span class="ui-azul">Agendar</span></div>
+      <div class="prof" data-r="prof"><span class="avatar laranja">LT</span><div><b>Lia Torres</b><small>Psicóloga, atendimento online</small></div><span class="ui-azul">Agendar</span></div>
+    </div>
+  </div>
+</div>

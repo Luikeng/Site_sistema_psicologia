@@ -4,6 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://sistemapsicologia.com.br',
+  // Sem a barra de ferramentas do Astro no modo dev: ela aparece sobre a página e confunde a revisão.
+  devToolbar: { enabled: false },
   trailingSlash: 'never',
   build: {
     format: 'file',

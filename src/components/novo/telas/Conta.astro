@@ -1,0 +1,45 @@
+---
+// Conta-corrente do paciente: registrar recebimento e o crédito cobrindo as sessões.
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+const sessoes = ['21/10/2026', '28/10/2026', '04/11/2026', '11/11/2026'];
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="conta" data-ui>
+  <Lateral ativo="pessoas" />
+  <div class="area centro">
+    <div class="pac-cab"><span class="avatar laranja">JA</span><b>Júlia A.</b></div>
+    <div class="ui-abas esconde-celular"><span>Dados do Paciente</span><span>Prontuário</span><span>Anamnese</span><span class="ativa">Financeiro</span><span>Documentos</span><span>Notas Fiscais</span></div>
+    <div class="cartao">
+      <div class="ui-topo"><b class="ui-titulo">Conta-corrente</b><span class="ui-verde" data-r="receber"><svg class="i"><use href="#i-mais"/></svg>Receber</span></div>
+      <div class="totais">
+        <div><small>COBRADO</small><b>R$ 0,00</b></div>
+        <div><small>RECEBIDO</small><b data-r="recebido">R$ 0,00</b></div>
+        <div><small>EM ABERTO</small><b>R$ 0,00</b></div>
+      </div>
+      <div class="hist">
+        <span class="ui-rot">PRÓXIMAS SESSÕES</span>
+        {sessoes.map((d) => (
+          <div class="ui-linha"><span><span class="esconde-celular">Sessão </span>{d}</span><span class="ui-selo verde some" data-r="selo">COBERTA PELO CRÉDITO</span><b>R$ 200,00</b></div>
+        ))}
+      </div>
+      <div class="coberto" data-r="coberto">R$ 800,00 já cobertos pelo crédito</div>
+      <div class="hist receb" data-r="receb">
+        <span class="ui-rot">RECEBIMENTOS</span>
+        <p class="vazio">Nenhum recebimento registrado.</p>
+        <div class="ui-linha nova"><span>19/10/2026, Pix</span><b>R$ 800,00</b></div>
+        <p class="obs">Não havia cobrança em aberto: o valor ficou como crédito.</p>
+      </div>
+    </div>
+    <div class="veu" data-r="veu"></div>
+    <div class="modal" data-r="modal">
+      <b>Registrar recebimento</b>
+      <div class="ui-campos">
+        <label>Valor recebido (R$)<span class="ui-campo" data-r="valor"></span></label>
+        <label>Forma de pagamento<span class="ui-campo">Pix</span></label>
+      </div>
+      <small class="dica">Nenhuma cobrança em aberto — o valor fica como crédito.</small>
+      <div class="modal-acoes"><span class="ui-contorno">Cancelar</span><span class="ui-azul" data-r="registrar">Registrar</span></div>
+    </div>
+  </div>
+</div>

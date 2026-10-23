@@ -1,0 +1,28 @@
+---
+// Recibo com o texto do sistema e a nota do mês saindo.
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+const datas = ['21/10/2026', '28/10/2026', '04/11/2026', '11/11/2026'];
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="documentos" data-ui>
+  <Lateral ativo="nota" />
+  <div class="area docs">
+    <div class="papel">
+      <b class="recibo-titulo">RECIBO</b>
+      <small class="recibo-sub">Documento sem validade fiscal · Emitido em 30/10/2026</small>
+      <div class="recibo-cab"><b>Consultório Paula Reis</b><span>Valor: <b class="v" data-r="v">R$ 800,00</b></span></div>
+      <p>Eu, <span class="v" data-r="v">Paula Reis, Psicólogo(a)</span>, recebi de <span class="v" data-r="v">Júlia A.</span>, a importância de <span class="v" data-r="v">R$ 800,00</span>, referente a atendimento psicológico, conforme demonstrativo:</p>
+      <ul>
+        {datas.map((d) => <li class="v" data-r="v">{d} — Sessão de atendimento psicológico</li>)}
+      </ul>
+      <p>Para maior clareza firmo o presente recibo, que não possui validade fiscal.</p>
+      <div class="assinatura">Assinatura do profissional</div>
+    </div>
+    <div class="cartao nota-card">
+      <b>Emitir Nota</b>
+      <div class="linha-nota"><span>Júlia A.</span><span class="esconde-celular">Outubro de 2026</span><b>R$ 400,00</b><span class="ui-selo" data-r="status">Pendente</span></div>
+      <div style="margin-top:10px"><span class="ui-azul" data-r="emitir">Emitir nota</span></div>
+    </div>
+  </div>
+</div>

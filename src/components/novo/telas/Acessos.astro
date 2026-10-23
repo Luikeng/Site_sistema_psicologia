@@ -1,0 +1,25 @@
+---
+// Acessos e histórico > Impersonação: o registro de quando o suporte entrou na
+// conta. Textos do próprio sistema (ImpersonationTab.tsx), conferidos em 22/10/2026.
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="acessos" data-ui>
+  <Lateral ativo="ajustes" />
+  <div class="area centro">
+    <div class="cartao" style="padding:16px 18px">
+      <b class="ui-titulo">Acessos &amp; Histórico</b>
+      <p class="ui-texto">Registro de quem acessou sua conta, como, e o que foi alterado na sua clínica.</p>
+      <div class="doc-escolha"><span class="sel">Impersonação</span><span>Logins</span><span>Alterações</span></div>
+      <div class="como-funciona"><b>Como funciona.</b> Administradores do Sistema Psicologia podem, em casos pontuais (bug reportado, migração, suporte), entrar na sua conta para investigar. Cada acesso exige motivo e gera um registro aqui. O acesso é temporário (30 minutos) e auditado.</div>
+      <b class="sessoes-tit">Sessões iniciadas (<span data-r="conta">0</span>)</b>
+      <div class="ui-caixa vazio" data-r="vazio">Nenhum administrador acessou sua conta neste período.</div>
+      <div class="acesso" data-r="acesso" hidden>
+        <span class="acesso-topo"><b>Equipe de suporte</b><span class="motivo">Migração de dados</span></span>
+        <span class="acesso-quando">20/10/2026, 14:05</span>
+        <i>"Importação da planilha do Psicomanager"</i>
+      </div>
+    </div>
+  </div>
+</div>

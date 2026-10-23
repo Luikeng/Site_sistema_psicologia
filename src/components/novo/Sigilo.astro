@@ -1,0 +1,22 @@
+---
+// Sigilo: só o que o sistema faz de verdade (conferido no código em 22/10/2026).
+const itens = [
+  ['Na clínica, você escolhe quem lê.', 'Cada profissional lê só o que escreveu, o dos pacientes que atende ou tudo. Dá para mudar paciente por paciente.'],
+  ['A secretária não lê prontuário.', 'Ela cuida da agenda e, se você quiser, dos pagamentos, sem acesso ao que é clínico.'],
+  ['Só quem escreveu edita ou apaga.', 'Nem o dono da clínica altera o registro de outro profissional.'],
+  ['A ficha registra o que mudou.', 'Cada alteração fica com data e autor no histórico do paciente.'],
+  ['Banco de dados em São Paulo.', 'A conexão é criptografada, e o certificado digital e a ligação com o Google ficam guardados com criptografia.'],
+  ['Pela LGPD, você é o controlador.', 'Nós somos o operador dos dados, e os seus pacientes não são vendidos nem compartilhados para publicidade.'],
+];
+---
+<section class="sigilo" id="sigilo" aria-labelledby="t-sigilo">
+  <div class="sigilo-grade">
+    <div>
+      <h2 id="t-sigilo">O prontuário é seu e do seu paciente</h2>
+      <a class="mais link-seta" href="/seguranca">Mais sobre segurança e LGPD</a>
+    </div>
+    <ul class="sigilo-lista">
+      {itens.map(([t, s]) => <li><b>{t}</b><span>{s}</span></li>)}
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+---
+// Balão flutuante (pedido em 23/10/2026): abre as duas saídas, testar ou falar com o
+// suporte, e um atalho para quem já é cliente. Sem script já funciona (<details>); com
+// script, fecha ao tocar fora ou com Esc.
+import { SITE } from '../../data/site.ts';
+const whats = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent('Olá! Tenho uma dúvida sobre o Sistema Psicologia.')}`;
+---
+<details class="balao" data-balao>
+  <summary class="balao-botao" aria-label="Teste grátis ou suporte">
+    <svg class="i balao-abre" aria-hidden="true"><use href="#i-mensagem"/></svg>
+    <svg class="i balao-fecha" aria-hidden="true"><use href="#i-fechar"/></svg>
+    <span class="balao-rotulo" aria-hidden="true">Teste grátis ou suporte</span>
+  </summary>
+  <div class="balao-painel">
+    <p class="balao-titulo">Como a gente pode ajudar?</p>
+    <a class="balao-acao principal" href={SITE.registerUrl} rel="noopener noreferrer" data-cta="balao-teste"><b>Testar grátis por 30 dias</b><span>Sem cartão de crédito</span></a>
+    <a class="balao-acao" href={whats} target="_blank" rel="noopener"><b>Falar com o suporte</b><span>WhatsApp, de segunda a sexta, das 9h às 18h</span></a>
+    <a class="balao-cliente" href={SITE.appUrl}>Já é cliente? Entrar</a>
+  </div>
+</details>
+<script>
+  import '../../scripts/balao.ts';
+</script>

@@ -1,59 +1,94 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import CTA from '../components/CTA.astro';
+// Sobre (visual novo, out/2026). Quem fala é a empresa: sem nome, foto ou registro
+// de pessoas. Ficaram de fora, por não serem verdade hoje ou não terem como ser
+// conferidos: "exportação completa em formato aberto", "preço estável", "equipe com
+// experiência em software médico" e "psicólogos parceiros validam cada decisão".
+import LayoutNovo from '../layouts/LayoutNovo.astro';
+import TopoFixo from '../components/rascunho/TopoFixo.astro';
+import PalcoSolto from '../components/novo/PalcoSolto.astro';
+import Documentos from '../components/novo/telas/Documentos.astro';
+import Agenda from '../components/novo/telas/Agenda.astro';
+import Cancelamento from '../components/novo/telas/Cancelamento.astro';
+import Clinica from '../components/novo/telas/Clinica.astro';
+import Comecar from '../components/novo/Comecar.astro';
+import Rodape from '../components/novo/Rodape.astro';
+import { SITE } from '../data/site.ts';
 
 const title = 'Sobre o Sistema Psicologia';
 const description =
-  'Construído por quem entende da rotina clínica. Conheça nossa missão de desburocratizar a gestão para psicólogos e clínicas no Brasil.';
----
+  'Por que o Sistema Psicologia existe, como a gente decide o que entra no sistema e o que a gente promete para quem usa.';
 
-<BaseLayout title={title} description={description}>
-  <header class="pt-32 pb-12 bg-gradient-to-b from-white to-[#F8FAFC]">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-5 text-balance">
-        Construído por quem <span class="text-blue-600">vive a clínica</span>
-      </h1>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-        O Sistema Psicologia nasceu da frustração com planilhas duplicadas, agendas perdidas e papeladas que tiram o foco do que importa: o paciente.
-      </p>
+const promessas = [
+  ['30 dias para testar, sem cartão.', 'Você usa com a sua agenda de verdade antes de decidir.'],
+  ['Sem fidelidade e sem multa.', 'Cancele quando quiser. Se for em até 7 dias depois da primeira cobrança, o reembolso é integral.'],
+  ['Gente no suporte.', 'Quem responde no WhatsApp e no e-mail é gente, em português.'],
+  ['Os dados dos seus pacientes não estão à venda.', 'A gente não vende, não aluga e não compartilha nada para publicidade.'],
+];
+---
+<LayoutNovo title={title} description={description}>
+  <TopoFixo base="/" atual="/sobre" />
+  <header class="cabeca-i">
+    <div class="cabeca-grade">
+      <div>
+        <h1>A gente cuida do que não é clínica</h1>
+        <p class="frase-i">O Sistema Psicologia junta agenda, prontuário, cobrança e parte fiscal num lugar só, para o seu tempo ficar com o paciente.</p>
+        <div class="botoes-i">
+          <a class="botao" href={SITE.registerUrl} rel="noopener noreferrer">Criar conta grátis</a>
+          <a class="link-seta" href="/#semana">Ver como funciona</a>
+        </div>
+      </div>
+      <PalcoSolto Tela={Documentos} />
     </div>
   </header>
 
-  <section class="py-16 bg-white">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-gray prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-2xl prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline">
-      <h2>Por que existimos</h2>
-      <p>
-        Psicólogos não estudaram pra virar contadores, secretários e administradores. Mas a realidade da clínica autônoma e da pequena clínica empurra todo psicólogo pra esse papel: agenda no Google + planilha no Excel + bloco de receita + WhatsApp + sistema de NFS-e do município + cálculo manual da Receita Saúde.
-      </p>
-      <p>
-        Cada uma dessas peças pede atenção. E quando você soma tudo, sobra menos tempo pra estudar, pra supervisão, pra você. O custo de oportunidade é enorme — e silencioso.
-      </p>
+  <main id="inicio">
+    <section class="banda claro" aria-labelledby="t-antes">
+      <div class="banda-grade">
+        <div>
+          <h2 id="t-antes" class="entra">Antes, a semana era assim</h2>
+          <p class="texto-i entra d1">A agenda no Google, os pagamentos numa planilha, o recibo num bloco, as conversas no WhatsApp, a nota fiscal no site da prefeitura e a conta do Receita Saúde para o fim do mês. Cada pedaço pede um pouco de atenção e, somados, tomam o tempo que seria do paciente, da supervisão e do descanso.</p>
+          <p class="texto-i entra d2">No Sistema Psicologia, a reserva entra pelo seu link, o lembrete sai sozinho, o pagamento fica registrado na conta do paciente, e no fim do mês o recibo, a nota e o arquivo do Receita Saúde estão prontos.</p>
+        </div>
+        <PalcoSolto Tela={Agenda} />
+      </div>
+    </section>
 
-      <h2>Como pensamos o produto</h2>
-      <p>
-        Cada módulo do sistema responde a uma dor concreta que ouvimos da prática clínica. Não construímos features pra gerar tela bonita — construímos pra eliminar uma fricção real do dia a dia. Quando uma feature não faz sentido pra rotina, não entra.
-      </p>
-      <p>
-        Os pilares são: <strong>nada de planilha pra contador</strong> (NFS-e e Receita Saúde nativos), <strong>nada de agenda manual</strong> (sincronização total com Google), <strong>nada de papelada solta</strong> (prontuário e documentos no mesmo lugar), e <strong>nada de quebra de sigilo</strong> (LGPD aplicada de verdade, não no marketing).
-      </p>
+    <section class="banda escuro" aria-labelledby="t-decide">
+      <div class="banda-grade palco-esquerda">
+        <div>
+          <h2 id="t-decide" class="entra">Como a gente decide o que entra</h2>
+          <p class="texto-i entra d1">Cada parte do sistema começou numa dificuldade de consultório: a reserva combinada por mensagem, o recibo refeito à mão, a nota fiscal digitada no site da prefeitura. Se uma função não ajuda a rotina de quem atende, ela não entra.</p>
+          <p class="texto-i entra d2">Por isso o sistema tem coisas pensadas para a psicologia: sigilo do prontuário entre profissionais da mesma clínica, sessões de casal, família e grupo, política de cancelamento que sugere e deixa a decisão com você, e um portal em que o paciente entra com um código, sem senha para esquecer.</p>
+        </div>
+        <PalcoSolto Tela={Cancelamento} />
+      </div>
+    </section>
 
-      <h2>Quem somos</h2>
-      <p>
-        Equipe pequena, brasileira, com background em desenvolvimento de software médico-clínico e conformidade LGPD. Psicólogos parceiros validam cada decisão de produto antes de virar código. Suporte respondido por gente — não por robô.
-      </p>
+    <section class="banda claro" aria-labelledby="t-sozinho">
+      <div class="banda-grade">
+        <div>
+          <h2 id="t-sozinho" class="entra">Sozinho ou com equipe</h2>
+          <p class="texto-i entra d1">No consultório de uma pessoa, o plano Individual traz a sua agenda, o seu prontuário e uma secretária. Na clínica, o plano Clínica junta até 5 profissionais e 2 secretárias, com salas, repasse e a escolha de quem lê o quê.</p>
+          <p class="texto-i entra d2">A clínica ganha também uma página com todos os profissionais. O paciente escolhe com quem quer marcar, e a reserva cai na agenda certa.</p>
+        </div>
+        <PalcoSolto Tela={Clinica} />
+      </div>
+    </section>
 
-      <h2>Compromissos</h2>
-      <ul>
-        <li><strong>Seus dados são seus.</strong> Exportação completa em qualquer momento, em formato aberto.</li>
-        <li><strong>Sem refém.</strong> Cancelamento sem multa, sem fidelidade.</li>
-        <li><strong>Preço estável.</strong> Não fazemos aumento surpresa em cima de quem já é cliente.</li>
-        <li><strong>Resposta humana.</strong> Suporte real, em português, por quem entende.</li>
-      </ul>
-    </div>
-  </section>
+    <section class="banda escuro" aria-labelledby="t-promete">
+      <div class="banda-miolo">
+        <h2 id="t-promete" class="entra">O que a gente promete</h2>
+        <ul class="regras">
+          {promessas.map(([t, s], i) => <li class="entra em-fila" style={`--i:${i}`}><b>{t}</b><span>{s}</span></li>)}
+        </ul>
+        <p class="rodape-i">Sistema Psicologia, CNPJ 52.249.772/0001-65. Para falar com a empresa: <a href="mailto:contato@sistemapsicologia.com.br">contato@sistemapsicologia.com.br</a>.</p>
+      </div>
+    </section>
 
-  <CTA
-    title="Quer conhecer o sistema na prática?"
-    subtitle="Crie a conta sem cartão e teste com seus próprios dados durante o período grátis."
-  />
-</BaseLayout>
+    <Comecar anima />
+  </main>
+  <Rodape />
+  <script>
+    import '../scripts/palco.ts';
+  </script>
+</LayoutNovo>

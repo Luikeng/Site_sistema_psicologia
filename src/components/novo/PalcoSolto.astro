@@ -1,0 +1,8 @@
+---
+// Uma tela do sistema solta na página (páginas internas). Roda quando aparece,
+// em qualquer largura, e para quando sai de vista.
+import PalcoExtras from './PalcoExtras.astro';
+export interface Props { Tela: any }
+const { Tela } = Astro.props;
+---
+<div class="palco-solto" aria-hidden="true" data-ui><Tela ativa /><PalcoExtras /></div>

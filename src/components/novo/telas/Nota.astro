@@ -1,0 +1,22 @@
+---
+// Emitir Nota: o mês aberto com o total emitido e uma nota saindo.
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="nota" data-ui>
+  <Lateral ativo="nota" />
+  <div class="area centro">
+    <div class="cartao">
+      <div class="ui-topo"><span><b class="ui-titulo">Emitir Nota</b><br /><span style="color:#475569">NFS-e Nacional</span></span><span class="ui-selo">2026</span></div>
+      <div class="hist">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><b>Outubro</b><span style="color:#475569">Total emitido <b data-r="total" style="color:#0f172a">R$ 3.000,00</b></span></div>
+        <div class="ui-linha"><span>Ana S.</span><b>R$ 800,00</b><span class="ui-selo verde">Confirmada</span></div>
+        <div class="ui-linha"><span>Carlos M. (casal)</span><b>R$ 600,00</b><span class="ui-selo verde">Confirmada</span></div>
+        <div class="ui-linha"><span>Elisa P.</span><b>R$ 800,00</b><span class="ui-selo verde">Confirmada</span></div>
+        <div class="ui-linha"><span>Igor N.</span><b>R$ 800,00</b><span class="ui-selo verde">Confirmada</span></div>
+        <div class="ui-linha" style="border-bottom:0"><span>Bruno M.</span><b>R$ 400,00</b><span class="ui-selo" data-r="status">Pendente</span><span class="ui-azul" data-r="emitir">Emitir</span></div>
+      </div>
+    </div>
+  </div>
+</div>

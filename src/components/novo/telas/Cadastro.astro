@@ -1,0 +1,26 @@
+---
+// Tela de cadastro do sistema (pages/auth/RegisterPage.tsx), com os mesmos rótulos
+// e a mensagem que aparece depois de criar a conta. Conferida em 22/10/2026.
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="cadastro" data-ui>
+  <div class="area centro cad-area">
+    <div class="cartao cad">
+      <span class="cad-icone"><svg class="i" aria-hidden="true"><use href="#i-pessoas"/></svg></span>
+      <b class="cad-titulo" data-r="titulo">Criar Conta</b>
+      <div class="cad-form" data-r="form">
+        <label>Nome Completo<span class="ui-campo" data-r="nome"></span></label>
+        <label>Email<span class="ui-campo" data-r="email"></span></label>
+        <label>Senha<span class="ui-campo" data-r="senha"></span></label>
+        <label>Confirmar Senha<span class="ui-campo" data-r="senha2"></span></label>
+        <span class="ui-azul cad-botao" data-r="criar">Criar Conta</span>
+      </div>
+      <div class="cad-ok" data-r="ok" hidden>
+        <p><b>Sua conta foi criada!</b> Enviamos um link de confirmação para:</p>
+        <p class="cad-email">paula@consultorioreis.com.br</p>
+        <p>Abra a mensagem e clique no link para ativar sua conta.</p>
+      </div>
+    </div>
+  </div>
+</div>

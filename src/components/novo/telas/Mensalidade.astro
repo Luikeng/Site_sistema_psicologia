@@ -1,0 +1,27 @@
+---
+// Mensalidades do paciente, como no financeiro do sistema.
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="mensalidade" data-ui>
+  <Lateral ativo="pessoas" />
+  <div class="area centro">
+    <div class="pac-cab"><span class="avatar azul">BM</span><b>Bruno M.</b></div>
+    <div class="cartao">
+      <div class="ui-topo">
+        <span><b class="ui-titulo">Mensalidades</b><br /><span style="color:#475569">Valor atual: R$ 800,00 · Vencimento dia 10</span></span>
+        <span class="ui-azul" data-r="gerar">Gerar Nov/2026</span>
+      </div>
+      <div class="hist">
+        <div class="ui-linha" data-r="nova" hidden><span><b>NOV 2026</b> R$ 800,00<br /><span style="color:#64748b">Venc. 10/11/2026</span></span><span class="ui-azul">Marcar paga</span></div>
+        <div class="ui-linha"><span><b>OUT 2026</b> R$ 800,00<br /><span style="color:#64748b">Venc. 10/10/2026 · Pago em 09/10/2026 · PIX</span></span><span class="ui-selo verde">PAGA</span></div>
+        <div class="ui-linha" style="border-bottom:0"><span><b>SET 2026</b> R$ 800,00<br /><span style="color:#64748b">Venc. 10/09/2026 · Pago em 10/09/2026 · PIX</span></span><span class="ui-selo verde">PAGA</span></div>
+      </div>
+    </div>
+    <div class="cartao" style="padding:10px 16px;margin-top:10px">
+      <div class="ui-linha"><span>Sessão 14/10/2026</span><span class="ui-selo azul">na mensalidade</span></div>
+      <div class="ui-linha" style="border-bottom:0"><span>Sessão 21/10/2026</span><span class="ui-selo azul">na mensalidade</span></div>
+    </div>
+  </div>
+</div>

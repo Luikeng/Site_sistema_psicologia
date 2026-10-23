@@ -1,0 +1,20 @@
+---
+// Anamnese pelo link, do lado do paciente, no celular dele.
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="anamnese" data-ui>
+  <div class="celular-moldura">
+    <div class="form-movel">
+      <b>Anamnese</b>
+      <small>Consultório Paula Reis</small>
+      <div class="barra-prog"><i data-r="prog"></i></div>
+      <div class="ui-campos">
+        <label>O que te traz à terapia?<span class="ui-campo" data-r="p1"></span></label>
+        <label>Já fez terapia antes?<span class="ui-campo" data-r="p2"></span></label>
+      </div>
+      <span class="ui-azul largo" data-r="enviar">Enviar</span>
+      <div class="sucesso" data-r="sucesso"><svg class="i"><use href="#i-ok-circulo"/></svg><b>Anamnese enviada</b><small>A Paula recebe antes da primeira sessão.</small></div>
+    </div>
+  </div>
+</div>

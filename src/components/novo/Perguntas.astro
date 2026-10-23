@@ -1,0 +1,25 @@
+---
+// Perguntas em lista que abre e fecha (como as listas do sistema), com a chamada
+// presa ao lado enquanto a lista passa. Sem script: <details> funciona sozinho.
+import { PERGUNTAS, type Pergunta } from '../../data/perguntas.ts';
+import { SITE } from '../../data/site.ts';
+export interface Props { titulo?: string; itens?: Pergunta[]; anima?: boolean }
+const { titulo = 'Perguntas que a gente recebe', itens = PERGUNTAS, anima = false } = Astro.props;
+const whats = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent('Olá! Tenho uma dúvida sobre o Sistema Psicologia.')}`;
+---
+<section class="perguntas" id="perguntas" aria-labelledby="t-perguntas">
+  <div class="perguntas-grade">
+    <div class="perguntas-intro">
+      <h2 id="t-perguntas" class="entra">{titulo}</h2>
+      <p class="entra d1">Não achou a sua? <a href={whats} target="_blank" rel="noopener">Pergunte no WhatsApp</a>. Quem responde é gente, em português.</p>
+    </div>
+    <div class="lista-perguntas">
+      {itens.map((p, i) => (
+        <details class:list={['pergunta', { 'entra em-fila': anima }]} style={anima ? `--i:${i % 4}` : undefined} open={i === 0}>
+          <summary><span>{p.q}</span><svg class="i" aria-hidden="true"><use href="#i-mais"/></svg></summary>
+          <p>{p.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

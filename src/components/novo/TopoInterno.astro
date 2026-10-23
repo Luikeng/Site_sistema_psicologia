@@ -1,0 +1,35 @@
+---
+// Topo das páginas internas: o nome leva à inicial, e os links da inicial
+// voltam para a seção certa dela.
+import { SITE } from '../../data/site.ts';
+export interface Props { atual?: string; tema?: 'escuro' | 'claro' }
+const { atual = '', tema = 'escuro' } = Astro.props;
+const menu = [
+  ['/#semana', 'Como funciona'],
+  ['/#clinicas', 'Clínicas'],
+  ['/precos', 'Preços'],
+  ['/seguranca', 'Segurança'],
+  ['/sobre', 'Sobre'],
+  ['/contato', 'Contato'],
+];
+const visiveis = ['/#semana', '/#clinicas', '/precos', '/seguranca'];
+const aqui = (href: string) => (href === atual ? 'page' : undefined);
+---
+<div class={`topo-i ${tema}`}>
+  <a class="marca-i" href="/">Sistema Psicologia</a>
+  <nav class="nav" aria-label="Principal">
+    <details class="nav-menu">
+      <summary>Menu</summary>
+      <div class="nav-lista">
+        {menu.map(([href, nome]) => <a href={href} aria-current={aqui(href)}>{nome}</a>)}
+        <a href={SITE.appUrl}>Entrar</a>
+        <a href={SITE.registerUrl} rel="noopener noreferrer">Criar conta grátis</a>
+      </div>
+    </details>
+    {menu.filter(([href]) => visiveis.includes(href)).map(([href, nome]) => (
+      <a class="link" href={href} aria-current={aqui(href)}>{nome}</a>
+    ))}
+    <a class="link" href={SITE.appUrl}>Entrar</a>
+    <a class="botao" href={SITE.registerUrl} rel="noopener noreferrer">Criar conta grátis</a>
+  </nav>
+</div>

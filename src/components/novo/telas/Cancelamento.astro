@@ -1,0 +1,27 @@
+---
+// Política de cancelamento e falta: o sistema sugere, o psicólogo decide.
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="cancelamento" data-ui>
+  <Lateral ativo="ajustes" />
+  <div class="area centro">
+    <div class="cartao" style="padding:18px">
+      <b class="ui-titulo">Cancelamento e falta</b>
+      <p style="margin:4px 0 14px;color:#475569;font-size:14px">Defina com quanta antecedência um paciente pode desmarcar sem ser cobrado. O sistema usa isso apenas para <b>sugerir</b>, você decide em cada sessão.</p>
+      <span style="font-weight:600">Antecedência mínima para cancelar sem cobrança</span>
+      <div class="doc-escolha" style="margin-top:8px">
+        <span data-r="atalho" data-h="0">Não sugerir</span><span class="sel" data-r="atalho" data-h="12">12h</span><span data-r="atalho" data-h="24">24h</span><span data-r="atalho" data-h="48">48h</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin:4px 0 14px"><span class="ui-campo" style="width:70px;text-align:center" data-r="horas">12</span><span>horas antes da sessão</span></div>
+      <div class="ui-caixa">
+        <span class="ui-rot">O QUE O SISTEMA VAI SUGERIR</span>
+        <p style="margin:6px 0 0"><b>Falta</b> (paciente não veio, sem avisar): sugere <b>cobrar</b>.</p>
+        <p style="margin:4px 0 0"><b>Cancelada com <span data-r="regra">12h</span> ou mais</b> de antecedência: sugere <b>não cobrar</b>.</p>
+        <p style="margin:4px 0 0"><b>Cancelada com menos de <span data-r="regra2">12h</span></b>: sugere <b>cobrar</b>.</p>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:14px"><span class="ui-azul" data-r="salvar">Salvar política</span></div>
+    </div>
+  </div>
+</div>

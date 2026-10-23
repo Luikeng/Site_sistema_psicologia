@@ -1,0 +1,10 @@
+---
+// Logo: o ícone oficial (public/brand/logo-icon.svg) com o nome em texto. O SVG com o
+// nome inteiro depende da fonte Inter e, com outra fonte, sobrepõe as duas palavras.
+export interface Props { tamanho?: number; claro?: boolean }
+const { tamanho = 34, claro = false } = Astro.props;
+---
+<span class:list={['logo', { 'logo-claro': claro }]} style={`--logo:${tamanho}px`}>
+  <img src="/brand/logo-icon.svg" alt="" width={tamanho} height={tamanho} />
+  <span class="logo-nome">Sistema <span>Psicologia</span></span>
+</span>

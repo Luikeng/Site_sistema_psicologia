@@ -1,0 +1,38 @@
+---
+// Topo do site: a mesma navegação do site atual (logo, links, Entrar e Teste grátis),
+// fixo no alto enquanto a página passa. Na inicial os links levam às seções da própria
+// página; nas outras páginas (base="/") levam de volta à seção certa da inicial.
+import { SITE } from '../../data/site.ts';
+import Logo from '../novo/Logo.astro';
+export interface Props { base?: string; atual?: string }
+const { base = '', atual = '' } = Astro.props;
+const links = [
+  [`${base}#recursos`, 'Recursos'],
+  [`${base}#fluxo`, 'Como funciona'],
+  [base ? '/precos' : '#precos', 'Preços'],
+  ['/seguranca', 'Segurança'],
+  ['/sobre', 'Sobre'],
+  ['/contato', 'Contato'],
+];
+const aqui = (href: string) => (href === atual ? 'page' : undefined);
+---
+<header class="r-topo">
+  <div class="r-topo-miolo">
+    <a href={base ? '/' : '#inicio'} class="r-logo" aria-label="Sistema Psicologia, início"><Logo tamanho={34} /></a>
+    <nav class="r-nav" aria-label="Principal">
+      {links.map(([href, nome]) => <a href={href} aria-current={aqui(href)}>{nome}</a>)}
+    </nav>
+    <div class="r-topo-acoes">
+      <a class="r-entrar" href={SITE.appUrl} title="Para quem já é cliente">Entrar</a>
+      <a class="botao" href={SITE.registerUrl} rel="noopener noreferrer" data-cta="nav-primary">Teste grátis</a>
+    </div>
+    <details class="nav-menu r-menu">
+      <summary>Menu</summary>
+      <div class="nav-lista">
+        <a class="r-menu-entrar" href={SITE.appUrl}>Entrar <span>já sou cliente</span></a>
+        {links.map(([href, nome]) => <a href={href} aria-current={aqui(href)}>{nome}</a>)}
+        <a href={SITE.registerUrl} rel="noopener noreferrer" data-cta="nav-menu">Criar conta grátis</a>
+      </div>
+    </details>
+  </div>
+</header>

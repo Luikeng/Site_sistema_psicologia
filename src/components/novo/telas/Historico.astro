@@ -1,0 +1,35 @@
+---
+// Histórico de Alterações (Configurações > Acessos e histórico). As frases são as
+// do próprio sistema (historicoFrases.ts), conferidas em 22/10/2026.
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+const eventos = [
+  ['paciente', 'Paciente (pelo site)', '19/10/2026, 07:15', 'Agendou pelo site a sessão de 21/10/2026 às 10:00', 'Júlia M.', ''],
+  ['paciente', 'Paciente', '18/10/2026, 21:10', 'Respondeu a anamnese', 'Júlia M.', ''],
+  ['', 'Rafael Lima', '16/10/2026, 17:03', 'Registrou evolução de 16/10/2026', 'Bruno M.', ''],
+  ['voce', 'Você', '16/10/2026, 09:30', 'Emitiu recibo de R$ 200,00', 'Carlos M.', ' esconde-celular'],
+];
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="historico" data-ui>
+  <Lateral ativo="ajustes" />
+  <div class="area centro">
+    <div class="cartao" style="padding:16px 18px">
+      <b class="ui-titulo">Histórico de Alterações</b>
+      <p class="ui-texto">Quem mexeu em quê na sua clínica: você, sua equipe, ou o robô (sincronização do Google Calendar, geração de mensalidades).</p>
+      <div class="doc-escolha"><span class="sel">Tudo</span><span>Só sistema</span><span>Só pessoas</span></div>
+      <ol class="linha-tempo">
+        <li class="ev voce nova" data-r="nova">
+          <span class="ev-quem"><b>Você</b><time>19/10/2026, 18:42</time></span>
+          <span class="ev-o-que">Editou evolução de 19/10/2026 · <i>Ana S.</i></span>
+        </li>
+        {eventos.map(([tipo, quem, quando, oque, paciente, extra]) => (
+          <li class={`ev ${tipo}${extra}`}>
+            <span class="ev-quem"><b>{quem}</b><time>{quando}</time></span>
+            <span class="ev-o-que">{oque} · <i>{paciente}</i></span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</div>

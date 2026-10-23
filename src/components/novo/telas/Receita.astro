@@ -1,0 +1,33 @@
+---
+// Receita Saúde: lote CSV com prévia do arquivo e correção antes de gerar.
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="receita" data-ui>
+  <Lateral ativo="nota" />
+  <div class="area centro">
+    <div class="cartao">
+      <div class="ui-topo"><span><b class="ui-titulo">Receita Saúde — Lote CSV</b><br /><span style="color:#475569">Ano de referência: 2026, outubro</span></span></div>
+      <div class="hist">
+        <span class="ui-rot">PRÉVIA DO ARQUIVO</span>
+        <table class="tabela" style="margin-top:6px">
+          <thead><tr><th>Paciente</th><th>Data</th><th class="n">Valor</th><th>Linha CSV / Erros</th></tr></thead>
+          <tbody>
+            <tr><td>Ana S.</td><td>19/10</td><td class="n">R$ 200,00</td><td><span class="ui-selo verde">ok</span></td></tr>
+            <tr><td>Elisa P.</td><td>20/10</td><td class="n">R$ 200,00</td><td><span class="ui-selo verde">ok</span></td></tr>
+            <tr><td>Igor N.</td><td>21/10</td><td class="n">R$ 200,00</td><td>
+              <span data-r="erro"><span class="ui-selo vermelho">CPF ausente</span> <span class="ui-contorno" style="padding:2px 8px" data-r="corrigir">Corrigir</span></span>
+              <span data-r="ok" hidden><span class="ui-selo verde">ok</span></span>
+            </td></tr>
+            <tr><td>Lia V.</td><td>22/10</td><td class="n">R$ 200,00</td><td><span class="ui-selo verde">ok</span></td></tr>
+          </tbody>
+        </table>
+        <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px;align-items:center">
+          <span class="ui-azul sumiu" data-r="gerar">Gerar arquivo CSV com 18 recibos</span>
+          <span class="ui-verde" data-r="baixar" hidden><svg class="i"><use href="#i-baixar"/></svg>Baixar arquivo do lote (CSV)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+---
+// Uma tela do sistema com abas: cada aba mostra (e roda) uma tela. Com "auto",
+// passa sozinha para a próxima enquanto a pessoa não escolhe uma.
+import PalcoExtras from '../novo/PalcoExtras.astro';
+export interface Aba { nome: string; rotulo: string; Tela: any }
+export interface Props { abas: Aba[]; auto?: number; rotulo: string; classe?: string }
+const { abas, auto = 0, rotulo, classe = '' } = Astro.props;
+---
+<div class={`r-abas ${classe}`} data-abas data-auto={auto ? String(auto) : undefined}>
+  <div class="r-abas-botoes" role="group" aria-label={rotulo}>
+    {abas.map((a, i) => <button type="button" data-aba={a.nome} aria-pressed={i === 0 ? 'true' : 'false'}>{a.rotulo}</button>)}
+  </div>
+  <div class="r-palco palco-abas" aria-hidden="true" data-ui>
+    {abas.map((a, i) => { const Tela = a.Tela; return <Tela ativa={i === 0} />; })}
+    <PalcoExtras />
+  </div>
+</div>

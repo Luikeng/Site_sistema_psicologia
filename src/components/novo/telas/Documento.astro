@@ -1,0 +1,31 @@
+---
+// Central de documentos: o mesmo paciente em declaração, atestado ou recibo, já preenchido.
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="documento" data-ui>
+  <Lateral ativo="pessoas" />
+  <div class="area centro">
+    <div class="pac-cab"><span class="avatar verde">AS</span><b>Ana S.</b></div>
+    <div class="doc-escolha">
+      <span class="sel" data-r="chip-decl">Declaração</span><span data-r="chip-atest">Atestado</span><span data-r="chip-recibo">Recibo</span>
+    </div>
+    <div class="papel doc-texto" data-r="doc">
+      <div data-r="doc-decl">
+        <b class="recibo-titulo">DECLARAÇÃO</b>
+        <p style="margin-top:14px">Declaro, para os devidos fins, que <span class="var">Ana Souza</span>, CPF <span class="var">000.000.000-00</span>, esteve em atendimento psicológico no dia <span class="var">19/10/2026</span>, das <span class="var">09:00</span> às <span class="var">09:50</span>.</p>
+      </div>
+      <div data-r="doc-atest" hidden>
+        <b class="recibo-titulo">ATESTADO</b>
+        <p style="margin-top:14px">Atesto que <span class="var">Ana Souza</span> compareceu a atendimento psicológico no dia <span class="var">19/10/2026</span>, das <span class="var">09:00</span> às <span class="var">09:50</span>.</p>
+      </div>
+      <div data-r="doc-recibo" hidden>
+        <b class="recibo-titulo">RECIBO</b>
+        <p style="margin-top:14px">Recebi de <span class="var">Ana Souza</span>, CPF <span class="var">000.000.000-00</span>, a importância de <span class="var">R$ 200,00</span>, referente a atendimento psicológico no dia <span class="var">19/10/2026</span>.</p>
+      </div>
+      <p style="margin-top:18px">Porto Alegre, <span class="var">19 de outubro de 2026</span>.</p>
+      <div class="assinatura">Paula Reis, Psicóloga, CRP 00/00000</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+---
+// Agenda da semana, como no sistema: semanal, hoje em azul, sessões por cor de status.
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+// 8 horas: cada célula fica alta o bastante para o nome e o horário, como no sistema
+const horas = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00'];
+const dias = [['Dom', '18'], ['Seg', '19'], ['Ter', '20'], ['Qua', '21'], ['Qui', '22'], ['Sex', '23'], ['Sáb', '24']];
+const sessoes = [
+  ['d1', 8, 'Carla R.', '14:00'], ['d1', 9, 'Diego F.', '15:00'],
+  ['d2', 2, 'Elisa P.', '08:00'], ['d2', 5, 'Fábio T.', '11:00'],
+  ['d3', 3, 'Igor N.', '09:00'],
+  ['d4', 8, 'Bruno M.', '14:00'], ['d4', 9, 'Lia V.', '15:00'],
+  ['d5', 3, 'Marcos D.', '09:00'], ['d5', 4, 'Nina O.', '10:00'],
+] as const;
+// sessões de 50 minutos, no formato do sistema: "08:00 - 08:50"
+const periodo = (inicio: string) => `${inicio} - ${inicio.replace(':00', ':50')}`;
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="agenda" data-ui>
+  <Lateral ativo="agenda" />
+  <div class="area">
+    <div class="cartao agenda">
+      <div class="ag-topo">
+        <span class="ag-titulo">Agenda</span>
+        <span class="ag-acoes"><span class="ic-botao"><svg class="i"><use href="#i-sino"/></svg></span><span class="ic-botao azul"><svg class="i"><use href="#i-mais"/></svg></span></span>
+      </div>
+      <div class="ag-linha2">
+        <span class="segmentado"><span class="seg ativo">Semanal</span><span class="seg">Mensal</span></span>
+        <span class="ui-contorno"><svg class="i"><use href="#i-agenda"/></svg>Hoje</span>
+      </div>
+      <div class="ag-mes"><svg class="i"><use href="#i-esq"/></svg><b>Outubro de 2026</b><svg class="i"><use href="#i-dir"/></svg></div>
+      <div class="grade">
+        {dias.map(([d, n], i) => <div class={`cab d${i}${i === 1 ? ' hoje' : ''}`}>{d}<b>{n}</b></div>)}
+        {dias.map((_, i) => <div class={`ag-col d${i}`}></div>)}
+        {horas.map((_, i) => <div class="faixa" style={`grid-row:${i + 2}`}></div>)}
+        {horas.map((h, i) => <div class="hora" style={`grid-row:${i + 2}`}>{h}</div>)}
+        <div class="bloco s-azul d1" style="grid-row:3" data-r="ana"><b>Ana S.</b><small>{periodo('09:00')}</small><svg class="i ok"><use href="#i-ok"/></svg></div>
+        {sessoes.map(([d, linha, nome, hora]) => (
+          <div class={`bloco s-azul ${d}`} style={`grid-row:${linha}`}><b>{nome}</b><small>{periodo(hora)}</small></div>
+        ))}
+        <div class="bloco s-ambar d3 oculto" style="grid-row:4" data-r="julia"><b>Júlia A.</b><small>{periodo('10:00')}</small></div>
+      </div>
+    </div>
+    <div class="pop" data-r="pop">
+      <b>Júlia A.</b>
+      <p>Quarta, 21 de outubro, das 10:00 às 10:50</p>
+      <p>Pediu pelo seu link</p>
+      <div class="pop-acoes"><span class="ui-azul" data-r="aprovar">Aprovar</span><span class="ui-contorno">Recusar</span></div>
+    </div>
+  </div>
+</div>

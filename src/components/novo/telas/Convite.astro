@@ -1,0 +1,30 @@
+---
+// Convite para a equipe já com a função e as permissões (caixinhas do sistema).
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="convite" data-ui>
+  <Lateral ativo="ajustes" />
+  <div class="area centro">
+    <div class="cartao" style="padding:18px">
+      <b class="ui-titulo">Convidar para a equipe</b>
+      <div class="ui-campos">
+        <label>E-mail<span class="ui-campo" data-r="email"></span></label>
+      </div>
+      <span style="font-weight:600">Função</span>
+      <div class="doc-escolha" style="margin-top:6px"><span>Profissional</span><span class="sel">Secretária</span></div>
+      <div class="caixinhas">
+        <span class="grupo-perm">Agenda</span>
+        <span class="caixinha" data-r="liga"><i></i>Visualizar Agenda</span>
+        <span class="caixinha" data-r="liga"><i></i>Agendar Sessões</span>
+        <span class="caixinha" data-r="liga"><i></i>Editar/Mover Sessões</span>
+        <span class="grupo-perm">Prontuários</span>
+        <span class="caixinha travada"><i></i>Ler Prontuários (Sigiloso)</span>
+        <span class="grupo-perm">Financeiro</span>
+        <span class="caixinha" data-r="liga"><i></i>Gerenciar Pagamentos</span>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:14px"><span class="ui-azul" data-r="enviar">Enviar convite</span></div>
+    </div>
+  </div>
+</div>

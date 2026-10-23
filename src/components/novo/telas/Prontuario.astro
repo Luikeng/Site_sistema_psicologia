@@ -1,0 +1,23 @@
+---
+// Prontuário: a evolução escrita na sessão do dia; só o autor edita.
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="prontuario" data-ui>
+  <Lateral ativo="pessoas" />
+  <div class="area" style="display:flex;flex-direction:column">
+    <div class="pac-cab"><span class="avatar verde">AS</span><b>Ana S.</b></div>
+    <div class="ui-abas esconde-celular"><span>Dados do Paciente</span><span class="ativa">Prontuário</span><span>Anamnese</span><span>Humor</span><span>Financeiro</span><span>Documentos</span></div>
+    <div class="evolucoes">
+      <div class="ev-lista">
+        <span class="ativa">Sessão de 19/10</span><span>Sessão de 12/10</span><span>Sessão de 05/10</span><span>Sessão de 28/09</span>
+      </div>
+      <div class="editor">
+        <div class="ed-barra" aria-hidden="true"><span>B</span><span style="font-style:italic">I</span><span style="text-decoration:underline">U</span><span>•</span></div>
+        <div class="ed-texto ed-cursor" data-r="texto"></div>
+        <div class="ed-rodape"><span class="trava"><svg class="i"><use href="#i-cadeado"/></svg>Só você edita este registro</span><span class="ui-azul" data-r="salvar">Salvar</span></div>
+      </div>
+    </div>
+  </div>
+</div>

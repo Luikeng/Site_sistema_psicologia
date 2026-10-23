@@ -1,0 +1,35 @@
+---
+// Aba Humor do paciente: os últimos 14 dias em gráfico, como no sistema.
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+// 1 = Muito mal ... 5 = Muito bem
+const valores = [2, 3, 2, 3, 3, 4, 3, 3, 4, 4, 3, 4, 5, 4];
+const w = 300, h = 120, px = 18, py = 14;
+const pontos = valores.map((v, i) => [px + (i * (w - 2 * px)) / (valores.length - 1), h - py - ((v - 1) * (h - 2 * py)) / 4]);
+const caminho = pontos.map(([x, y], i) => `${i ? 'L' : 'M'}${x.toFixed(1)} ${y.toFixed(1)}`).join(' ');
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="humor" data-ui>
+  <Lateral ativo="pessoas" />
+  <div class="area centro">
+    <div class="pac-cab"><span class="avatar verde">AS</span><b>Ana S.</b></div>
+    <div class="ui-abas esconde-celular"><span>Dados do Paciente</span><span>Prontuário</span><span>Anamnese</span><span class="ativa">Humor</span><span>Financeiro</span></div>
+    <div class="cartao" style="padding:14px 16px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><b class="ui-titulo">Humor</b><span class="ui-rot">Últimos 14 dias</span></div>
+      <svg class="grafico" data-r="grafico" viewBox={`0 0 ${w} ${h}`} role="img" aria-label="Gráfico de humor dos últimos 14 dias">
+        {[1, 2, 3, 4, 5].map((v) => {
+          const y = h - py - ((v - 1) * (h - 2 * py)) / 4;
+          return <line class="guia" x1={px} x2={w - px} y1={y} y2={y} />;
+        })}
+        <path class="linha-humor" d={caminho} pathLength="1" />
+        {pontos.map(([x, y]) => <circle class="ponto" cx={x} cy={y} r="3" />)}
+      </svg>
+      <div style="display:flex;justify-content:space-between;color:#64748b"><span>Muito mal</span><span>Muito bem</span></div>
+    </div>
+    <div class="cartao" style="padding:12px 16px;margin-top:10px">
+      <div class="ui-linha some oculto-ui" data-r="novo"><span><b>Hoje</b>: Bem. Dormi melhor esta semana.</span><span class="ui-selo verde">novo</span></div>
+      <div class="ui-linha"><span><b>Ontem</b>: Muito bem.</span></div>
+      <div class="ui-linha" style="border-bottom:0"><span><b>Domingo</b>: Bem.</span></div>
+    </div>
+  </div>
+</div>

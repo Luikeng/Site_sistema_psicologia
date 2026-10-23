@@ -1,0 +1,34 @@
+---
+// Um capítulo: a tela do sistema parada de um lado (computador) e os passos do
+// outro. No celular, cada passo leva a sua própria tela logo acima do texto.
+import PalcoExtras from './PalcoExtras.astro';
+
+export interface Passo { tela: string; Tela: any; afirma: string; apoio: string }
+export interface Props {
+  id: string;
+  titulo: string;
+  intro?: string;
+  tema?: 'escuro' | 'claro' | 'azul';
+  passos: Passo[];
+}
+const { id, titulo, intro, tema = 'escuro', passos } = Astro.props;
+---
+<section class={`capitulo${tema === 'escuro' ? '' : ' ' + tema}`} id={id} aria-labelledby={`t-${id}`} data-capitulo>
+  <div class="cap-palco" aria-hidden="true">
+    {passos.map((p, i) => { const Tela = p.Tela; return <Tela ativa={i === 0} />; })}
+    <PalcoExtras />
+  </div>
+  <div class="cap-texto">
+    <div class="cap-cabeca">
+      <h2 class="cap-titulo entra" id={`t-${id}`}>{titulo}</h2>
+      {intro && <p class="cap-intro entra d1">{intro}</p>}
+    </div>
+    {passos.map((p) => { const Tela = p.Tela; return (
+      <article class="passo" data-passo data-tela={p.tela}>
+        <div class="palco-movel unica" aria-hidden="true"><Tela ativa={true} /><PalcoExtras /></div>
+        <p class="afirma entra">{p.afirma}</p>
+        <p class="apoio entra d1">{p.apoio}</p>
+      </article>
+    ); })}
+  </div>
+</section>

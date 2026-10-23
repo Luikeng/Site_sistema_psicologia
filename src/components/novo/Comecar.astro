@@ -1,0 +1,26 @@
+---
+// Fechamento: o convite para testar, ao lado da tela de cadastro do sistema
+// sendo preenchida (nome, e-mail e senha, como ela é de verdade).
+import { SITE } from '../../data/site.ts';
+import PalcoSolto from './PalcoSolto.astro';
+import Cadastro from './telas/Cadastro.astro';
+// anima: entrada suave das partes (só nas páginas internas; a inicial já tem movimento de sobra)
+export interface Props { anima?: boolean }
+const { anima = false } = Astro.props;
+const e = (extra = '') => (anima ? `entra${extra}` : undefined);
+const whats = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent('Olá! Tenho uma dúvida sobre o Sistema Psicologia.')}`;
+---
+<section class="comecar" id="comecar" aria-labelledby="t-comecar">
+  <div class="comecar-grade">
+    <div>
+      <h2 id="t-comecar" class={e()}>Teste por 30 dias</h2>
+      <p class={e(' d1')}>Sem cartão de crédito. Você cria a conta com nome, e-mail e senha, confirma o e-mail e já começa. Se não fizer sentido para a sua rotina, é só não continuar.</p>
+      <div class:list={['contatos', e(' d2')]}>
+        <a class="botao branco" href={SITE.registerUrl} rel="noopener noreferrer" data-cta="cta-primary">Criar conta grátis</a>
+        <a class="link-seta" href={whats} target="_blank" rel="noopener">Falar com o suporte</a>
+      </div>
+      <p class:list={['comecar-email', e(' d2')]}>Prefere e-mail? <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>. Quem responde é gente, em português.</p>
+    </div>
+    <PalcoSolto Tela={Cadastro} />
+  </div>
+</section>

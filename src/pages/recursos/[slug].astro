@@ -1,0 +1,12 @@
+---
+// As páginas de cada recurso, com os mesmos endereços de antes (/recursos/agenda-google
+// etc.). O conteúdo está em src/data/recursos.ts.
+import PaginaRecurso from '../../components/novo/PaginaRecurso.astro';
+import { PAGINAS } from '../../data/recursos.ts';
+
+export function getStaticPaths() {
+  return PAGINAS.map((pagina) => ({ params: { slug: pagina.slug }, props: { pagina } }));
+}
+const { pagina } = Astro.props;
+---
+<PaginaRecurso pagina={pagina} />

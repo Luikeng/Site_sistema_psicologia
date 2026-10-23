@@ -1,0 +1,29 @@
+---
+// Painel do mês (recebido e em aberto) e a previsão do ano das Estatísticas.
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+const meses = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out'];
+const alturas = [62, 70, 74, 68, 80, 77, 84, 88, 86, 92];
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="painel" data-ui>
+  <Lateral ativo="painel" />
+  <div class="area centro">
+    <div class="cartao" style="padding:16px 18px">
+      <span class="ui-rot">OUTUBRO DE 2026</span>
+      <div style="display:flex;gap:18px;align-items:baseline;flex-wrap:wrap;margin-top:6px">
+        <span><span class="painel-num" data-r="recebido">R$ 8.600</span> <span class="painel-sub">recebido</span></span>
+        <span><b style="font-size:20px">R$ 1.200</b> <span class="painel-sub">em aberto</span></span>
+      </div>
+      <p class="painel-sub" style="margin:4px 0 0">+ R$ 400 de meses anteriores</p>
+      <div class="barras" data-r="barras">
+        {alturas.map((a, i) => <i class={i === alturas.length - 1 ? 'atual' : ''} style={`height:${a}%;transition-delay:${i * 50}ms`}></i>)}
+      </div>
+      <div class="barras-rot">{meses.map((m) => <span>{m}</span>)}</div>
+    </div>
+    <div class="cartao" style="padding:14px 18px;margin-top:10px;display:flex;justify-content:space-between;align-items:center;gap:12px">
+      <span><span class="ui-rot">ESTATÍSTICAS</span><b class="ui-titulo">Previsão de 2026</b></span>
+      <span class="painel-num" style="font-size:26px" data-r="previsao">R$ 98.400</span>
+    </div>
+  </div>
+</div>

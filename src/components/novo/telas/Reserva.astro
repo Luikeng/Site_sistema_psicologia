@@ -1,0 +1,23 @@
+---
+// Página pública de reserva, do lado do paciente.
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="reserva" data-ui>
+  <div class="pub">
+    <div class="pub-psi"><span class="avatar azul">PR</span><div><b>Paula Reis</b><small>Psicóloga, atendimento presencial e online</small></div></div>
+    <div class="pub-card">
+      <b class="ui-titulo">Escolha um horário</b>
+      <div class="dias">
+        <span class="dia-chip">Seg<b>19</b></span><span class="dia-chip">Ter<b>20</b></span><span class="dia-chip" data-r="dia">Qua<b>21</b></span><span class="dia-chip">Qui<b>22</b></span><span class="dia-chip">Sex<b>23</b></span>
+      </div>
+      <div class="horas"><span>08:00</span><span data-r="hora">10:00</span><span>11:00</span><span>14:00</span><span>15:00</span><span>16:00</span></div>
+      <div class="ui-campos">
+        <label>Seu nome<span class="ui-campo" data-r="nome"></span></label>
+        <label>E-mail<span class="ui-campo" data-r="email"></span></label>
+      </div>
+      <span class="ui-azul largo" data-r="solicitar">Solicitar reserva</span>
+      <div class="sucesso" data-r="sucesso"><svg class="i"><use href="#i-ok-circulo"/></svg><b>Reserva enviada!</b><small>Aguardando confirmação do profissional.</small></div>
+    </div>
+  </div>
+</div>

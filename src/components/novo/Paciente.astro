@@ -1,0 +1,26 @@
+---
+// Do lado do paciente: o portal.
+import PalcoExtras from './PalcoExtras.astro';
+import Portal from './telas/Portal.astro';
+---
+<section class="capitulo" id="paciente" aria-labelledby="t-paciente" data-capitulo>
+  <div class="cap-palco" aria-hidden="true"><Portal ativa /><PalcoExtras /></div>
+  <div class="cap-texto">
+    <div class="cap-cabeca">
+      <h2 class="cap-titulo entra" id="t-paciente">Do lado do paciente</h2>
+      <p class="cap-intro entra d1">Um portal só dele, com o que ele precisa e nada do que é seu.</p>
+    </div>
+    <article class="passo" data-passo data-tela="portal">
+      <div class="palco-movel unica" aria-hidden="true"><Portal ativa /><PalcoExtras /></div>
+      <p class="afirma entra">Ele entra com um código, sem precisar de senha.</p>
+      <ul class="lista-viva entra d1">
+        <li>A próxima sessão e o histórico de sessões</li>
+        <li>Recibos e notas fiscais</li>
+        <li>A anamnese para preencher</li>
+        <li>O registro de humor, que você acompanha em gráfico</li>
+        <li>O valor em aberto, quando houver</li>
+      </ul>
+      <p class="apoio entra d2">Você escolhe, paciente por paciente, o que fica liberado no portal.</p>
+    </article>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+---
+// Compartilhamento de Prontuário (Configurações da clínica). Textos do próprio
+// sistema (RecordsSharingSettings.tsx), conferidos em 22/10/2026.
+import Lateral from '../Lateral.astro';
+export interface Props { ativa?: boolean }
+const { ativa = false } = Astro.props;
+const modos = [
+  ['private', 'Privado', 'Cada profissional só vê os registros que ele mesmo escreveu.', ' O proprietário da clínica continua vendo tudo.'],
+  ['active', 'Compartilhamento ativo', 'Profissional acessa o prontuário do paciente enquanto tiver sessão atribuída', ' (futura ou nos últimos N dias).'],
+  ['full', 'Compartilhamento total', 'Todos os profissionais da clínica veem o histórico completo do paciente.', ''],
+];
+---
+<div class={`tela${ativa ? ' ativa' : ''}`} data-tela="compartilhamento" data-ui>
+  <Lateral ativo="ajustes" />
+  <div class="area centro">
+    <div class="cartao" style="padding:16px 18px">
+      <b class="ui-titulo">Compartilhamento de Prontuário</b>
+      <p class="ui-texto">Define quem dentro da clínica pode ler os registros clínicos de um paciente. Edição e exclusão continuam restritas ao autor de cada anotação em todos os modos.</p>
+      <div class="modos">
+        {modos.map(([id, nome, desc, resto]) => (
+          <div class={`modo${id === 'active' ? ' sel' : ''}`} data-r="modo" data-m={id}>
+            <span class="modo-topo"><b>{nome}</b><em>Selecionado</em></span>
+            <span class="modo-desc">{desc}<span class="longo">{resto}</span></span>
+          </div>
+        ))}
+      </div>
+      <div class="janela" data-r="janela"><span>Janela de sessão recente (dias)</span><span class="ui-campo">90</span></div>
+      <div style="display:flex;justify-content:flex-end;margin-top:12px"><span class="ui-azul" data-r="salvar">Salvar configuração</span></div>
+    </div>
+  </div>
+</div>

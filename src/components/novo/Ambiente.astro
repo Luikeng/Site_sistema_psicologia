@@ -1,0 +1,72 @@
+---
+// Fundo em movimento da abertura (pedido em 23/10/2026, no lugar do vídeo do site
+// antigo): cores esmaecidas que se misturam devagar e flocos grandes e desfocados caindo.
+// Só CSS: cada peça é um degradê radial (o desfoque já vem do degradê, sem filtro) e se
+// move apenas com transform, que o navegador entrega à placa de vídeo; nenhum JavaScript
+// roda a cada quadro. Fica parado para quem pede menos movimento no aparelho.
+// Os flocos são sorteados aqui, no build, com semente fixa: o HTML sai igual a cada build.
+
+type Faixa = [number, number];
+type Cor = { c: string; a: number; x: number; y: number; d: number; caminho: string; t: number; sentido: string };
+type Camada = { nome: string; largo: number; celular: number; tam: Faixa; queda: Faixa; balanco: Faixa; alfa: Faixa };
+
+// c = cor (r g b), a = opacidade no centro, x/y = centro em % da abertura,
+// d = diâmetro em % da largura, t = segundos de cada ida pelo caminho
+const CORES: Cor[] = [
+  { c: '147 197 253', a: 0.55, x: 14, y: 16, d: 52, caminho: 'amb-deriva-a', t: 24, sentido: 'alternate' },
+  { c: '196 181 253', a: 0.5, x: 84, y: 18, d: 46, caminho: 'amb-deriva-b', t: 28, sentido: 'alternate' },
+  { c: '251 207 232', a: 0.45, x: 60, y: 6, d: 38, caminho: 'amb-deriva-c', t: 21, sentido: 'alternate-reverse' },
+  { c: '153 246 228', a: 0.4, x: 28, y: 46, d: 40, caminho: 'amb-deriva-b', t: 31, sentido: 'alternate-reverse' },
+  { c: '199 210 254', a: 0.55, x: 78, y: 52, d: 48, caminho: 'amb-deriva-a', t: 26, sentido: 'alternate-reverse' },
+  { c: '186 230 253', a: 0.5, x: 6, y: 78, d: 44, caminho: 'amb-deriva-c', t: 33, sentido: 'alternate' },
+];
+
+// longe: pequenos e lentos; meio: o grosso da neve; perto: grandes, quase transparentes.
+// queda = segundos para atravessar a abertura; balanco = segundos de cada ida para o lado
+const CAMADAS: Camada[] = [
+  { nome: 'amb-longe', largo: 14, celular: 7, tam: [10, 16], queda: [80, 120], balanco: [5, 9], alfa: [0.55, 0.75] },
+  { nome: 'amb-meio', largo: 12, celular: 6, tam: [16, 26], queda: [50, 75], balanco: [6, 10], alfa: [0.7, 0.9] },
+  { nome: 'amb-perto', largo: 5, celular: 3, tam: [40, 64], queda: [30, 42], balanco: [7, 11], alfa: [0.3, 0.45] },
+];
+
+// mulberry32: sorteio com semente fixa
+let semente = 20261023;
+const aleatorio = () => {
+  semente = (semente + 0x6d2b79f5) | 0;
+  let t = Math.imul(semente ^ (semente >>> 15), 1 | semente);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+};
+const entre = ([a, b]: Faixa) => a + aleatorio() * (b - a);
+const arred = (n: number, casas = 1) => Number(n.toFixed(casas));
+// sorteio puro amontoa: cada floco ganha a sua faixa da largura e varia dentro dela
+const espalha = (n: number) => Array.from({ length: n }, (_, i) => ((i + 0.15 + aleatorio() * 0.7) / n) * 100);
+
+const flocos = CAMADAS.flatMap((cam) => {
+  const todos = espalha(cam.celular).map((x) => ({ x, soLargo: false }));
+  const extras = espalha(cam.largo - cam.celular).map((x) => ({ x, soLargo: true }));
+  return [...todos, ...extras].map(({ x, soLargo }) => ({
+    classes: ['amb-queda', cam.nome, { 'amb-so-largo': soLargo }],
+    estilo: [
+      `--x:${arred(x)}%`,
+      `--p:${arred(aleatorio(), 3)}`,
+      `--dur:${arred(entre(cam.queda))}s`,
+      `--tam:${arred(entre(cam.tam))}px`,
+      `--alfa:${arred(entre(cam.alfa), 2)}`,
+      `--dur-b:${arred(entre(cam.balanco))}s`,
+      `--atraso-b:${arred(-aleatorio() * 10)}s`,
+    ].join(';'),
+  }));
+});
+---
+<div class="ambiente" aria-hidden="true">
+  {CORES.map((c) => (
+    <span class="amb-cor" style={`--c:${c.c};--a:${c.a};--x:${c.x}%;--y:${c.y}%;--d:${c.d}%;--caminho:${c.caminho};--t:${c.t}s;--sentido:${c.sentido}`}></span>
+  ))}
+  {flocos.map((f) => (
+    <span class:list={f.classes} style={f.estilo}><span class="amb-floco"></span></span>
+  ))}
+</div>
+<script>
+  import '../../scripts/ambiente.ts';
+</script>

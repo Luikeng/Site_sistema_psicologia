@@ -1,0 +1,22 @@
+---
+// Novidades: a lista do que chegou à esquerda e a tela de cada uma à direita.
+// Clicar num item troca a tela; sem clique, a vitrine passa sozinha.
+import PalcoExtras from '../novo/PalcoExtras.astro';
+export interface Item { nome: string; titulo: string; texto: string; Tela: any }
+export interface Props { itens: Item[] }
+const { itens } = Astro.props;
+---
+<div class="r-vitrine" data-abas data-auto="9000">
+  <div class="r-vitrine-lista" role="group" aria-label="Novidades">
+    {itens.map((it, i) => (
+      <button type="button" class="r-vitrine-item" data-aba={it.nome} aria-pressed={i === 0 ? 'true' : 'false'}>
+        <span class="r-vitrine-topo"><b>{it.titulo}</b><span class="r-selo">Novo</span></span>
+        <span class="r-vitrine-texto">{it.texto}</span>
+      </button>
+    ))}
+  </div>
+  <div class="r-palco palco-abas" aria-hidden="true" data-ui>
+    {itens.map((it, i) => { const Tela = it.Tela; return <Tela ativa={i === 0} />; })}
+    <PalcoExtras />
+  </div>
+</div>

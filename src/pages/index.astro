@@ -1,23 +1,45 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import SocialProof from '../components/SocialProof.astro';
-import Spotlight from '../components/Spotlight.astro';
-import WorkflowTimeline from '../components/WorkflowTimeline.astro';
-import Features from '../components/Features.astro';
-import FiscalShowcase from '../components/FiscalShowcase.astro';
-import DocumentEditor from '../components/DocumentEditor.astro';
-import Security from '../components/Security.astro';
-import Pricing from '../components/Pricing.astro';
-import FAQ from '../components/FAQ.astro';
-import CTA from '../components/CTA.astro';
+// Página inicial (escolhida por ele em 23/10/2026): a organização e a navegação do
+// site atual (abertura com o sistema, novidades, grade de recursos, fluxo do
+// atendimento, parte fiscal, documentos, sigilo, preços, perguntas), com as telas
+// do sistema em ação e o conteúdo conferido no código. A versão anterior, com os
+// capítulos em palco, ficou em _inicial-palco.astro (fora das rotas).
+import LayoutNovo from '../layouts/LayoutNovo.astro';
+import TopoFixo from '../components/rascunho/TopoFixo.astro';
+import Abas from '../components/rascunho/Abas.astro';
+import Ambiente from '../components/novo/Ambiente.astro';
+import Vitrine from '../components/rascunho/Vitrine.astro';
+import Capitulo from '../components/novo/Capitulo.astro';
+import PalcoSolto from '../components/novo/PalcoSolto.astro';
+import Precos from '../components/novo/Precos.astro';
+import Perguntas from '../components/novo/Perguntas.astro';
+import Comecar from '../components/novo/Comecar.astro';
+import Rodape from '../components/novo/Rodape.astro';
+import Agenda from '../components/novo/telas/Agenda.astro';
+import Reserva from '../components/novo/telas/Reserva.astro';
+import Lembrete from '../components/novo/telas/Lembrete.astro';
+import Conta from '../components/novo/telas/Conta.astro';
+import Documentos from '../components/novo/telas/Documentos.astro';
+import Prontuario from '../components/novo/telas/Prontuario.astro';
+import Anamnese from '../components/novo/telas/Anamnese.astro';
+import Humor from '../components/novo/telas/Humor.astro';
+import Documento from '../components/novo/telas/Documento.astro';
+import Grupo from '../components/novo/telas/Grupo.astro';
+import Painel from '../components/novo/telas/Painel.astro';
+import Mensalidade from '../components/novo/telas/Mensalidade.astro';
+import Cancelamento from '../components/novo/telas/Cancelamento.astro';
+import Nota from '../components/novo/telas/Nota.astro';
+import Receita from '../components/novo/telas/Receita.astro';
+import Historico from '../components/novo/telas/Historico.astro';
+import Compartilhamento from '../components/novo/telas/Compartilhamento.astro';
 import { SITE } from '../data/site.ts';
-import { FAQ as FAQ_ITEMS } from '../data/faq.ts';
 import { PLANS } from '../data/pricing.ts';
+import { PERGUNTAS } from '../data/perguntas.ts';
+import { GRADE as recursos } from '../data/recursos.ts';
 
-const title = 'Sistema Psicologia · Agenda, Prontuário LGPD, NFS-e e Financeiro';
+const title = 'Sistema Psicologia · Agenda, Prontuário, NFS-e e Financeiro para psicólogos';
 const description =
-  'Plataforma all-in-one pra psicólogos e clínicas: agenda integrada ao Google, prontuário eletrônico LGPD, NFS-e, Receita Saúde, financeiro e portal do paciente. Teste grátis, sem cartão.';
+  'Sistema de gestão para psicólogos e clínicas: reservas pelo seu link com lembrete, prontuário com sigilo, financeiro, NFS-e e Receita Saúde. R$ 39 por mês, 30 dias grátis sem cartão.';
 
 const orgLd = {
   '@context': 'https://schema.org',
@@ -26,14 +48,7 @@ const orgLd = {
   name: SITE.name,
   url: SITE.url,
   logo: `${SITE.url}/favicon.svg`,
-  sameAs: [],
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'customer support',
-    email: SITE.contactEmail,
-    areaServed: 'BR',
-    availableLanguage: ['pt-BR'],
-  },
+  contactPoint: { '@type': 'ContactPoint', contactType: 'customer support', email: SITE.contactEmail, areaServed: 'BR', availableLanguage: ['pt-BR'] },
 };
 
 const softwareLd = {
@@ -51,65 +66,209 @@ const softwareLd = {
     name: `Plano ${plan.name}`,
     price: plan.monthly.toFixed(2),
     priceCurrency: 'BRL',
-    priceSpecification: {
-      '@type': 'UnitPriceSpecification',
-      price: plan.monthly.toFixed(2),
-      priceCurrency: 'BRL',
-      billingIncrement: 1,
-      unitText: 'MONTH',
-    },
-    url: SITE.appUrl,
+    priceSpecification: { '@type': 'UnitPriceSpecification', price: plan.monthly.toFixed(2), priceCurrency: 'BRL', billingIncrement: 1, unitText: 'MONTH' },
+    url: SITE.registerUrl,
   })),
-  aggregateRating: undefined, // adicionar quando tiver reviews reais
   featureList: [
-    'Página pública de agendamento (link Cal.com-style com embed iframe)',
-    'Agenda 2-way Google Calendar',
-    'Prontuário Eletrônico LGPD',
-    'Anamnese digital por link',
-    'NFS-e Nacional integrada',
-    'Receita Saúde (Carnê-Leão)',
-    'Recibo simples para municípios sem NFS-e',
-    'Financeiro com mensalidades',
-    'Portal do Paciente com diário de humor',
-    'Multi-profissional e multi-salas',
-    'Multi-fuso horário pra atendimento online',
-    'Repasse automatizado clínica ↔ profissional',
-    'Portal de pagamento próprio',
-    'Permissões granulares (RBAC)',
-    'Lembrete 24h por e-mail automático',
-    'Cancelamento pelo paciente via link sem login',
+    'Página de reservas pelo seu link, com aprovação ou confirmação automática',
+    'Lembrete por e-mail 24 horas antes da sessão',
+    'Agenda sincronizada com o Google Agenda nos dois sentidos',
+    'Prontuário com evolução por sessão e edição só pelo autor',
+    'Anamnese pelo celular',
+    'Registro de humor do paciente com gráfico',
+    'Documentos: recibo, atestado, declaração e relatório',
+    'Financeiro com mensalidades e crédito do paciente',
+    'NFS-e Nacional para quem tem CNPJ',
+    'Arquivo do Receita Saúde',
+    'Recibo simples',
+    'Portal do paciente',
+    'Sessões de casal, família e grupo',
+    'Agenda da equipe com salas',
+    'Repasse por profissional',
+    'Permissões por pessoa',
+    'Estatísticas e origem dos pacientes',
   ],
 };
 
 const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: FAQ_ITEMS.slice(0, 6).map((item) => ({
-    '@type': 'Question',
-    name: item.q,
-    acceptedAnswer: { '@type': 'Answer', text: item.a },
-  })),
+  mainEntity: PERGUNTAS.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } })),
 };
----
 
-<BaseLayout
-  title={title}
-  description={description}
-  jsonLd={[orgLd, softwareLd, faqLd]}
->
-  <Hero />
-  <SocialProof />
-  <Spotlight />
-  <Features
-    show={['agendamento-publico', 'agenda-google', 'prontuario-eletronico', 'anamnese-digital', 'nfs-e-psicologia', 'receita-saude', 'recibo-simples', 'financeiro', 'portal-paciente', 'documentos', 'whatsapp-templates', 'multi-clinica', 'multi-fuso']}
-    title="Tudo que sua clínica precisa, num só lugar"
-    subtitle="Mapeamos cada detalhe da rotina psicológica para entregar módulos prontos. Do link público de agendamento até a NFS-e, sem precisar de planilha, papel ou outro app."
-  />
-  <WorkflowTimeline />
-  <FiscalShowcase />
-  <DocumentEditor />
-  <Security />
-  <Pricing variant="home" />
-  <FAQ limit={6} />
-  <CTA />
-</BaseLayout>
+const novidades = [
+  { nome: 'grupo', Tela: Grupo, titulo: 'Casal, família e grupo', texto: 'Cada grupo com prontuário e financeiro próprios. A nota vai para quem paga, e cada participante vê a sessão no próprio portal.' },
+  { nome: 'conta', Tela: Conta, titulo: 'Crédito do paciente', texto: 'Registre o Pix uma vez. Cada sessão que acontece é quitada com o crédito, e a conta mostra o que já está coberto.' },
+  { nome: 'mensalidade', Tela: Mensalidade, titulo: 'Mensalidade', texto: 'O sistema gera a cobrança do mês e mostra quais sessões estão dentro dela.' },
+  { nome: 'cancelamento', Tela: Cancelamento, titulo: 'Política de cancelamento', texto: 'Você define com quantas horas o cancelamento é gratuito. Na falta ou no aviso em cima da hora, o sistema sugere cobrar, e você decide.' },
+  { nome: 'painel', Tela: Painel, titulo: 'Painel e previsão do ano', texto: 'O que já entrou, o que está em aberto e o que ficou de meses anteriores, com a previsão do ano nas Estatísticas.' },
+  { nome: 'historico', Tela: Historico, titulo: 'Histórico de alterações', texto: 'Quem marcou, editou ou emitiu o quê, com data e autor: você, a equipe, o paciente ou o próprio sistema.' },
+];
+
+
+const fluxo = [
+  { tela: 'reserva', Tela: Reserva, afirma: '1. O paciente marca pelo seu link.', apoio: 'Ele escolhe um horário livre na sua página, que também pode ficar dentro do seu site. Você decide se a reserva entra direto ou espera a sua aprovação.' },
+  { tela: 'anamnese', Tela: Anamnese, afirma: '2. A anamnese chega antes da primeira sessão.', apoio: 'Você manda um link e ele preenche pelo celular, em casa. Se for paciente novo, o cadastro é criado quando ele envia.' },
+  { tela: 'lembrete', Tela: Lembrete, afirma: '3. Um dia antes, sai o lembrete.', apoio: 'O paciente recebe um e-mail 24 horas antes da sessão, que pode sair do seu próprio e-mail. Se marcou pelo seu link, traz também o link para cancelar.' },
+  { tela: 'prontuario', Tela: Prontuario, afirma: '4. Na sessão, a evolução vai para o prontuário.', apoio: 'Você escreve no prontuário da sessão, com formatação, e só você edita o que escreveu.' },
+  { tela: 'humor', Tela: Humor, afirma: '5. Entre uma sessão e outra, o humor.', apoio: 'Pelo portal, ele registra como está, de Muito mal a Muito bem. Você vê o gráfico, e o sino avisa quando chega um registro novo.' },
+  { tela: 'conta', Tela: Conta, afirma: '6. O pagamento fica registrado.', apoio: 'Quando o paciente paga adiantado, você registra o Pix uma vez, e cada sessão que acontece é quitada com o crédito.' },
+  { tela: 'documentos', Tela: Documentos, afirma: '7. No fim do mês, recibo e nota.', apoio: 'O recibo sai com os dados preenchidos. Com CNPJ, a nota fiscal sai daqui também; como pessoa física, o arquivo do Receita Saúde.' },
+];
+
+const nfse = [
+  'Certificado digital A1, guardado com criptografia',
+  'Código de serviço de psicologia (04.16) já configurado',
+  'Emissão no padrão nacional, sem sair do sistema',
+  'Texto da nota editável antes de emitir',
+  'Nota do casal ou do grupo para quem paga',
+];
+const receitaSaude = [
+  'Arquivo CSV no layout oficial do Receita Saúde',
+  'Código de ocupação 255 (psicólogo)',
+  'Até 1.000 linhas por arquivo',
+  'Prévia do lote, com aviso do que falta (como CPF ausente)',
+  'Os recibos do mês num lote só',
+];
+const sigilo = [
+  ['Você escolhe quem lê.', 'Na clínica, cada profissional lê só o que escreveu, o dos pacientes que atende ou tudo.'],
+  ['A secretária não lê prontuário.', 'Ela cuida da agenda e, se você quiser, dos pagamentos.'],
+  ['Só quem escreveu edita ou apaga.', 'Nem o dono da clínica altera o registro de outro profissional.'],
+  ['Banco de dados em São Paulo.', 'Conexão criptografada, e o certificado e a ligação com o Google guardados com criptografia.'],
+];
+---
+<LayoutNovo title={title} description={description} jsonLd={[orgLd, softwareLd, faqLd]}>
+  <TopoFixo />
+  <main id="inicio">
+    <section class="r-hero" aria-labelledby="t-hero">
+      <Ambiente />
+      <div class="r-miolo r-centro">
+        <h1 id="t-hero">O sistema de gestão para psicólogos que faz tudo num lugar só.</h1>
+        <p class="r-sub">Agenda com página de reservas, prontuário, financeiro, nota fiscal e Receita Saúde. Você atende, a gente cuida do resto.</p>
+        <div class="r-botoes">
+          <a class="botao r-grande" href={SITE.registerUrl} rel="noopener noreferrer" data-cta="hero-primary">Começar teste grátis</a>
+          <a class="r-botao-claro" href="#recursos">Ver todos os recursos</a>
+        </div>
+        <ul class="r-pontos">
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg>Sem cartão para começar</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg>Traga seus dados do Psicomanager</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg>Página de reservas incluída</li>
+        </ul>
+      </div>
+      <div class="r-miolo">
+        <Abas classe="r-abas-hero" auto={9000} rotulo="Partes do sistema" abas={[
+          { nome: 'agenda', rotulo: 'Agenda', Tela: Agenda },
+          { nome: 'prontuario', rotulo: 'Prontuário', Tela: Prontuario },
+          { nome: 'conta', rotulo: 'Financeiro', Tela: Conta },
+          { nome: 'nota', rotulo: 'Nota fiscal', Tela: Nota },
+        ]} />
+      </div>
+    </section>
+
+    <section class="r-garantias" aria-label="O que o sistema segue">
+      <div class="r-miolo">
+        <p>Feito em cima das regras que importam para quem atende</p>
+        <ul>
+          <li><svg class="i" aria-hidden="true"><use href="#i-nota"/></svg>NFS-e no padrão nacional</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-recibo"/></svg>Receita Saúde no layout oficial</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-escudo"/></svg>LGPD: você controla, a gente opera</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-cadeado"/></svg>Banco de dados em São Paulo</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="r-secao r-claro" id="novidades" aria-labelledby="t-novidades">
+      <div class="r-miolo">
+        <div class="r-cabeca r-centro">
+          <h2 id="t-novidades" class="entra">O que chegou de novo</h2>
+          <p class="entra d1">Funções que entraram no sistema nos últimos meses, pensadas a partir da rotina de quem atende.</p>
+        </div>
+        <Vitrine itens={novidades} />
+      </div>
+    </section>
+
+    <section class="r-secao" id="recursos" aria-labelledby="t-recursos">
+      <div class="r-miolo">
+        <div class="r-cabeca">
+          <h2 id="t-recursos" class="entra">Tudo o que o consultório precisa</h2>
+          <p class="entra d1">Num lugar só, do link de reservas até a nota fiscal, sem planilha, papel ou outro aplicativo.</p>
+        </div>
+        <div class="r-cartoes">
+          {recursos.map((c, i) => (
+            <article class="r-cartao entra em-fila" style={`--i:${i % 3}`}>
+              <div class="r-cartao-topo"><svg class="i" aria-hidden="true"><use href={`#i-${c.icone}`}/></svg><h3>{c.titulo}</h3></div>
+              <p>{c.texto}</p>
+              {c.link && <a class="r-mais" href={c.link}>Saiba mais<span class="so-leitor"> sobre {c.titulo}</span></a>}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <Capitulo id="fluxo" tema="claro" titulo="Do contato à nota fiscal" intro="Cada etapa do atendimento ligada à seguinte. O dado entra uma vez e segue até o recibo e a nota." passos={fluxo} />
+
+    <section class="r-secao r-claro" id="fiscal" aria-labelledby="t-fiscal">
+      <div class="r-miolo">
+        <div class="r-cabeca r-centro">
+          <h2 id="t-fiscal" class="entra">NFS-e e Receita Saúde sem sair do sistema</h2>
+          <p class="entra d1">Chega de digitar nota no site da prefeitura e de montar planilha para o Carnê-Leão.</p>
+        </div>
+        <Abas classe="r-abas-fiscal" auto={11000} rotulo="Caminho fiscal" abas={[
+          { nome: 'nota', rotulo: 'Tenho CNPJ: NFS-e', Tela: Nota },
+          { nome: 'receita', rotulo: 'Pessoa física: Receita Saúde', Tela: Receita },
+        ]} />
+        <div class="r-dupla">
+          <article class="r-cartao r-lista-cartao">
+            <h3>NFS-e nacional</h3>
+            <p>Para quem tem CNPJ.</p>
+            <ul>{nfse.map((t) => <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg>{t}</li>)}</ul>
+            <a class="r-mais" href="/recursos/nfs-e-psicologia">Ver detalhes da NFS-e</a>
+          </article>
+          <article class="r-cartao r-lista-cartao">
+            <h3>Receita Saúde</h3>
+            <p>Para quem atende como pessoa física.</p>
+            <ul>{receitaSaude.map((t) => <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg>{t}</li>)}</ul>
+            <a class="r-mais" href="/recursos/receita-saude">Ver detalhes do Receita Saúde</a>
+          </article>
+        </div>
+        <p class="r-nota-rodape">A cidade ainda não aceita a nota nacional? O recibo simples resolve o dia a dia, e a nota continua sendo feita pelo site da prefeitura.</p>
+      </div>
+    </section>
+
+    <section class="r-secao" id="documentos" aria-labelledby="t-documentos">
+      <div class="r-miolo r-lado">
+        <div>
+          <h2 id="t-documentos" class="entra">Recibo, atestado e declaração prontos</h2>
+          <p class="r-texto entra d1">Os modelos já trazem os dados do paciente. Você só revisa e emite.</p>
+          <ul class="r-itens">
+            <li class="entra em-fila" style="--i:0"><b>Os seus modelos.</b><span>Recibo, atestado, declaração e os que você criar, inclusive relatórios.</span></li>
+            <li class="entra em-fila" style="--i:1"><b>Dados preenchidos.</b><span>Nome, CPF, data e valor entram sozinhos a partir da ficha.</span></li>
+            <li class="entra em-fila" style="--i:2"><b>Texto do seu jeito.</b><span>Você ajusta antes de emitir e salva como modelo.</span></li>
+          </ul>
+        </div>
+        <PalcoSolto Tela={Documento} />
+      </div>
+    </section>
+
+    <section class="r-secao r-escuro" id="sigilo" aria-labelledby="t-sigilo">
+      <div class="r-miolo r-lado">
+        <div>
+          <h2 id="t-sigilo" class="entra">O prontuário é seu e do seu paciente</h2>
+          <ul class="r-itens r-itens-duplos">
+            {sigilo.map(([t, s], i) => <li class="entra em-fila" style={`--i:${i}`}><b>{t}</b><span>{s}</span></li>)}
+          </ul>
+          <a class="r-mais r-mais-claro" href="/seguranca">Ver tudo sobre segurança e LGPD</a>
+        </div>
+        <PalcoSolto Tela={Compartilhamento} />
+      </div>
+    </section>
+
+    <Precos />
+    <Perguntas anima />
+    <Comecar anima />
+  </main>
+  <Rodape />
+  <script>
+    import '../scripts/palco.ts';
+  </script>
+</LayoutNovo>

@@ -1,89 +1,117 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Security from '../components/Security.astro';
-import CTA from '../components/CTA.astro';
-import Icon from '../components/Icon.astro';
+// Segurança e sigilo (visual novo, out/2026). Cada frase foi conferida no código
+// do sistema ou na política de privacidade em 22/10/2026. Ficaram de fora, por não
+// serem verdade hoje: registro de cada leitura de prontuário, exportação completa,
+// "TLS 1.3 sempre", backups diários com retenção e trilha de auditoria por plano.
+import LayoutNovo from '../layouts/LayoutNovo.astro';
+import TopoFixo from '../components/rascunho/TopoFixo.astro';
+import PalcoSolto from '../components/novo/PalcoSolto.astro';
+import Compartilhamento from '../components/novo/telas/Compartilhamento.astro';
+import Convite from '../components/novo/telas/Convite.astro';
+import Historico from '../components/novo/telas/Historico.astro';
+import Acessos from '../components/novo/telas/Acessos.astro';
+import Comecar from '../components/novo/Comecar.astro';
+import Rodape from '../components/novo/Rodape.astro';
+import { SITE } from '../data/site.ts';
 
-const title = 'Segurança, LGPD e Conformidade CFP';
+const title = 'Segurança, sigilo e LGPD';
 const description =
-  'Como o Sistema Psicologia protege os dados sensíveis dos seus pacientes: tráfego em TLS 1.3, conformidade LGPD, Resoluções CFP, backups diários e trilha de auditoria.';
+  'Quem lê o prontuário, o que fica registrado e onde os dados ficam: o que o Sistema Psicologia faz para proteger o sigilo dos seus pacientes.';
 
-const sections = [
-  {
-    icon: 'ShieldCheck',
-    t: 'LGPD aplicada na prática',
-    d: 'A Lei Geral de Proteção de Dados classifica dados de saúde como sensíveis (Art. 11). Operamos como Operador (Art. 39); você, profissional, é o Controlador. Mantemos registro de operações, gerenciamos consentimentos e respondemos solicitações de titulares.',
-  },
-  {
-    icon: 'Lock',
-    t: 'Tráfego seguro e credenciais protegidas',
-    d: 'Conexão sempre em TLS 1.3 (HTTPS forte) entre seu navegador e nossos servidores. Tokens do Google Calendar criptografados com chave separada. Senhas armazenadas com hash bcrypt — nem nossa equipe vê a senha em claro.',
-  },
-  {
-    icon: 'BookText',
-    t: 'Resoluções do CFP atendidas',
-    d: 'Resolução CFP nº 01/2009 (prontuário psicológico): registro datado, identificado e fidedigno. Resolução CFP nº 11/2018 (atendimento online): plataforma adequada, segurança e confidencialidade.',
-  },
-  {
-    icon: 'KeyRound',
-    t: 'Permissões granulares (RBAC)',
-    d: 'Sistema de papéis e permissões: secretária só vê agenda; psicólogo parceiro só vê seus pacientes; admin vê tudo. Cada acesso a prontuário é registrado.',
-  },
-  {
-    icon: 'Repeat',
-    t: 'Backups diários e portabilidade',
-    d: 'Snapshot diário do banco em Cloud Storage com retenção. Você pode exportar todos os seus dados a qualquer momento — pacientes, prontuários, recibos, financeiro. Sem refém.',
-  },
-  {
-    icon: 'BookText',
-    t: 'Trilha de auditoria',
-    d: 'Toda ação sensível (acesso a prontuário, alteração financeira, emissão de documento) é registrada com usuário, timestamp e detalhes — útil pra LGPD e investigação interna.',
-  },
+const guarda = [
+  ['Banco de dados em São Paulo.', 'Pacientes, sessões e prontuários ficam num banco de dados na cidade de São Paulo.'],
+  ['Conexão criptografada.', 'Tudo o que vai e volta entre o seu navegador e o sistema passa por HTTPS.'],
+  ['Senha que ninguém lê.', 'A sua senha é guardada como hash (bcrypt). Nem a equipe do sistema consegue vê-la.'],
+  ['Certificado e Google com criptografia.', 'O certificado digital da nota fiscal, a senha dele e a ligação com o Google Agenda ficam guardados criptografados.'],
+  ['Arquivos anexados protegidos.', 'Fotos e documentos da ficha são criptografados no envio e enquanto ficam guardados.'],
+  ['Portal do paciente sem prontuário.', 'O paciente entra com um código e vê só o que você liberou. O prontuário não aparece lá.'],
 ];
 ---
-
-<BaseLayout title={title} description={description}>
-  <header class="pt-32 pb-12 bg-gradient-to-b from-white to-emerald-50/40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold text-[10px] uppercase tracking-widest mb-5">
-        <Icon name="ShieldCheck" class="w-3.5 h-3.5" /> Segurança em primeiro lugar
+<LayoutNovo title={title} description={description}>
+  <TopoFixo base="/" atual="/seguranca" />
+  <header class="cabeca-i">
+    <div class="cabeca-grade">
+      <div>
+        <h1>Quem lê o prontuário, você decide</h1>
+        <p class="frase-i">Atendendo sozinho, só você lê o prontuário. Na clínica, você escolhe se cada profissional lê só o que escreveu, o dos pacientes que atende ou tudo.</p>
+        <div class="botoes-i">
+          <a class="botao" href={SITE.registerUrl} rel="noopener noreferrer">Criar conta grátis</a>
+          <a class="link-seta" href="/precos">Ver os planos</a>
+        </div>
       </div>
-      <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-5 text-balance">
-        Sigilo profissional <span class="text-blue-600">tratado a sério</span>
-      </h1>
-      <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-        Os dados dos seus pacientes têm o mesmo grau de proteção que arquivos médicos físicos trancados. Conheça as camadas de segurança que aplicamos.
-      </p>
+      <PalcoSolto Tela={Compartilhamento} />
     </div>
   </header>
 
-  <section class="py-16 bg-white">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {sections.map((s) => (
-          <article class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
-            <div class="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-4">
-              <Icon name={s.icon as any} class="w-6 h-6" />
-            </div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2">{s.t}</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">{s.d}</p>
-          </article>
-        ))}
+  <main id="inicio">
+    <section class="banda claro" aria-labelledby="t-modos">
+      <div class="banda-grade leitura">
+        <h2 id="t-modos" class="entra">Três modos de compartilhar</h2>
+        <div>
+          <p class="texto-i entra d1"><b>Privado:</b> cada profissional só vê os registros que ele mesmo escreveu. <b>Compartilhamento ativo:</b> o profissional lê o prontuário enquanto tiver sessão com o paciente, marcada ou recente, numa janela de dias que você define. <b>Compartilhamento total:</b> todos os profissionais da clínica leem o histórico completo.</p>
+          <p class="texto-i entra d1">Na ficha de um paciente, dá para fugir do padrão da clínica e forçar o modo privado ou o total só para ele. Quem é dono da clínica lê todos os prontuários, em qualquer modo, e é quem muda essa configuração.</p>
+          <p class="texto-i entra d2">Em todos os modos, só quem escreveu uma evolução pode editá-la ou apagá-la. Ler o registro de um colega não dá direito de mexer nele, nem ao dono da clínica.</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <Security />
+    <section class="banda escuro" aria-labelledby="t-secretaria">
+      <div class="banda-grade palco-esquerda">
+        <div>
+          <h2 id="t-secretaria" class="entra">A secretária não lê prontuário</h2>
+          <p class="texto-i entra d1">Ao convidar alguém para a equipe, você marca o que a pessoa pode fazer, item por item: ver a agenda, marcar e mover sessões, cuidar dos pagamentos. Para a secretária, ler prontuário fica travado.</p>
+          <p class="texto-i entra d2">As permissões de cada pessoa podem ser mudadas depois, a qualquer hora.</p>
+        </div>
+        <PalcoSolto Tela={Convite} />
+      </div>
+    </section>
 
-  <section class="py-16 bg-[#F8FAFC]">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 tracking-tight">Tem alguma dúvida específica de segurança?</h2>
-      <p class="text-gray-600 mb-6">Para questões de conformidade, due diligence ou acordos de processamento de dados (DPA), entre em contato com nosso DPO.</p>
-      <a href="/contato" class="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors">
-        Falar com o DPO
-      </a>
-    </div>
-  </section>
+    <section class="banda claro" aria-labelledby="t-historico">
+      <div class="banda-grade">
+        <div>
+          <h2 id="t-historico" class="entra">Quem mexeu em quê fica registrado</h2>
+          <p class="texto-i entra d1">Evolução registrada, editada ou apagada, sessão marcada pelo site, recibo e nota emitidos, anamnese respondida: tudo entra no histórico com o nome de quem fez e a hora. Vale para você, para a equipe, para o paciente e para o próprio sistema, quando ele sincroniza o Google Agenda ou gera mensalidades.</p>
+          <p class="texto-i entra d2">Cada profissional só vê o histórico dos pacientes que tem permissão de ver.</p>
+        </div>
+        <PalcoSolto Tela={Historico} />
+      </div>
+    </section>
 
-  <CTA />
-</BaseLayout>
+    <section class="banda app" aria-labelledby="t-suporte">
+      <div class="banda-grade palco-esquerda">
+        <div>
+          <h2 id="t-suporte" class="entra">O suporte só entra com motivo</h2>
+          <p class="texto-i entra d1">Às vezes, para resolver um erro que você relatou ou ajudar numa importação de dados, alguém do suporte do Sistema Psicologia precisa ver a sua conta por dentro.</p>
+          <p class="texto-i entra d2">Isso só acontece com um motivo registrado. Cada acesso aparece para você em Configurações, em Acessos e histórico, com o motivo e o que foi feito, e acaba sozinho em 30 minutos.</p>
+        </div>
+        <PalcoSolto Tela={Acessos} />
+      </div>
+    </section>
+
+    <section class="banda escuro" aria-labelledby="t-guarda">
+      <div class="banda-miolo">
+        <h2 id="t-guarda" class="entra">Onde e como os dados ficam</h2>
+        <ul class="regras">
+          {guarda.map(([t, s], i) => <li class="entra em-fila" style={`--i:${i}`}><b>{t}</b><span>{s}</span></li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="banda claro" aria-labelledby="t-lgpd">
+      <div class="banda-grade leitura">
+        <h2 id="t-lgpd" class="entra">Pela LGPD, você é o controlador</h2>
+        <div>
+          <p class="texto-i entra d1">Os dados dos seus pacientes são de responsabilidade sua, como profissional. O Sistema Psicologia é o operador: guarda e processa esses dados para o sistema funcionar, e não vende, não aluga e não compartilha nada para publicidade.</p>
+          <p class="texto-i entra d1">Alguns serviços de apoio são de empresas de fora, como a Stripe, que processa o pagamento da assinatura sem que os dados completos do cartão fiquem com a gente. A lista está na <a href="/privacidade">política de privacidade</a>.</p>
+          <p class="texto-i entra d2">Pedidos de titulares e dúvidas de privacidade vão para o encarregado de dados, pelo e-mail <a href="mailto:contato@sistemapsicologia.com.br">contato@sistemapsicologia.com.br</a>. A resposta vem em até 15 dias.</p>
+        </div>
+      </div>
+    </section>
+
+    <Comecar anima />
+  </main>
+  <Rodape />
+  <script>
+    import '../scripts/palco.ts';
+  </script>
+</LayoutNovo>

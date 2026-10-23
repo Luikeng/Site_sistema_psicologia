@@ -1,35 +1,69 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Features from '../../components/Features.astro';
-import CTA from '../../components/CTA.astro';
-import { SITE } from '../../data/site.ts';
+// Índice de recursos (out/2026): a mesma grade da inicial, com as novidades no alto.
+import LayoutNovo from '../../layouts/LayoutNovo.astro';
+import TopoFixo from '../../components/rascunho/TopoFixo.astro';
+import Vitrine from '../../components/rascunho/Vitrine.astro';
+import Comecar from '../../components/novo/Comecar.astro';
+import Rodape from '../../components/novo/Rodape.astro';
+import Grupo from '../../components/novo/telas/Grupo.astro';
+import Conta from '../../components/novo/telas/Conta.astro';
+import Mensalidade from '../../components/novo/telas/Mensalidade.astro';
+import Cancelamento from '../../components/novo/telas/Cancelamento.astro';
+import Painel from '../../components/novo/telas/Painel.astro';
+import Historico from '../../components/novo/telas/Historico.astro';
+import { GRADE } from '../../data/recursos.ts';
 
-const title = 'Recursos completos do Sistema Psicologia';
+const title = 'Recursos do Sistema Psicologia';
 const description =
-  'Conheça todos os módulos: agenda Google 2-way, prontuário LGPD, NFS-e, Receita Saúde, mensalidades, portal do paciente, multi-profissional e mais.';
+  'Tudo o que o Sistema Psicologia faz: página de agendamento, Google Agenda, prontuário, anamnese, financeiro, NFS-e, Receita Saúde, portal do paciente e gestão de clínicas.';
+
+const novidades = [
+  { nome: 'grupo', Tela: Grupo, titulo: 'Casal, família e grupo', texto: 'Cada grupo com prontuário e financeiro próprios. A nota vai para quem paga, e cada participante vê a sessão no próprio portal.' },
+  { nome: 'conta', Tela: Conta, titulo: 'Crédito do paciente', texto: 'Registre o Pix uma vez. Cada sessão que acontece é quitada com o crédito, e a conta mostra o que já está coberto.' },
+  { nome: 'mensalidade', Tela: Mensalidade, titulo: 'Mensalidade', texto: 'O sistema gera a cobrança do mês e mostra quais sessões estão dentro dela.' },
+  { nome: 'cancelamento', Tela: Cancelamento, titulo: 'Política de cancelamento', texto: 'Você define com quantas horas o cancelamento é gratuito. Na falta ou no aviso em cima da hora, o sistema sugere cobrar, e você decide.' },
+  { nome: 'painel', Tela: Painel, titulo: 'Painel e previsão do ano', texto: 'O que já entrou, o que está em aberto e o que ficou de meses anteriores, com a previsão do ano nas Estatísticas.' },
+  { nome: 'historico', Tela: Historico, titulo: 'Histórico de alterações', texto: 'Quem marcou, editou ou emitiu o quê, com data e autor: você, a equipe, o paciente ou o próprio sistema.' },
+];
 ---
+<LayoutNovo title={title} description={description}>
+  <TopoFixo base="/" />
+  <main id="inicio">
+    <section class="r-hero r-hero-recurso" aria-labelledby="t-recursos-pg">
+      <div class="r-miolo">
+        <h1 id="t-recursos-pg">Recursos</h1>
+        <p class="r-sub">Tudo o que o Sistema Psicologia faz, do link de reservas até a nota fiscal. Toque num recurso para ver como ele funciona.</p>
+      </div>
+    </section>
 
-<BaseLayout title={title} description={description}>
-  <header class="pt-32 pb-12 bg-gradient-to-b from-white to-[#F8FAFC]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-5 text-balance">
-        Todos os recursos do <span class="text-blue-600">Sistema Psicologia</span>
-      </h1>
-      <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-        Catálogo completo dos módulos disponíveis. Cada um foi pensado para resolver uma dor específica da rotina clínica.
-      </p>
-    </div>
-  </header>
+    <section class="r-secao" aria-label="Todos os recursos">
+      <div class="r-miolo">
+        <div class="r-cartoes">
+          {GRADE.map((c, i) => (
+            <article class="r-cartao entra em-fila" style={`--i:${i % 3}`}>
+              <div class="r-cartao-topo"><svg class="i" aria-hidden="true"><use href={`#i-${c.icone}`}/></svg><h2 class="r-cartao-h">{c.titulo}</h2></div>
+              <p>{c.texto}</p>
+              {c.link && <a class="r-mais" href={c.link}>Saiba mais<span class="so-leitor"> sobre {c.titulo}</span></a>}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
 
-  <Features
-    id="lista-recursos"
-    show="all"
-    title="Catálogo de funcionalidades"
-    subtitle="Clique em qualquer recurso para ver a página dedicada com todos os detalhes técnicos e clínicos."
-  />
+    <section class="r-secao r-claro" aria-labelledby="t-novidades-pg">
+      <div class="r-miolo">
+        <div class="r-cabeca r-centro">
+          <h2 id="t-novidades-pg" class="entra">O que chegou de novo</h2>
+          <p class="entra d1">Funções que entraram no sistema nos últimos meses, pensadas a partir da rotina de quem atende.</p>
+        </div>
+        <Vitrine itens={novidades} />
+      </div>
+    </section>
 
-  <CTA
-    title="Quer ver tudo isso funcionando?"
-    subtitle="Crie a conta sem cartão e use o sistema completo durante o teste grátis."
-  />
-</BaseLayout>
+    <Comecar anima />
+  </main>
+  <Rodape />
+  <script>
+    import '../../scripts/palco.ts';
+  </script>
+</LayoutNovo>

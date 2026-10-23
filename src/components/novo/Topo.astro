@@ -1,0 +1,23 @@
+---
+import { SITE } from '../../data/site.ts';
+---
+<nav class="nav" aria-label="Principal">
+  <details class="nav-menu">
+    <summary>Menu</summary>
+    <div class="nav-lista">
+      <a href="#semana">Como funciona</a>
+      <a href="#atendimento">Atendimento</a>
+      <a href="#dinheiro">Financeiro</a>
+      <a href="#fiscal">Nota fiscal e Receita Saúde</a>
+      <a href="#clinicas">Clínicas</a>
+      <a href="#paciente">Portal do paciente</a>
+      <a href="#precos">Preços</a>
+      <a href={SITE.appUrl}>Entrar</a>
+    </div>
+  </details>
+  <a class="link" href="#semana">Como funciona</a>
+  <a class="link" href="#clinicas">Clínicas</a>
+  <a class="link" href="#precos">Preços</a>
+  <a class="link" href={SITE.appUrl}>Entrar</a>
+  <a class="botao" href={SITE.registerUrl} rel="noopener noreferrer">Criar conta grátis</a>
+</nav>

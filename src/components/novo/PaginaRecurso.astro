@@ -1,0 +1,109 @@
+---
+// Página de um recurso (out/2026): a tela do sistema em ação, o que ele faz, como
+// funciona, perguntas e recursos relacionados. Conteúdo em src/data/recursos.ts.
+import LayoutNovo from '../../layouts/LayoutNovo.astro';
+import TopoFixo from '../rascunho/TopoFixo.astro';
+import PalcoSolto from './PalcoSolto.astro';
+import Perguntas from './Perguntas.astro';
+import Comecar from './Comecar.astro';
+import Rodape from './Rodape.astro';
+import Reserva from './telas/Reserva.astro';
+import Agenda from './telas/Agenda.astro';
+import Prontuario from './telas/Prontuario.astro';
+import Anamnese from './telas/Anamnese.astro';
+import Nota from './telas/Nota.astro';
+import Receita from './telas/Receita.astro';
+import Documentos from './telas/Documentos.astro';
+import Portal from './telas/Portal.astro';
+import Equipe from './telas/Equipe.astro';
+import Repasse from './telas/Repasse.astro';
+import Lembrete from './telas/Lembrete.astro';
+import Humor from './telas/Humor.astro';
+import Convite from './telas/Convite.astro';
+import { SITE } from '../../data/site.ts';
+import { GRADE, type PaginaRecurso } from '../../data/recursos.ts';
+
+export interface Props { pagina: PaginaRecurso }
+const { pagina } = Astro.props;
+const TELAS: Record<string, any> = { Reserva, Agenda, Prontuario, Anamnese, Nota, Receita, Documentos, Portal, Equipe, Repasse, Lembrete, Humor, Convite };
+const Tela = TELAS[pagina.tela];
+if (!Tela) throw new Error('Tela não encontrada: ' + pagina.tela);
+const Tela2 = pagina.tela2 ? TELAS[pagina.tela2] : null;
+if (pagina.tela2 && !Tela2) throw new Error('Tela não encontrada: ' + pagina.tela2);
+const relacionados = pagina.relacionados.map((slug) => {
+  const c = GRADE.find((g) => g.link === `/recursos/${slug}`);
+  if (!c) throw new Error('Recurso relacionado sem cartão: ' + slug);
+  return c;
+});
+const whats = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(`Olá! Quero saber mais sobre ${pagina.titulo.toLowerCase()} no Sistema Psicologia.`)}`;
+---
+<LayoutNovo title={pagina.seoTitulo} description={pagina.seoDescricao}>
+  <TopoFixo base="/" />
+  <main id="inicio">
+    <section class="r-hero r-hero-recurso" aria-labelledby="t-recurso">
+      <div class="r-miolo r-lado">
+        <div>
+          <h1 id="t-recurso">{pagina.titulo}</h1>
+          <p class="r-sub">{pagina.intro}</p>
+          <div class="r-botoes">
+            <a class="botao r-grande" href={SITE.registerUrl} rel="noopener noreferrer" data-cta="recurso-primary">Começar teste grátis</a>
+            <a class="r-botao-claro" href={whats} target="_blank" rel="noopener">Falar com a gente</a>
+          </div>
+          <a class="r-voltar" href="/recursos">Ver todos os recursos</a>
+        </div>
+        <PalcoSolto Tela={Tela} />
+      </div>
+    </section>
+
+    <section class="r-secao" aria-labelledby="t-faz">
+      <div class="r-miolo">
+        <div class="r-cabeca"><h2 id="t-faz" class="entra">O que ele faz</h2></div>
+        <div class="r-cartoes">
+          {pagina.beneficios.map(([t, s], i) => (
+            <article class="r-cartao entra em-fila" style={`--i:${i % 3}`}>
+              <div class="r-cartao-topo"><svg class="i" aria-hidden="true"><use href="#i-ok-circulo"/></svg><h3>{t}</h3></div>
+              <p>{s}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="r-secao r-claro" aria-labelledby="t-como">
+      <div class:list={['r-miolo', { 'r-lado': Tela2 }]}>
+        <div>
+          <div class="r-cabeca"><h2 id="t-como" class="entra">Como funciona</h2></div>
+          <ol class:list={['r-passos', { 'r-passos-coluna': Tela2 }]}>
+            {pagina.passos.map(([t, s], i) => (
+              <li class="entra em-fila" style={`--i:${i}`}><span class="r-num" aria-hidden="true">{i + 1}</span><b>{t}</b><span>{s}</span></li>
+            ))}
+          </ol>
+        </div>
+        {Tela2 && <PalcoSolto Tela={Tela2} />}
+      </div>
+    </section>
+
+    {pagina.perguntas.length > 0 && <Perguntas titulo="Perguntas que a gente recebe" itens={pagina.perguntas} anima />}
+
+    <section class="r-secao" aria-labelledby="t-veja">
+      <div class="r-miolo">
+        <div class="r-cabeca"><h2 id="t-veja" class="entra">Veja também</h2></div>
+        <div class="r-cartoes">
+          {relacionados.map((c, i) => (
+            <article class="r-cartao entra em-fila" style={`--i:${i}`}>
+              <div class="r-cartao-topo"><svg class="i" aria-hidden="true"><use href={`#i-${c.icone}`}/></svg><h3>{c.titulo}</h3></div>
+              <p>{c.texto}</p>
+              <a class="r-mais" href={c.link}>Saiba mais<span class="so-leitor"> sobre {c.titulo}</span></a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <Comecar anima />
+  </main>
+  <Rodape />
+  <script>
+    import '../../scripts/palco.ts';
+  </script>
+</LayoutNovo>
