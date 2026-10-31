@@ -39,13 +39,19 @@ const clarityId = import.meta.env.PUBLIC_CLARITY_ID || (PROD ? 'x3vd1tcpf5' : ''
       <script is:inline set:html={`
         (function () {
           if (!/(^|\\.)sistemapsicologia\\.com\\.br$/.test(location.hostname)) return;
+          // http ainda responde 200 e o Google indexou a inicial assim (31/10/2026).
+          if (location.protocol === 'http:') { location.replace('https:' + location.href.slice(5)); return; }
           function carrega(src) { var s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); }
           window.dataLayer = window.dataLayer || [];
           window.gtag = function () { dataLayer.push(arguments); };
           gtag('js', new Date());
           carrega('https://www.googletagmanager.com/gtag/js?id=AW-18119618300');
           gtag('config', 'AW-18119618300');
-          ${ga4Id ? `gtag('config', '${ga4Id}', { cookie_domain: '.sistemapsicologia.com.br', cookie_flags: 'SameSite=None;Secure' });` : ''}
+          ${ga4Id ? `gtag('config', '${ga4Id}', { cookie_domain: '.sistemapsicologia.com.br', cookie_flags: 'SameSite=None;Secure' });
+          document.addEventListener('click', function (e) {
+            var a = e.target.closest && e.target.closest('[data-cta]');
+            if (a) gtag('event', 'cta_click', { cta: a.getAttribute('data-cta'), send_to: '${ga4Id}', transport_type: 'beacon' });
+          });` : ''}
           !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
           n.callMethod.apply(n,arguments):n.queue.push(arguments)};
           if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
