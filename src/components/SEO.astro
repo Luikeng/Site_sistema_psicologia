@@ -19,7 +19,9 @@ const {
 
 const siteUrl = 'https://sistemapsicologia.com.br';
 const fullTitle = title.includes('Sistema Psicologia') ? title : `${title} | Sistema Psicologia`;
-const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).toString();
+// Build em arquivo gera /contato.html; o endereco publico e o do sitemap: /contato.
+const caminho = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+const canonicalUrl = canonical ?? new URL(caminho, siteUrl).toString();
 const imageUrl = image.startsWith('http') ? image : new URL(image, siteUrl).toString();
 
 const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
