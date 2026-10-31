@@ -25,7 +25,7 @@ export const PERGUNTAS: Pergunta[] = [
   },
   {
     q: 'Já uso outro sistema. Consigo trazer meus dados?',
-    a: 'Se você vem do Psicomanager, pacientes e sessões entram pela planilha exportada, com opção de desfazer. A agenda do Google também pode ser importada. Para outros casos, fale com a gente.',
+    a: 'Sim. Se você vem do Psicomanager, pacientes, sessões e prontuários entram pelas planilhas exportadas, sem duplicar e com opção de desfazer. A agenda do Google também pode ser importada. Para outros casos, fale com a gente.',
   },
   {
     q: 'Pago a mais por profissional na clínica?',
