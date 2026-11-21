@@ -45,7 +45,7 @@ export const PERGUNTAS: Pergunta[] = [
   },
   {
     q: 'Posso cancelar quando quiser?',
-    a: 'Pode, sem multa e sem fidelidade. O acesso segue até o fim do período já pago, e se o cancelamento for em até 7 dias depois da primeira cobrança, o reembolso é integral.',
+    a: 'Pode. No mensal, o cancelamento é pelo painel da conta, sem multa, e o acesso segue até o fim do mês já pago. O anual e o plano sob medida têm regras próprias, descritas nos Termos de Uso. Se o cancelamento for em até 7 dias depois da primeira cobrança, o reembolso é integral.',
   },
   {
     q: 'Atendo em casal e grupo. Funciona?',

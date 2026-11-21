@@ -58,5 +58,7 @@ const whatsPersonalizado = `https://wa.me/${SITE.whatsapp}?text=${encodeURICompo
       <a class="botao branco" href={whatsPersonalizado} target="_blank" rel="noopener" data-cta="pricing-sob-medida">Montar o plano da clínica</a>
     </div>
   </div>
-  <p class="precos-letras">Cancele quando quiser, sem multa. Se cancelar em até 7 dias depois da primeira cobrança, o reembolso é integral.{!pagina && <> <a href="/precos">Ver os planos em detalhe</a>.</>}</p>
+  {/* A regra de cancelamento mora nos Termos (pedido dele, 21/11/2026): "sem multa"
+      só vale para o mensal; o anual tem regra própria. */}
+  {!pagina && <p class="precos-letras"><a href="/precos">Ver os planos em detalhe</a>.</p>}
 </section>
