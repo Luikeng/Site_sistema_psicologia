@@ -29,7 +29,7 @@ export const PERGUNTAS: Pergunta[] = [
   },
   {
     q: 'Pago a mais por profissional na clínica?',
-    a: 'Não. O plano Clínica inclui até 5 profissionais e 2 secretárias. Para uma equipe maior, a gente monta um plano personalizado.',
+    a: 'Não. O plano Clínica inclui até 5 profissionais e 1 secretária. Clínica com mais de 5 profissionais tem plano sob medida, montado com você.',
   },
   {
     q: 'Quem da equipe vê o prontuário?',

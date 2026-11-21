@@ -186,28 +186,32 @@ svg.i { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-widt
 .periodo { display: inline-flex; background: #fff; border-radius: 10px; padding: 4px; gap: 4px; }
 .periodo button { font: inherit; font-size: 16px; font-weight: 600; color: var(--ink-2); background: transparent; border: 0; border-radius: 8px; padding: 10px 16px; cursor: pointer; min-height: 44px; transition: background-color .2s ease, color .2s ease; }
 .periodo button[aria-pressed="true"] { background: var(--azul); color: #fff; }
-.planos { display: grid; grid-template-columns: 1fr 1fr; }
+.planos { display: grid; grid-template-columns: 1fr 1fr 1fr; }
 .plano { padding: 64px var(--margem) 56px; display: flex; flex-direction: column; }
 .plano.individual { background: #fff; color: var(--ink); }
 .plano.clinica { background: var(--azul); color: #fff; }
+.plano.sobmedida { background: var(--campo); color: var(--campo-ink); }
 .plano h3 { margin: 0; font-size: clamp(32px, 3.2vw, 48px); letter-spacing: -0.03em; line-height: 1; }
 .plano .para { margin: 12px 0 0; font-size: 20px; max-width: 26ch; }
 .plano .inclui { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 12px; font-size: 18px; line-height: 1.4; }
 .plano .inclui li { display: flex; gap: 12px; align-items: flex-start; }
 .plano .inclui svg.i { margin-top: 2px; color: var(--azul); }
 .plano.clinica .inclui svg.i { color: #fff; }
+.plano.sobmedida .inclui svg.i { color: #93c5fd; }
 /* os dois campos de cor vão de borda a borda, mas o conteúdo segue a grade de 1200px do resto do site */
 .precos { container-type: inline-size; }
 .plano.individual { padding-left: max(var(--margem), calc((100cqw - 1200px) / 2)); }
-.plano.clinica { padding-right: max(var(--margem), calc((100cqw - 1200px) / 2)); }
+.plano.sobmedida { padding-right: max(var(--margem), calc((100cqw - 1200px) / 2)); }
 .plano .valor { margin-top: 32px; }
 .plano > .botao { margin-top: auto; align-self: flex-start; }
 .plano .inclui { margin-bottom: 40px; }
-.plano .preco { font-size: clamp(56px, 6vw, 96px); font-weight: 800; letter-spacing: -0.04em; line-height: .9; font-variant-numeric: tabular-nums; }
+.plano .preco { font-size: clamp(48px, 4.6vw, 76px); font-weight: 800; letter-spacing: -0.04em; line-height: .9; font-variant-numeric: tabular-nums; }
 .plano .preco small { font-size: 18px; font-weight: 600; letter-spacing: 0; margin-left: 6px; }
 .plano .equivale { display: block; font-size: 15px; margin-top: 10px; min-height: 1.5em; }
 .plano.individual .equivale { color: var(--muted); }
 .plano.clinica .equivale { color: #dbeafe; }
+.plano.sobmedida .equivale { color: var(--campo-muted); }
+.plano .preco-texto { font-size: clamp(36px, 3.4vw, 54px); }
 .personalizado { background: var(--campo); color: var(--campo-ink); padding: 34px max(var(--margem), calc((100cqw - 1200px) / 2)); display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
 .personalizado p { margin: 0; font-size: 20px; max-width: 60ch; }
 .personalizado b { font-size: 22px; }

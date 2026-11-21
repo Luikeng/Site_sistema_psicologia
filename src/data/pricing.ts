@@ -40,14 +40,14 @@ export const PLANS: Plan[] = [
     id: 'clinica',
     name: 'Clínica',
     tagline: 'Organize equipe, salas e repasses financeiros.',
-    monthly: 69,
-    annual: 699, // ~15% off vs 12x mensal
+    monthly: 150,
+    annual: 1500, // 12 meses pelo preço de 10 (decisão dele, 21/11/2026)
     highlight: true,
     badge: 'Mais completo',
     features: [
       'Tudo do plano Individual (inclui página pública de agendamento por psi)',
       'Até 5 profissionais (1 dono + 4) no mesmo workspace',
-      'Até 2 secretárias com acesso restrito',
+      '1 secretária com acesso restrito',
       'Landing pública da clínica com cards dos psicólogos',
       'Gestão de Multi-Salas',
       'Repasse automatizado clínica ↔ profissional',

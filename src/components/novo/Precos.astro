@@ -1,11 +1,13 @@
 ---
-// Preços: dois campos de cor (Individual e Clínica) e a faixa do Personalizado.
-// Valores conferidos em produção (system_settings) em 22/10/2026.
+// Preços: três campos de cor — Individual, Clínica e Sob medida (clínicas maiores).
+// Decisão dele (21/11/2026): Clínica R$ 150/mês ou R$ 1.500/ano (12 pelo preço de 10),
+// até 5 profissionais e 1 secretária, assinatura pelo próprio app; mais de 5
+// profissionais = plano sob medida, pelo suporte (sem preço de tabela).
 import { SITE } from '../../data/site.ts';
 export interface Props { pagina?: boolean }
 const { pagina = false } = Astro.props;
 const Titulo = pagina ? 'h1' : 'h2';
-const whatsPersonalizado = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent('Olá! Quero saber do plano personalizado do Sistema Psicologia.')}`;
+const whatsPersonalizado = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent('Olá! Minha clínica tem mais de 5 profissionais e quero montar o plano sob medida do Sistema Psicologia.')}`;
 ---
 <section class:list={['precos', { 'na-pagina': pagina }]} id="precos" aria-labelledby="t-precos">
   <div class="precos-cabeca">
@@ -35,18 +37,26 @@ const whatsPersonalizado = `https://wa.me/${SITE.whatsapp}?text=${encodeURICompo
       <h3>Clínica</h3>
       <p class="para">Para quem tem equipe.</p>
       <div class="valor">
-        <span class="preco"><span data-mensal="R$ 69" data-anual="R$ 699">R$ 69</span><small data-mensal="por mês" data-anual="por ano">por mês</small></span>
-        <span class="equivale" data-mensal="" data-anual="Sai por R$ 58,25 por mês"></span>
+        <span class="preco"><span data-mensal="R$ 150" data-anual="R$ 1.500">R$ 150</span><small data-mensal="por mês" data-anual="por ano">por mês</small></span>
+        <span class="equivale" data-mensal="" data-anual="12 meses pelo preço de 10 — sai por R$ 125 por mês"></span>
       </div>
       <ul class="inclui">
-        {['Tudo do Individual', 'Até 5 profissionais e 2 secretárias', 'Agenda da equipe com salas', 'Repasse de cada profissional, calculado', 'Quem lê o quê, com permissões por pessoa'].map((t) => <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg>{t}</li>)}
+        {['Tudo do Individual', 'Até 5 profissionais e 1 secretária', 'Agenda da equipe com salas', 'Repasse de cada profissional, calculado', 'Quem lê o quê, com permissões por pessoa'].map((t) => <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg>{t}</li>)}
       </ul>
       <a class="botao branco" href={SITE.registerUrl} rel="noopener noreferrer" data-cta="pricing-clinica">Criar conta grátis</a>
     </div>
-  </div>
-  <div class="personalizado">
-    <p><b>Personalizado.</b> Mais de 5 profissionais, mais secretárias ou um jeito diferente de trabalhar? A gente monta o plano com você.</p>
-    <a class="botao branco" href={whatsPersonalizado} target="_blank" rel="noopener">Falar com a gente</a>
+    <div class="plano sobmedida">
+      <h3>Sob medida</h3>
+      <p class="para">Para clínicas com mais de 5 profissionais.</p>
+      <div class="valor">
+        <span class="preco preco-texto">Sob consulta</span>
+        <span class="equivale">Valor por profissional, montado com você.</span>
+      </div>
+      <ul class="inclui">
+        {['Tudo do plano Clínica', 'Quantos profissionais a equipe tiver', 'As secretárias que a clínica precisar', 'Mensal ou anual — 12 meses pelo preço de 10'].map((t) => <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg>{t}</li>)}
+      </ul>
+      <a class="botao branco" href={whatsPersonalizado} target="_blank" rel="noopener" data-cta="pricing-sob-medida">Montar o plano da clínica</a>
+    </div>
   </div>
   <p class="precos-letras">Cancele quando quiser, sem multa. Se cancelar em até 7 dias depois da primeira cobrança, o reembolso é integral.{!pagina && <> <a href="/precos">Ver os planos em detalhe</a>.</>}</p>
 </section>

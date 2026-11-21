@@ -34,7 +34,7 @@ export const FAQ: FAQItem[] = [
   },
   {
     q: 'Preciso pagar a mais por cada psicólogo da clínica?',
-    a: 'Não. O Plano Clínica é flat: até 5 profissionais (1 dono + 4 colaboradores) e até 2 secretárias, tudo incluído no valor mensal. O Plano Individual é para 1 psicólogo só. Veja a página de Preços para os limites exatos de cada plano.',
+    a: 'Não. O Plano Clínica é flat: até 5 profissionais (1 dono + 4 colaboradores) e 1 secretária, tudo incluído no valor mensal. Clínica com mais de 5 profissionais tem plano sob medida. O Plano Individual é para 1 psicólogo só. Veja a página de Preços para os limites exatos de cada plano.',
   },
   {
     q: 'Como funciona o teste grátis?',
