@@ -13,7 +13,7 @@ const description =
   <main id="inicio" class="legal">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <h1 class="text-4xl font-extrabold text-gray-900 mb-8 tracking-tight">Termos de Serviço</h1>
-      <p class="text-sm text-gray-500 mb-6">Última atualização: 20 de novembro de 2026</p>
+      <p class="text-sm text-gray-500 mb-6">Última atualização: 21 de novembro de 2026</p>
 
       <div class="bg-white p-8 sm:p-12 rounded-2xl shadow-sm border border-gray-100 text-gray-700 space-y-8 leading-relaxed">
         <section>
@@ -50,13 +50,19 @@ const description =
 
         <section>
           <h2 class="text-2xl font-bold text-gray-900 mb-4">4. Disponibilidade do Serviço</h2>
+          <p class="mb-3">
+            Empregamos nossos melhores esforços para manter a plataforma estável, segura e disponível. O serviço pode ter interrupções por manutenção, atualização, falha de fornecedores (hospedagem, provedores de e-mail, Google, Stripe, sistemas da Receita e das prefeituras) ou motivo de força maior, e não garantimos funcionamento ininterrupto.
+          </p>
           <p>
-            O Sistema Psicologia é oferecido "as is" (reconhecido no estado em que se encontra). Realizamos os nossos melhores esforços comerciais para manter a plataforma sempre acessível durante no mínimo 99% do ano. Contudo, janelas de manutenção, atualizações do sistema ou motivos de força maior não garantem uptime ininterrupto garantido com SLAs impositivos em todos os planos não-Enterprise.
+            Manutenções programadas que possam interromper o uso são avisadas com antecedência pelos canais oficiais sempre que possível, e feitas preferencialmente fora do horário comercial.
           </p>
         </section>
 
         <section>
           <h2 class="text-2xl font-bold text-gray-900 mb-4">5. Planos, Cancelamento e Inadimplência</h2>
+          <p class="mb-3">
+            <strong>Planos de tabela:</strong> o plano Individual e o plano Clínica (até 5 profissionais) têm preço publicado em <a href="/precos" class="text-blue-700 underline">sistemapsicologia.com.br/precos</a>, são contratados pelo próprio sistema e podem ser mensais ou anuais. O plano sob medida, para clínicas maiores, segue a seção 6.
+          </p>
           <p class="mb-3">
             <strong>Renovação:</strong> as assinaturas mensais e anuais se renovam automaticamente ao fim de cada ciclo, até que sejam canceladas.
           </p>
@@ -75,37 +81,88 @@ const description =
               <strong>Plano anual:</strong> o plano anual tem preço menor porque é contratado por 12 meses. Se for cancelado antes do fim, os meses já usados são recalculados pelo preço do plano mensal vigente na contratação, e a diferença é devolvida. O valor retido nunca passa de 20% (vinte por cento) do valor proporcional aos meses não usados. Exemplo ilustrativo: num anual de R$ 399,00 com mensal de R$ 39,00, quem cancela no 3º mês usou 3 × R$ 39,00 = R$ 117,00 e recebe R$ 282,00 de volta.
             </p>
             <p>
-              <strong>Planos personalizados (clínicas):</strong> seguem o contrato aceito na contratação. Mudanças no plano e cancelamento são feitos pelo suporte. O cancelamento antes do fim do período contratado tem multa de 20% (vinte por cento) sobre o valor correspondente ao período restante.
+              <strong>Plano sob medida (clínicas):</strong> segue o contrato aceito na contratação (seção 6). O cancelamento antes do fim do período contratado tem multa de 20% (vinte por cento) sobre o valor correspondente ao período restante.
             </p>
           </div>
           <p>
-            <strong>Inadimplência:</strong> em caso de falta de pagamento, após as devidas notificações por e-mail, o acesso ao serviço ficará restrito (modo somente leitura) até a devida regularização.
+            <strong>Inadimplência:</strong> se um pagamento falhar, enviamos um e-mail na hora e o cartão é cobrado de novo automaticamente nos dias seguintes. Enquanto o pagamento estiver em atraso, a conta fica em <strong>modo somente leitura</strong>: consultar e exportar continuam liberados; criar e alterar registros ficam bloqueados até a regularização. Se as novas tentativas não derem certo, a assinatura é cancelada e a conta continua em modo somente leitura (seção 7).
           </p>
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">6. Responsabilidade do Profissional</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">6. Plano Sob Medida (contrato da clínica)</h2>
           <p class="mb-3">
-            O Profissional, ao utilizar o Sistema Psicologia, é o <strong>Controlador</strong> dos dados de seus pacientes nos termos da LGPD. Compete a ele:
+            Clínicas com mais de 5 profissionais contratam o plano sob medida pelo suporte. As condições abaixo valem para todo plano sob medida e completam o resumo de valores mostrado e aceito na contratação, que fica registrado com a data e a versão destes Termos.
+          </p>
+          <div class="mb-3 rounded-lg border-2 border-amber-300 bg-amber-50 p-4 space-y-2">
+            <p><strong>Valor:</strong> preço por profissional, multiplicado pelo número de profissionais contratados. As secretárias incluídas e o ciclo (mensal ou anual) ficam no resumo aceito. No anual, cobram-se 10 (dez) meses pelos 12 (doze) do ciclo.</p>
+            <p><strong>Mudanças:</strong> aumentar ou diminuir profissionais, secretárias ou ciclo é feito pelo suporte e gera uma nova versão do contrato. Aumento é cobrado na hora, proporcional aos dias que faltam no ciclo; redução vale a partir da renovação seguinte. A conta não muda de plano sozinha.</p>
+            <p><strong>Pagamento:</strong> pelo Stripe. No portal de pagamento é possível trocar o cartão e ver as faturas; cancelamento e troca de plano são feitos pelo suporte.</p>
+            <p><strong>Cancelamento:</strong> o direito de arrependimento da seção 5 vale nos 7 (sete) dias após a primeira cobrança. Depois disso: no ciclo mensal, o cancelamento vale ao fim do mês já pago, sem multa; no ciclo anual, o cancelamento antes do fim dos 12 meses tem multa de 20% (vinte por cento) sobre o valor correspondente aos meses restantes, e o que sobrar desse valor é devolvido.</p>
+            <p><strong>Vagas:</strong> o sistema não deixa passar do número de profissionais e secretárias contratados; quem já está na clínica nunca é removido por isso.</p>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">7. Seus Dados Depois do Cancelamento</h2>
+          <p class="mb-3">
+            Depois do cancelamento, ou com o período de teste vencido, a conta continua em <strong>modo somente leitura</strong>: o Profissional segue entrando, consultando e exportando prontuários e documentos (o prontuário sai em PDF), e pode voltar a assinar a qualquer momento sem perder nada.
+          </p>
+          <p class="mb-3">
+            Os dados permanecem guardados enquanto a conta existir; nenhum dado é apagado automaticamente por causa do cancelamento. O Profissional pode pedir a exclusão definitiva pelo e-mail <a href="mailto:contato@sistemapsicologia.com.br" class="text-blue-700 underline">contato@sistemapsicologia.com.br</a>: a conta é desativada e os dados são apagados em até 30 (trinta) dias do pedido. Antes de pedir, o Profissional deve exportar o que precisa guardar: a guarda dos registros de atendimento pelo prazo exigido pelo Conselho Federal de Psicologia (a Resolução CFP nº 001/2009 fala em no mínimo 5 anos) e pela legislação aplicável é responsabilidade do Profissional ou da instituição.
+          </p>
+          <p>
+            Ficam guardados pelo prazo legal, mesmo depois da exclusão, os registros que a lei obriga a manter (como os fiscais e os registros de acesso). Dados apagados podem continuar nas cópias de segurança, que são protegidas e usadas apenas para recuperar o sistema em caso de desastre.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">8. Proteção de Dados e Responsabilidade do Profissional</h2>
+          <p class="mb-3">
+            Nos termos da LGPD, o Profissional (ou a clínica) é o <strong>Controlador</strong> dos dados de seus pacientes: decide o que registrar e para quê. O Sistema Psicologia atua como <strong>Operador</strong> desses dados, tratando-os apenas para prestar o serviço contratado e conforme as instruções do Profissional. Dos dados da própria conta (cadastro, cobrança, suporte, segurança e registros de acesso), o Sistema Psicologia é o Controlador. Não vendemos dados, não os usamos para publicidade e não usamos dados de pacientes para treinar modelos de inteligência artificial. Os detalhes estão na <a href="/privacidade" class="text-blue-700 underline">Política de Privacidade</a>.
+          </p>
+          <p class="mb-3">
+            Compete ao Profissional:
           </p>
           <ul class="list-disc pl-6 space-y-2">
             <li>Cumprir o Código de Ética da Psicologia (CFP) e a LGPD em relação a seus pacientes.</li>
             <li>Coletar consentimento dos pacientes para o tratamento de dados pela plataforma, quando exigido por lei.</li>
             <li>Manter cadastros (CRP, CPF/CNPJ, dados fiscais) atualizados.</li>
             <li>Pagar a mensalidade nas datas devidas.</li>
-            <li>Não compartilhar credenciais de acesso.</li>
+            <li>Não compartilhar credenciais de acesso e responder pelos acessos que conceder a membros da equipe (profissionais e secretárias) da sua clínica.</li>
           </ul>
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">7. Propriedade Intelectual</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">9. Suspensão por Uso Indevido</h2>
+          <p>
+            Podemos suspender ou limitar uma conta, avisando o titular sempre que possível, em caso de dados cadastrais falsos, fraude, risco à segurança da plataforma ou de outros usuários, uso contrário à lei ou a estes Termos. Os dados do Profissional não são apagados por isso; quando a suspensão for definitiva, a seção 7 continua valendo para a exportação.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">10. Limitação de Responsabilidade</h2>
+          <p>
+            Na máxima extensão permitida pela lei, o Sistema Psicologia não responde por danos indiretos ou lucros cessantes, por conteúdo registrado pelo Profissional ou por falhas de serviços de terceiros, e a sua responsabilidade total fica limitada ao valor pago pelo Usuário nos 12 (doze) meses anteriores ao fato. Esta limitação não se aplica a dolo nem afasta as obrigações de segurança e proteção de dados da seção 8 e da Política de Privacidade, nem os direitos garantidos ao consumidor pelo Código de Defesa do Consumidor.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">11. Mudanças nestes Termos</h2>
+          <p>
+            Mudanças relevantes nestes Termos são avisadas por e-mail com pelo menos 30 (trinta) dias de antecedência e passam a valer na data indicada no aviso; a data da última atualização fica no topo desta página. Quem não concordar pode cancelar antes dessa data, sem multa. A versão aceita em cada contratação fica registrada.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">12. Propriedade Intelectual</h2>
           <p>
             Todos os direitos intelectuais e industriais sobre o software, marca, códigos, design de interfaces e logotipos pertencem integralmente ao Sistema Psicologia. O licenciamento de uso da plataforma como SaaS não constitui transferência de tecnologia ou a compra de direito de propriedade do software pelo usuário.
           </p>
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">8. Lei Aplicável e Foro</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">13. Lei Aplicável e Foro</h2>
           <p>
             Este Termo é regido pelas leis da República Federativa do Brasil, em especial pela Lei Geral de Proteção de Dados (Lei nº 13.709/2018), pelo Marco Civil da Internet (Lei nº 12.965/2014) e pelo Código de Defesa do Consumidor (Lei nº 8.078/1990) no que couber.
           </p>
@@ -115,7 +172,7 @@ const description =
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">9. Identificação do Operador</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">14. Identificação do Operador</h2>
           <p class="mb-3">
             O <strong>Sistema Psicologia</strong> é desenvolvido e operado por pessoa jurídica de direito privado, regularmente inscrita no CNPJ/MF:
           </p>
